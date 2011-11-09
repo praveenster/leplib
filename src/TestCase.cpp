@@ -31,7 +31,7 @@ TestCase::TestCase(string name)
 {
 }
 
-string TestCase::getName()
+string TestCase::name()
 {
   return mName;
 }

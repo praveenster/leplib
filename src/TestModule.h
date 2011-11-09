@@ -35,7 +35,7 @@ namespace lepcpplib {
       virtual ~TestModule();
       virtual void run(unsigned int& passCount, unsigned int& failCount);
       void add(TestCase* testCase);
-      std::string getName();
+      std::string name();
 
     protected:
       TestModule(std::string name);

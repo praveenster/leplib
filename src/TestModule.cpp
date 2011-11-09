@@ -44,7 +44,7 @@ TestModule::~TestModule()
 void TestModule::run(unsigned int& passCount, unsigned int& failCount)
 {
   for (unsigned int i = 0; i < tests.size(); i++) {
-    DEBUG_D("TestCase: %s started\n", tests[i]->getName().c_str());
+    DEBUG_D("TestCase: %s started\n", tests[i]->name().c_str());
     unsigned int p = 0;
     unsigned int f = 0;
     string result;
@@ -58,7 +58,7 @@ void TestModule::run(unsigned int& passCount, unsigned int& failCount)
     }
 
     DEBUG_D("TestCase: %s complete. Result = %s\n", 
-      tests[i]->getName().c_str(), result.c_str());
+      tests[i]->name().c_str(), result.c_str());
   }
 }
 
@@ -67,7 +67,7 @@ void TestModule::add(TestCase* testCase)
   tests.push_back(testCase);
 }
 
-string TestModule::getName()
+string TestModule::name()
 {
   return mName;
 }

@@ -31,12 +31,15 @@ namespace lepcpplib {
   {
     public:
       virtual bool test() = 0;
-      std::string getName();
+      std::string name();
 
     protected:
       TestCase(std::string name);
 
     private:
+      TestCase(const TestCase& testCase);
+      const TestCase& operator=(const TestCase& testCase);
+
       std::string mName;
   };
 }
