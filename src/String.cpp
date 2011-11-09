@@ -37,29 +37,18 @@ String::String(const char* c)
   *this = c;
 }
 
-const String& String::operator=(const String& s)
+String& String::operator=(const String& s)
 {
   if (this != &s) {
-    unsigned int l = s.length();
-    delete[] mBuffer;
-    mBuffer = 0;
-    mBuffer = new char[l + 1];
-    memcpy(mBuffer, s.mBuffer, l);
-    mBuffer[l] = 0;
+    clone(s.mBuffer, strlen(s.mBuffer));
   }
 
   return *this;
 }
 
-const String& String::operator=(const char* c)
+String& String::operator=(const char* c)
 {
-  unsigned int l = strlen(c);
-  delete[] mBuffer;
-  mBuffer = 0;
-  mBuffer = new char[l + 1];
-  memcpy(mBuffer, c, l);
-  mBuffer[l] = 0;
-
+  clone(c, strlen(c));
   return *this;
 }
 
@@ -70,7 +59,7 @@ bool lepcpplib::operator==(const String& s1, const String& s2)
 
 String::~String()
 {
-  delete mBuffer;
+  delete[] mBuffer;
 }
 
 char* String::toCharArray()
@@ -78,11 +67,16 @@ char* String::toCharArray()
   return mBuffer;
 }
 
-unsigned int String::length() const
+unsigned int String::length()
 {
   return (mBuffer == 0) ? 0 : strlen(mBuffer);
 }
 
 void String::clone(const char* c, unsigned int l)
 {
+  delete[] mBuffer;
+  mBuffer = 0;
+  mBuffer = new char[l + 1];
+  memcpy(mBuffer, c, l);
+  mBuffer[l] = 0;
 }

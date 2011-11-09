@@ -26,8 +26,8 @@ namespace lepcpplib {
 
       ~String();
 
-      const String& operator=(const String& s);
-      const String& operator=(const char* c);
+      String& operator=(const String& s);
+      String& operator=(const char* c);
       friend bool operator==(const String& s1, const String& s2);
 
       static String valueOf(int i);
@@ -40,7 +40,7 @@ namespace lepcpplib {
       int compare(const String& s);
       int compare(const char* c);
 
-      unsigned int length() const;
+      unsigned int length();
 
     private:
       void clone(const char* c, unsigned int l);
