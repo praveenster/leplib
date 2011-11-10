@@ -24,7 +24,6 @@
 #ifndef __TESTMODULE_H__
 #define __TESTMODULE_H__
 
-#include <string>
 #include <vector>
 #include "TestCase.h"
 
@@ -35,13 +34,13 @@ namespace lepcpplib {
       virtual ~TestModule();
       virtual void run(unsigned int& passCount, unsigned int& failCount);
       void add(TestCase* testCase);
-      std::string name();
+      const String& name();
 
     protected:
-      TestModule(std::string name);
+      TestModule(String name);
 
     private:
-      std::string mName;
+      String mName;
       std::vector<TestCase*> tests;
   };
 }

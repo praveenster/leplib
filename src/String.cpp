@@ -25,7 +25,9 @@
 #include "String.h"
 
 using lepcpplib::String;
-using namespace std;
+using std::memcpy;
+using std::strcmp;
+using std::strlen;
 
 String::String()
   : mBuffer(0)
@@ -64,12 +66,17 @@ bool lepcpplib::operator==(const String& s1, const String& s2)
   return (strcmp(s1.mBuffer, s2.mBuffer) == 0);
 }
 
+bool lepcpplib::operator!=(const String& s1, const String& s2)
+{
+  return !(operator==(s1, s2));
+}
+
 String::~String()
 {
   delete[] mBuffer;
 }
 
-char* String::toCharArray()
+const char* String::toCharArray() const
 {
   return mBuffer;
 }

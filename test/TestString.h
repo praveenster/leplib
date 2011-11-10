@@ -21,53 +21,16 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "Debug.h"
-#include "TestModule.h"
+#ifndef __TESTSTRING_H__
+#define __TESTSTRING_H__
 
-using std::vector;
-using lepcpplib::TestCase;
+#include "../src/TestModule.h"
 using lepcpplib::TestModule;
-using lepcpplib::String;
 
-TestModule::TestModule(String name)
-  :mName(name)
+class TestString : public TestModule
 {
-}
+  public:
+    TestString();
+};
 
-TestModule::~TestModule()
-{
-  for (unsigned int i = 0; i < tests.size(); i++) {
-    delete tests[i];
-  }
-}
-
-void TestModule::run(unsigned int& passCount, unsigned int& failCount)
-{
-  for (unsigned int i = 0; i < tests.size(); i++) {
-    DEBUG_D("TestCase: %s started\n", tests[i]->name().toCharArray());
-    unsigned int p = 0;
-    unsigned int f = 0;
-    String result;
-    if (tests[i]->test()) {
-      passCount++;
-      result = "PASS";
-    }
-    else {
-      failCount++;
-      result = "FAIL";
-    }
-
-    DEBUG_D("TestCase: %s complete. Result = %s\n", 
-      tests[i]->name().toCharArray(), result.toCharArray());
-  }
-}
-
-void TestModule::add(TestCase* testCase)
-{
-  tests.push_back(testCase);
-}
-
-const String& TestModule::name()
-{
-  return mName;
-}
+#endif // __TESTSTRING_H__

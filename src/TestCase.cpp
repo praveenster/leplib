@@ -23,15 +23,15 @@
 
 #include "TestCase.h"
 
-using std::string;
 using lepcpplib::TestCase;
+using lepcpplib::String;
 
-TestCase::TestCase(string name)
+TestCase::TestCase(String name)
   :mName(name)
 {
 }
 
-string TestCase::name()
+const String& TestCase::name()
 {
   return mName;
 }

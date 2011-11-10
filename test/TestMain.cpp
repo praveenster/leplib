@@ -21,53 +21,36 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "Debug.h"
-#include "TestModule.h"
+#ifdef WIN32
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+#endif
 
-using std::vector;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
-using lepcpplib::String;
+#include "../src/Debug.h"
+#include "../src/TestSet.h"
+#include "TestString.h"
 
-TestModule::TestModule(String name)
-  :mName(name)
+using namespace std;
+using lepcpplib::TestSet;
+
+class TestMain : public TestSet
 {
-}
+  public:
+    TestMain()
+    {
+      add(new TestString());
+    };
+};
 
-TestModule::~TestModule()
+int main(int argc, char** argv)
 {
-  for (unsigned int i = 0; i < tests.size(); i++) {
-    delete tests[i];
-  }
-}
-
-void TestModule::run(unsigned int& passCount, unsigned int& failCount)
-{
-  for (unsigned int i = 0; i < tests.size(); i++) {
-    DEBUG_D("TestCase: %s started\n", tests[i]->name().toCharArray());
-    unsigned int p = 0;
-    unsigned int f = 0;
-    String result;
-    if (tests[i]->test()) {
-      passCount++;
-      result = "PASS";
-    }
-    else {
-      failCount++;
-      result = "FAIL";
-    }
-
-    DEBUG_D("TestCase: %s complete. Result = %s\n", 
-      tests[i]->name().toCharArray(), result.toCharArray());
-  }
-}
-
-void TestModule::add(TestCase* testCase)
-{
-  tests.push_back(testCase);
-}
-
-const String& TestModule::name()
-{
-  return mName;
+  TestMain* pTM = new TestMain();
+  unsigned int passCount = 0;
+  unsigned int failCount = 0;
+  pTM->run(passCount, failCount);
+  delete pTM;
+#ifdef WIN32
+  _CrtDumpMemoryLeaks();
+#endif
 }

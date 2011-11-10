@@ -24,23 +24,23 @@
 #ifndef __TESTCASE_H__
 #define __TESTCASE_H__
 
-#include <string>
+#include "String.h"
 
 namespace lepcpplib {
   class TestCase
   {
     public:
       virtual bool test() = 0;
-      std::string name();
+      const String& name();
 
     protected:
-      TestCase(std::string name);
+      TestCase(String name);
 
     private:
       TestCase(const TestCase& testCase);
       const TestCase& operator=(const TestCase& testCase);
 
-      std::string mName;
+      String mName;
   };
 }
 

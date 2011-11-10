@@ -37,13 +37,14 @@ namespace lepcpplib {
       String& operator=(const String& s);
       String& operator=(const char* c);
       friend bool operator==(const String& s1, const String& s2);
+      friend bool operator!=(const String& s1, const String& s2);
 
       static String valueOf(int i);
       static String valueOf(int i, int width, char pad);
 
       int extractInt();
 
-      char* toCharArray();
+      const char* toCharArray() const;
 
       int compare(const String& s);
       int compare(const char* c);

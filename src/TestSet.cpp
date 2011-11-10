@@ -24,7 +24,6 @@
 #include "Debug.h"
 #include "TestSet.h"
 
-using std::string;
 using std::vector;
 using lepcpplib::TestSet;
 using lepcpplib::TestModule;
@@ -40,12 +39,12 @@ void TestSet::run(unsigned int& passCount, unsigned int& failCount)
 {
   DEBUG_D("Starting tests ...\n");
   for (unsigned int i = 0; i < testModules.size(); i++) {
-    DEBUG_D("TestModule: %s started\n", testModules[i]->name().c_str());
+    DEBUG_D("TestModule: %s started\n", testModules[i]->name().toCharArray());
     unsigned int p = 0;
     unsigned int f = 0;
     testModules[i]->run(p, f);
     DEBUG_D("TestModule: %s complete. Pass = %d, Fail = %d\n", 
-      testModules[i]->name().c_str(), p, f);
+      testModules[i]->name().toCharArray(), p, f);
     passCount += p;
     failCount += f;
   }
