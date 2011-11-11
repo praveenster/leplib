@@ -21,17 +21,11 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifdef WIN32
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-#endif
 
 #include "../src/Debug.h"
 #include "../src/TestSet.h"
 #include "TestString.h"
 
-using namespace std;
 using lepcpplib::TestSet;
 
 class TestMain : public TestSet
@@ -45,11 +39,12 @@ class TestMain : public TestSet
 
 int main(int argc, char** argv)
 {
-  TestMain* pTM = new TestMain();
+  TestMain* pTest = new TestMain();
   unsigned int passCount = 0;
   unsigned int failCount = 0;
-  pTM->run(passCount, failCount);
-  delete pTM;
+  pTest->run(passCount, failCount);
+  delete pTest;
+
 #ifdef WIN32
   _CrtDumpMemoryLeaks();
 #endif
