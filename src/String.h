@@ -39,6 +39,10 @@ namespace lepcpplib {
       String& operator=(const char* c);
       String& operator=(const char c);
 
+      String& operator+=(const String& s1);
+      String& operator+=(const char* s1);
+      String& operator+=(const char c1);
+
       friend bool operator==(const String& s1, const String& s2);
       friend bool operator!=(const String& s1, const String& s2);
 

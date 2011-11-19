@@ -515,6 +515,77 @@ class TestStringConcatenation8 : public TestCase
     }
 };
 
+class TestStringConcatenation9 : public TestCase
+{
+  public:
+    TestStringConcatenation9()
+      : TestCase("TestStringConcatenation9: of string to itself")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "qwer";
+      s1 = s1 + s1;
+
+      return ((s1 == "qwerqwer"));
+    }
+};
+
+class TestStringConcatenation10 : public TestCase
+{
+  public:
+    TestStringConcatenation10()
+      : TestCase("TestStringConcatenation10: of string to string")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "qwer";
+      String s2 = "asdf";
+      s1 += s2;
+
+      return ((s1 == "qwerasdf"));
+    }
+};
+
+class TestStringConcatenation11 : public TestCase
+{
+  public:
+    TestStringConcatenation11()
+      : TestCase("TestStringConcatenation11: of cstring to string")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+      const char* s2 = "poiut";
+      s1 += s2;
+
+      return ((s1 == "zxcvpoiut"));
+    }
+};
+
+class TestStringConcatenation12 : public TestCase
+{
+  public:
+    TestStringConcatenation12()
+      : TestCase("TestStringConcatenation12: of char to string")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+      const char c2 = 'p';
+      s1 += c2;
+
+      return ((s1 == "zxcvp"));
+    }
+};
+
 TestString::TestString()
   : TestModule("String class tester")
 {
@@ -547,4 +618,8 @@ TestString::TestString()
   add(new TestStringConcatenation6());
   add(new TestStringConcatenation7());
   add(new TestStringConcatenation8());
+  add(new TestStringConcatenation9());
+  add(new TestStringConcatenation10());
+  add(new TestStringConcatenation11());
+  add(new TestStringConcatenation12());
 }

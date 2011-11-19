@@ -139,6 +139,7 @@ void String::append(const char* c, unsigned int l)
     std::memcpy(temp, mBuffer, lold);
     std::memcpy(temp + lold, c, l);
     temp[lnew] = '\0';
+    delete[] mBuffer;
     mBuffer = temp;
   }
 }
@@ -256,4 +257,32 @@ String lepcpplib::operator+(const String& s1, const char c2)
   s3.append(temp, sizeof(temp));
 
   return s3;
+}
+
+String& String::operator+=(const String& s1)
+{
+  this->append(s1.mBuffer, s1.length());
+  return *this;
+}
+
+String& String::operator+=(const char* s1)
+{
+  if (s1 != NULL) {
+    int l = strlen(s1);
+    if (l != 0) {
+      this->append(s1, l);
+    }
+  }
+
+  return *this;
+}
+
+String& String::operator+=(const char c1)
+{
+  char temp[2];
+  temp[0] = c1;
+  temp[2] = '\0';
+  this->append(temp, sizeof(temp));
+
+  return *this;
 }
