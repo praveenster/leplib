@@ -36,28 +36,40 @@ namespace lepcpplib {
 
       String& operator=(const String& s);
       String& operator=(const char* c);
+
       friend bool operator==(const String& s1, const String& s2);
       friend bool operator!=(const String& s1, const String& s2);
 
-      static String valueOf(int i);
-      static String valueOf(int i, int width, char pad);
+      //String operator+(const String& s1);
+      friend String operator+(const String& s1, const String& s2);
+      friend String operator+(const String& s1, const char* s2);
+      friend String operator+(const char* s1, const String& s2);
 
-      int extractInt();
+      static String fromInt(int i);
+      static String fromInt(int i, int width, char pad);
+
+      int toInt() const;
+      static int toInt(const char* c);
 
       const char* toCharArray() const;
 
-      int compare(const String& s);
-      int compare(const char* c);
+      int compare(const String& s) const;
+      int compare(const char* c) const;
 
-      unsigned int length();
+      unsigned int length() const;
 
     private:
       void clone(const char* c, unsigned int l);
+      void append(const char* c, unsigned int l);
+
       char* mBuffer;
   };
 
   bool operator==(const String& s1, const String& s2);
   bool operator!=(const String& s1, const String& s2);
+  String operator+(const String& s1, const String& s2);
+  String operator+(const String& s1, const char* s2);
+  String operator+(const char* s1, const String& s2);
 }
 
 #endif // __STRING_H__

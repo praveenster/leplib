@@ -22,6 +22,8 @@
 */
 
 #include <cstring>
+#include <sstream>
+#include <iomanip>
 #include "String.h"
 
 using lepcpplib::String;
@@ -49,7 +51,7 @@ String::String(const char* c)
 String& String::operator=(const String& s)
 {
   if (this != &s) {
-    clone(s.mBuffer, strlen(s.mBuffer));
+    clone(s.mBuffer, s.length());
   }
 
   return *this;
@@ -57,13 +59,27 @@ String& String::operator=(const String& s)
 
 String& String::operator=(const char* c)
 {
-  clone(c, strlen(c));
+  int l = 0;
+  if (c != 0) {
+    l = strlen(c);
+  }
+
+  clone(c, l);
   return *this;
 }
 
 bool lepcpplib::operator==(const String& s1, const String& s2)
 {
-  return (strcmp(s1.mBuffer, s2.mBuffer) == 0);
+  bool result = false;
+
+  if ((s1.length() == 0) && (s2.length() == 0)) {
+    result = true;
+  }
+  else if ((s1.length() > 0) && (s2.length() > 0)) {
+    result = (strcmp(s1.mBuffer, s2.mBuffer) == 0);
+  }
+
+  return result;
 }
 
 bool lepcpplib::operator!=(const String& s1, const String& s2)
@@ -81,7 +97,7 @@ const char* String::toCharArray() const
   return mBuffer;
 }
 
-unsigned int String::length()
+unsigned int String::length() const
 {
   return (mBuffer == 0) ? 0 : strlen(mBuffer);
 }
@@ -90,7 +106,122 @@ void String::clone(const char* c, unsigned int l)
 {
   delete[] mBuffer;
   mBuffer = 0;
-  mBuffer = new char[l + 1];
-  memcpy(mBuffer, c, l);
-  mBuffer[l] = 0;
+
+  if ((l > 0) && (c != NULL)) {
+    mBuffer = new char[l + 1];
+    memcpy(mBuffer, c, l);
+    mBuffer[l] = 0;
+  }
+}
+
+void String::append(const char* c, unsigned int l)
+{
+  if ((l > 0) && (c != NULL)) {
+    int lold = length();
+    int lnew = lold + l;
+    char* temp = new char[lnew + 1];
+    std::memcpy(temp, mBuffer, lold);
+    std::memcpy(temp + lold, c, l);
+    temp[lnew] = '\0';
+    mBuffer = temp;
+  }
+}
+
+String String::fromInt(int value)
+{
+  std::stringstream ss;
+  ss << value;
+  return String(ss.str().c_str());
+}
+
+String String::fromInt(int value, int width, char pad)
+{
+   std::stringstream ss;
+   ss << std::setw(width) << std::setfill(pad) << value;
+   return String(ss.str().c_str());
+}
+
+int String::toInt() const
+{
+  std::stringstream ss;
+  ss << toCharArray();
+  int value;
+  ss >> value;
+  return value;
+}
+
+int String::toInt(const char* c)
+{
+  std::stringstream ss;
+  ss << c;
+  int value;
+  ss >> value;
+  return value;
+}
+/*
+String String::operator+(const String& s1)
+{
+  String s2;
+
+  if (this->length()) {
+    s2.append(this->mBuffer, this->length());
+  }
+
+  if (s1.length()) {
+    s2.append(s1.mBuffer, s1.length());
+  }
+
+  return s2;
+}
+*/
+
+String lepcpplib::operator+(const String& s1, const String& s2)
+{
+  String s3;
+
+  if (s1.length()) {
+    s3.append(s1.mBuffer, s1.length());
+  }
+
+  if (s2.length()) {
+    s3.append(s2.mBuffer, s2.length());
+  }
+
+  return s3;
+}
+
+String lepcpplib::operator+(const char* s1, const String& s2)
+{
+  String s3;
+
+  if (s1 != NULL) {
+    int l = strlen(s1);
+    if (l != 0) {
+      s3.append(s1, l);
+    }
+  }
+
+  if (s2.length()) {
+    s3.append(s2.mBuffer, s2.length());
+  }
+
+  return s3;
+}
+
+String lepcpplib::operator+(const String& s1, const char* s2)
+{
+  String s3;
+
+  if (s1.length()) {
+    s3.append(s1.mBuffer, s1.length());
+  }
+
+  if (s2 != NULL) {
+    int l = strlen(s2);
+    if (l != 0) {
+      s3.append(s2, l);
+    }
+  }
+
+  return s3;
 }
