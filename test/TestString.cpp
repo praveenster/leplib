@@ -31,7 +31,7 @@ class TestStringEquality : public TestCase
 {
   public:
     TestStringEquality()
-      : TestCase("Test string equality")
+      : TestCase("TestStringEquality")
     {
     }
 
@@ -48,7 +48,7 @@ class TestStringInequality : public TestCase
 {
   public:
     TestStringInequality()
-      : TestCase("Test string inequality")
+      : TestCase("TestStringInequality")
     {
     }
 
@@ -65,7 +65,7 @@ class TestStringLength : public TestCase
 {
   public:
     TestStringLength()
-      : TestCase("Test string length")
+      : TestCase("TestStringLength")
     {
     }
 
@@ -81,7 +81,7 @@ class TestStringNullLength : public TestCase
 {
   public:
     TestStringNullLength()
-      : TestCase("Test null string length")
+      : TestCase("TestStringNullLength")
     {
     }
 
@@ -97,7 +97,7 @@ class TestStringConstructorFromCString1 : public TestCase
 {
   public:
     TestStringConstructorFromCString1()
-      : TestCase("Test string ctor from cstring")
+      : TestCase("TestStringConstructorFromCString1: valid cstring")
     {
     }
 
@@ -114,7 +114,7 @@ class TestStringConstructorFromCString2 : public TestCase
 {
   public:
     TestStringConstructorFromCString2()
-      : TestCase("Test string ctor from null cstring")
+      : TestCase("TestStringConstructorFromCString2: null cstring")
     {
     }
 
@@ -127,11 +127,28 @@ class TestStringConstructorFromCString2 : public TestCase
     }
 };
 
+class TestStringConstructorFromCString3 : public TestCase
+{
+  public:
+    TestStringConstructorFromCString3()
+      : TestCase("TestStringConstructorFromCString2: empty cstring")
+    {
+    }
+
+    bool test()
+    {
+      String s1("");
+      String s2 = "";
+
+      return ((s1 == s2) && (s1.length() == 0) && (s2.length() == 0));
+    }
+};
+
 class TestStringCopyConstructor1 : public TestCase
 {
   public:
     TestStringCopyConstructor1()
-      : TestCase("Test string copy ctor")
+      : TestCase("TestStringCopyConstructor1: valid string")
     {
     }
 
@@ -148,7 +165,7 @@ class TestStringCopyConstructor2 : public TestCase
 {
   public:
     TestStringCopyConstructor2()
-      : TestCase("Test string copy ctor from empty string")
+      : TestCase("TestStringCopyConstructor2: empty string")
     {
     }
 
@@ -165,7 +182,7 @@ class TestStringAssignment1 : public TestCase
 {
   public:
     TestStringAssignment1()
-      : TestCase("Test string assignment to null string")
+      : TestCase("TestStringAssignment1: to null string")
     {
     }
 
@@ -183,7 +200,7 @@ class TestStringAssignment2 : public TestCase
 {
   public:
     TestStringAssignment2()
-      : TestCase("Test string assignment to another string")
+      : TestCase("TestStringAssignment2: to another string")
     {
     }
 
@@ -201,7 +218,7 @@ class TestStringAssignment3 : public TestCase
 {
   public:
     TestStringAssignment3()
-      : TestCase("Test string assignment from empty string")
+      : TestCase("TestStringAssignment3: from empty string")
     {
     }
 
@@ -219,7 +236,7 @@ class TestStringAssignment4 : public TestCase
 {
   public:
     TestStringAssignment4()
-      : TestCase("Test string assignment from empty cstring")
+      : TestCase("TestStringAssignment4: from empty cstring")
     {
     }
 
@@ -236,7 +253,7 @@ class TestStringAssignment5 : public TestCase
 {
   public:
     TestStringAssignment5()
-      : TestCase("Test string assignment from null cstring")
+      : TestCase("TestStringAssignment5: from null cstring")
     {
     }
 
@@ -253,7 +270,7 @@ class TestStringFromInt : public TestCase
 {
   public:
     TestStringFromInt()
-      : TestCase("Test string from int")
+      : TestCase("TestStringFromInt")
     {
     }
 
@@ -270,7 +287,7 @@ class TestStringFromIntWithPad : public TestCase
 {
   public:
     TestStringFromIntWithPad()
-      : TestCase("Test string from int with pad")
+      : TestCase("TestStringFromIntWithPad")
     {
     }
 
@@ -287,7 +304,7 @@ class TestStringToInt : public TestCase
 {
   public:
     TestStringToInt()
-      : TestCase("Test string to int")
+      : TestCase("TestStringToInt")
     {
     }
 
@@ -304,7 +321,7 @@ class TestStringToIntStatic : public TestCase
 {
   public:
     TestStringToIntStatic()
-      : TestCase("Test static cstring to int")
+      : TestCase("TestStringToIntStatic: cstring to int")
     {
     }
 
@@ -321,7 +338,7 @@ class TestStringConcatenation1 : public TestCase
 {
   public:
     TestStringConcatenation1()
-      : TestCase("Test string concatenation of two strings")
+      : TestCase("TestStringConcatenation1: of two strings")
     {
     }
 
@@ -339,7 +356,7 @@ class TestStringConcatenation2 : public TestCase
 {
   public:
     TestStringConcatenation2()
-      : TestCase("Test string concatenation of string with empty string")
+      : TestCase("TestStringConcatenation2: of string with empty string")
     {
     }
 
@@ -357,7 +374,7 @@ class TestStringConcatenation3 : public TestCase
 {
   public:
     TestStringConcatenation3()
-      : TestCase("Test string concatenation of three strings")
+      : TestCase("TestStringConcatenation3: of three strings")
     {
     }
 
@@ -376,7 +393,7 @@ class TestStringConcatenation4 : public TestCase
 {
   public:
     TestStringConcatenation4()
-      : TestCase("Test string concatenation of two strings and one cstring")
+      : TestCase("TestStringConcatenation4: of two strings and one cstring")
     {
     }
 
@@ -395,7 +412,7 @@ class TestStringConcatenation5 : public TestCase
 {
   public:
     TestStringConcatenation5()
-      : TestCase("Test string concatenation of string to a cstring")
+      : TestCase("TestStringConcatenation5: of string to a cstring")
     {
     }
 
@@ -413,7 +430,7 @@ class TestStringConcatenation6 : public TestCase
 {
   public:
     TestStringConcatenation6()
-      : TestCase("Test string concatenation of cstring to a strings")
+      : TestCase("TestStringConcatenation6: of cstring to a strings")
     {
     }
 
@@ -436,6 +453,7 @@ TestString::TestString()
   add(new TestStringNullLength());
   add(new TestStringConstructorFromCString1());
   add(new TestStringConstructorFromCString2());
+  add(new TestStringConstructorFromCString3());
   add(new TestStringCopyConstructor1());
   add(new TestStringCopyConstructor2());
   add(new TestStringAssignment1());
