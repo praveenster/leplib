@@ -55,6 +55,9 @@ namespace lepcpplib {
       void clone(const char* c, unsigned int l);
       char* mBuffer;
   };
+
+  bool operator==(const String& s1, const String& s2);
+  bool operator!=(const String& s1, const String& s2);
 }
 
 #endif // __STRING_H__
