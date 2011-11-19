@@ -586,6 +586,54 @@ class TestStringConcatenation12 : public TestCase
     }
 };
 
+class TestStringConcatenation13 : public TestCase
+{
+  public:
+    TestStringConcatenation13()
+      : TestCase("TestStringConcatenation13: of string to itself")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+      s1 += s1;
+
+      return ((s1 == "zxcvzxcv"));
+    }
+};
+
+class TestStringMegaMix : public TestCase
+{
+  public:
+    TestStringMegaMix()
+      : TestCase("TestStringMegaMix: create, copy, assign strings")
+    {
+    }
+
+    void test1(String& s) {
+      s = "12345";
+    }
+
+    String test2(String s) {
+      String s1 = "qaz";
+      return s + s1;
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+      test1(s1);
+      bool b1 = (s1 == "12345");
+      bool b2 = (test2(s1) == "12345qaz");
+      String s3 = "hjkl";
+      s1 = s3 + "poiuyt";
+      bool b3 = (s1 == "hjklpoiuyt");
+
+      return (b1 && b2 && b3);
+    }
+};
+
 TestString::TestString()
   : TestModule("String class tester")
 {
@@ -622,4 +670,6 @@ TestString::TestString()
   add(new TestStringConcatenation10());
   add(new TestStringConcatenation11());
   add(new TestStringConcatenation12());
+  add(new TestStringConcatenation13());
+  add(new TestStringMegaMix());
 }

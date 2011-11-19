@@ -179,14 +179,8 @@ int String::toInt(const char* c)
 String lepcpplib::operator+(const String& s1, const String& s2)
 {
   String s3;
-
-  if (s1.length()) {
-    s3.append(s1.mBuffer, s1.length());
-  }
-
-  if (s2.length()) {
-    s3.append(s2.mBuffer, s2.length());
-  }
+  s3 += s1;
+  s3 += s2;
 
   return s3;
 }
@@ -194,17 +188,8 @@ String lepcpplib::operator+(const String& s1, const String& s2)
 String lepcpplib::operator+(const char* s1, const String& s2)
 {
   String s3;
-
-  if (s1 != NULL) {
-    int l = strlen(s1);
-    if (l != 0) {
-      s3.append(s1, l);
-    }
-  }
-
-  if (s2.length()) {
-    s3.append(s2.mBuffer, s2.length());
-  }
+  s3 += s1;
+  s3 += s2;
 
   return s3;
 }
@@ -212,17 +197,8 @@ String lepcpplib::operator+(const char* s1, const String& s2)
 String lepcpplib::operator+(const String& s1, const char* s2)
 {
   String s3;
-
-  if (s1.length()) {
-    s3.append(s1.mBuffer, s1.length());
-  }
-
-  if (s2 != NULL) {
-    int l = strlen(s2);
-    if (l != 0) {
-      s3.append(s2, l);
-    }
-  }
+  s3 += s1;
+  s3 += s2;
 
   return s3;
 }
@@ -230,15 +206,8 @@ String lepcpplib::operator+(const String& s1, const char* s2)
 String lepcpplib::operator+(const char c1, const String& s2)
 {
   String s3;
-
-  char temp[2];
-  temp[0] = c1;
-  temp[2] = '\0';
-  s3.append(temp, sizeof(temp));
-
-  if (s2.length()) {
-    s3.append(s2.mBuffer, s2.length());
-  }
+  s3 += c1;
+  s3 += s2;
 
   return s3;
 }
@@ -246,15 +215,8 @@ String lepcpplib::operator+(const char c1, const String& s2)
 String lepcpplib::operator+(const String& s1, const char c2)
 {
   String s3;
-
-  if (s1.length()) {
-    s3.append(s1.mBuffer, s1.length());
-  }
-
-  char temp[2];
-  temp[0] = c2;
-  temp[2] = '\0';
-  s3.append(temp, sizeof(temp));
+  s3 += s1;
+  s3 += c2;
 
   return s3;
 }
