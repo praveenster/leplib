@@ -31,19 +31,22 @@ namespace lepcpplib {
       String();
       String(const String& s);
       String(const char* c);
+      String(const char c);
 
       ~String();
 
       String& operator=(const String& s);
       String& operator=(const char* c);
+      String& operator=(const char c);
 
       friend bool operator==(const String& s1, const String& s2);
       friend bool operator!=(const String& s1, const String& s2);
 
-      //String operator+(const String& s1);
       friend String operator+(const String& s1, const String& s2);
       friend String operator+(const String& s1, const char* s2);
       friend String operator+(const char* s1, const String& s2);
+      friend String operator+(const String& s1, const char c2);
+      friend String operator+(const char c1, const String& s2);
 
       static String fromInt(int i);
       static String fromInt(int i, int width, char pad);

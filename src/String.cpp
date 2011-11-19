@@ -48,6 +48,12 @@ String::String(const char* c)
   *this = c;
 }
 
+String::String(const char c)
+  : mBuffer(0)
+{
+  *this = c;
+}
+
 String& String::operator=(const String& s)
 {
   if (this != &s) {
@@ -65,6 +71,16 @@ String& String::operator=(const char* c)
   }
 
   clone(c, l);
+  return *this;
+}
+
+String& String::operator=(const char c)
+{
+  char temp[2];
+  temp[0] = c;
+  temp[1] = '\0';
+
+  clone(temp, sizeof(temp));
   return *this;
 }
 
@@ -158,22 +174,6 @@ int String::toInt(const char* c)
   ss >> value;
   return value;
 }
-/*
-String String::operator+(const String& s1)
-{
-  String s2;
-
-  if (this->length()) {
-    s2.append(this->mBuffer, this->length());
-  }
-
-  if (s1.length()) {
-    s2.append(s1.mBuffer, s1.length());
-  }
-
-  return s2;
-}
-*/
 
 String lepcpplib::operator+(const String& s1, const String& s2)
 {
@@ -222,6 +222,38 @@ String lepcpplib::operator+(const String& s1, const char* s2)
       s3.append(s2, l);
     }
   }
+
+  return s3;
+}
+
+String lepcpplib::operator+(const char c1, const String& s2)
+{
+  String s3;
+
+  char temp[2];
+  temp[0] = c1;
+  temp[2] = '\0';
+  s3.append(temp, sizeof(temp));
+
+  if (s2.length()) {
+    s3.append(s2.mBuffer, s2.length());
+  }
+
+  return s3;
+}
+
+String lepcpplib::operator+(const String& s1, const char c2)
+{
+  String s3;
+
+  if (s1.length()) {
+    s3.append(s1.mBuffer, s1.length());
+  }
+
+  char temp[2];
+  temp[0] = c2;
+  temp[2] = '\0';
+  s3.append(temp, sizeof(temp));
 
   return s3;
 }

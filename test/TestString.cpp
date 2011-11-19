@@ -120,10 +120,11 @@ class TestStringConstructorFromCString2 : public TestCase
 
     bool test()
     {
-      String s1(NULL);
-      String s2 = NULL;
+      char* c = NULL;
+      String s1(c);
+      String s2 = c;
 
-      return (s1 == s2);
+      return ((s1 == s2) && (s1.length() == 0) && (s2.length() == 0));
     }
 };
 
@@ -141,6 +142,23 @@ class TestStringConstructorFromCString3 : public TestCase
       String s2 = "";
 
       return ((s1 == s2) && (s1.length() == 0) && (s2.length() == 0));
+    }
+};
+
+class TestStringConstructorFromChar : public TestCase
+{
+  public:
+    TestStringConstructorFromChar()
+      : TestCase("TestStringConstructorFromChar")
+    {
+    }
+
+    bool test()
+    {
+      String s1("a");
+      String s2('a');
+
+      return (s1 == s2);
     }
 };
 
@@ -260,9 +278,26 @@ class TestStringAssignment5 : public TestCase
     bool test()
     {
       String s1("asdfghjkl");
-      s1 = NULL;
+      s1 = (char*) NULL;
 
       return ((s1.length() == 0) && (s1 == ""));
+    }
+};
+
+class TestStringAssignment6 : public TestCase
+{
+  public:
+    TestStringAssignment6()
+      : TestCase("TestStringAssignment6: from char")
+    {
+    }
+
+    bool test()
+    {
+      String s1("");
+      s1 = 'z';
+
+      return ((s1.length() == 1) && (s1 == "z"));
     }
 };
 
@@ -430,7 +465,7 @@ class TestStringConcatenation6 : public TestCase
 {
   public:
     TestStringConcatenation6()
-      : TestCase("TestStringConcatenation6: of cstring to a strings")
+      : TestCase("TestStringConcatenation6: of cstring to a string")
     {
     }
 
@@ -444,6 +479,42 @@ class TestStringConcatenation6 : public TestCase
     }
 };
 
+class TestStringConcatenation7 : public TestCase
+{
+  public:
+    TestStringConcatenation7()
+      : TestCase("TestStringConcatenation7: of char to a string")
+    {
+    }
+
+    bool test()
+    {
+      const char c1 = '1';
+      String s2 = "abcd";
+      String s3 = c1 + s2;
+
+      return (s3 == "1abcd");
+    }
+};
+
+class TestStringConcatenation8 : public TestCase
+{
+  public:
+    TestStringConcatenation8()
+      : TestCase("TestStringConcatenation8: of null char to a string")
+    {
+    }
+
+    bool test()
+    {
+      const char c1 = '\0';
+      String s2 = "abcd";
+      String s3 = c1 + s2;
+
+      return ((s3 == "abcd") && (s3.length() == 4));
+    }
+};
+
 TestString::TestString()
   : TestModule("String class tester")
 {
@@ -454,6 +525,7 @@ TestString::TestString()
   add(new TestStringConstructorFromCString1());
   add(new TestStringConstructorFromCString2());
   add(new TestStringConstructorFromCString3());
+  add(new TestStringConstructorFromChar());
   add(new TestStringCopyConstructor1());
   add(new TestStringCopyConstructor2());
   add(new TestStringAssignment1());
@@ -461,6 +533,8 @@ TestString::TestString()
   add(new TestStringAssignment3());
   add(new TestStringAssignment4());
   add(new TestStringAssignment5());
+  add(new TestStringAssignment6());
+  add(new TestStringAssignment6());
   add(new TestStringFromInt());
   add(new TestStringFromIntWithPad());
   add(new TestStringToInt());
@@ -471,4 +545,6 @@ TestString::TestString()
   add(new TestStringConcatenation4());
   add(new TestStringConcatenation5());
   add(new TestStringConcatenation6());
+  add(new TestStringConcatenation7());
+  add(new TestStringConcatenation8());
 }
