@@ -248,3 +248,47 @@ String& String::operator+=(const char c1)
 
   return *this;
 }
+
+int String::indexOf(char c, int fromIndex)
+{
+  int index = -1;
+  for (int i = fromIndex; i < length(); i++) {
+    if (mBuffer[i] == c) {
+      index = i;
+      break;
+    }
+  }
+
+  return index;
+}
+
+String String::substring(int beginIndex)
+{
+  if (length() && (beginIndex >= 0)) {
+    return substring(beginIndex, length() - 1);
+  }
+  else {
+    return String();
+  }
+
+}
+
+String String::substring(int beginIndex, int endIndex)
+{
+  String s;
+
+  if ((beginIndex < 0) || (endIndex < 0)) {
+    return s;
+  }
+
+  if (endIndex >= length()) {
+    endIndex = length() - 1;
+  }
+
+  if ((beginIndex < length()) &&
+      (beginIndex < endIndex)) {
+    s.append((mBuffer + beginIndex), (endIndex - beginIndex + 1));
+  }
+
+  return s;
+}

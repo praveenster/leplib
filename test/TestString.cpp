@@ -599,7 +599,7 @@ class TestStringConcatenation13 : public TestCase
       String s1 = "zxcv";
       s1 += s1;
 
-      return ((s1 == "zxcvzxcv"));
+      return (s1 == "zxcvzxcv");
     }
 };
 
@@ -631,6 +631,214 @@ class TestStringMegaMix : public TestCase
       bool b3 = (s1 == "hjklpoiuyt");
 
       return (b1 && b2 && b3);
+    }
+};
+
+class TestStringIndexOf1 : public TestCase
+{
+  public:
+    TestStringIndexOf1()
+      : TestCase("TestStringIndexOf1: of char present")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+
+      return (s1.indexOf('x') == 1);
+    }
+};
+
+class TestStringIndexOf2 : public TestCase
+{
+  public:
+    TestStringIndexOf2()
+      : TestCase("TestStringIndexOf2: of char absent")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+
+      return (s1.indexOf('d') == -1);
+    }
+};
+
+class TestStringIndexOfFromIndex1 : public TestCase
+{
+  public:
+    TestStringIndexOfFromIndex1()
+      : TestCase("TestStringIndexOfFromIndex1: of char present")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcvx";
+
+      return (s1.indexOf('x', 2) == 4);
+    }
+};
+
+class TestStringIndexOfFromIndex2 : public TestCase
+{
+  public:
+    TestStringIndexOfFromIndex2()
+      : TestCase("TestStringIndexOfFromIndex2: of char absent")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+
+      return (s1.indexOf('c', 3) == -1);
+    }
+};
+
+class TestStringIndexOfFromIndex3 : public TestCase
+{
+  public:
+    TestStringIndexOfFromIndex3()
+      : TestCase("TestStringIndexOfFromIndex3: of invalid index")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+
+      return (s1.indexOf('c', 4) == -1);
+    }
+};
+
+class TestStringSubstring1 : public TestCase
+{
+  public:
+    TestStringSubstring1()
+      : TestCase("TestStringSubstring1: with zero begin index")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+
+      return (s1.substring(0) == "zxcv");
+    }
+};
+
+class TestStringSubstring2 : public TestCase
+{
+  public:
+    TestStringSubstring2()
+      : TestCase("TestStringSubstring2: with valid begin index")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcvfgthyrew";
+
+      return (s1.substring(4) == "fgthyrew");
+    }
+};
+
+class TestStringSubstring3 : public TestCase
+{
+  public:
+    TestStringSubstring3()
+      : TestCase("TestStringSubstring3: with invalid begin index")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcvfgthyrew";
+
+      return (s1.substring(14) == "");
+    }
+};
+
+class TestStringSubstring4 : public TestCase
+{
+  public:
+    TestStringSubstring4()
+      : TestCase("TestStringSubstring4: with valid begin and end index")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcvfgthyrew";
+
+      return (s1.substring(2, 4) == "cvf");
+    }
+};
+
+class TestStringSubstring5 : public TestCase
+{
+  public:
+    TestStringSubstring5()
+      : TestCase("TestStringSubstring5: with valid begin but invalid end index")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcvfgthyrew";
+
+      return (s1.substring(2, 24) == "cvfgthyrew");
+    }
+};
+
+class TestStringSubstring6 : public TestCase
+{
+  public:
+    TestStringSubstring6()
+      : TestCase("TestStringSubstring6: with begin > end index")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcvfgthyrew";
+
+      return (s1.substring(5, 2) == "");
+    }
+};
+
+class TestStringSubstring7 : public TestCase
+{
+  public:
+    TestStringSubstring7()
+      : TestCase("TestStringSubstring7: of empty string")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "";
+
+      return ((s1.substring(5, 2) == "") && (s1.substring(2) == ""));
+    }
+};
+
+class TestStringSubstring8 : public TestCase
+{
+  public:
+    TestStringSubstring8()
+      : TestCase("TestStringSubstring8: with negative beginIndex")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "987654321`";
+
+      return ((s1.substring(-2) == "") && (s1.substring(-2, -1) == ""));
     }
 };
 
@@ -672,4 +880,17 @@ TestString::TestString()
   add(new TestStringConcatenation12());
   add(new TestStringConcatenation13());
   add(new TestStringMegaMix());
+  add(new TestStringIndexOf1());
+  add(new TestStringIndexOf2());
+  add(new TestStringIndexOfFromIndex1());
+  add(new TestStringIndexOfFromIndex2());
+  add(new TestStringIndexOfFromIndex3());
+  add(new TestStringSubstring1());
+  add(new TestStringSubstring2());
+  add(new TestStringSubstring3());
+  add(new TestStringSubstring4());
+  add(new TestStringSubstring5());
+  add(new TestStringSubstring6());
+  add(new TestStringSubstring7());
+  add(new TestStringSubstring8());
 }
