@@ -21,7 +21,7 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "Debug.h"
+#include "Logger.h"
 #include "TestModule.h"
 
 using std::vector;
@@ -44,7 +44,7 @@ TestModule::~TestModule()
 void TestModule::run(unsigned int& passCount, unsigned int& failCount)
 {
   for (unsigned int i = 0; i < tests.size(); i++) {
-    DEBUG_D("TestCase: %s started\n", tests[i]->name().toCharArray());
+    LOG_D("TestCase: %s started\n", tests[i]->name().toCharArray());
     unsigned int p = 0;
     unsigned int f = 0;
     String result;
@@ -57,7 +57,7 @@ void TestModule::run(unsigned int& passCount, unsigned int& failCount)
       result = "FAIL";
     }
 
-    DEBUG_D("TestCase: %s complete. Result = %s\n", 
+    LOG_D("TestCase: %s complete. Result = %s\n",
       tests[i]->name().toCharArray(), result.toCharArray());
   }
 }

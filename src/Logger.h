@@ -21,50 +21,50 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef __DEBUG_H__
-#define __DEBUG_H__
+#ifndef __LOGGER_H__
+#define __LOGGER_H__
 
 #include <cstdio>
 
-extern int DEBUG_LEVEL;
-#define DEBUG_LEVEL_D 0
-#define DEBUG_LEVEL_I 1
-#define DEBUG_LEVEL_W 2
-#define DEBUG_LEVEL_E 3
+extern int LOGGER_LEVEL;
+#define LOGGER_LEVEL_D 0
+#define LOGGER_LEVEL_I 1
+#define LOGGER_LEVEL_W 2
+#define LOGGER_LEVEL_E 3
 
-/* 
+/*
   Reference:
   GNU: http://gcc.gnu.org/onlinedocs/cpp/Variadic-Macros.html
   WIN32: http://msdn.microsoft.com/en-us/library/ms177415(v=vs.80).aspx
 */
 
-#ifdef __ENABLE_DEBUG_LOG__
+#ifdef __ENABLE_LOGGER__
 #ifdef WIN32
-#define DEBUG_LOG(debug_string, debug_level, format, ...)  \
+#define LOGGER_LOG(logger_string, logger_level, format, ...)  \
 do { \
-  if (DEBUG_LEVEL <= debug_level) \
-    printf("[%s:%s:%d] " format, debug_string, __FILE__, __LINE__, __VA_ARGS__); \
+  if (LOGGER_LEVEL <= logger_level) \
+    printf("[%s:%s:%d] " format, logger_string, __FILE__, __LINE__, __VA_ARGS__); \
 } while (0)
-#define DEBUG_D(format, ...) DEBUG_LOG("DBG", DEBUG_LEVEL_D, format, __VA_ARGS__)
-#define DEBUG_I(format, ...) DEBUG_LOG("INF", DEBUG_LEVEL_I, format, __VA_ARGS__)
-#define DEBUG_W(format, ...) DEBUG_LOG("WRN", DEBUG_LEVEL_W, format, __VA_ARGS__)
-#define DEBUG_E(format, ...) DEBUG_LOG("ERR", DEBUG_LEVEL_E, format, __VA_ARGS__)
+#define LOG_D(format, ...) LOGGER_LOG("DBG", LOGGER_LEVEL_D, format, __VA_ARGS__)
+#define LOG_I(format, ...) LOGGER_LOG("INF", LOGGER_LEVEL_I, format, __VA_ARGS__)
+#define LOG_W(format, ...) LOGGER_LOG("WRN", LOGGER_LEVEL_W, format, __VA_ARGS__)
+#define LOG_E(format, ...) LOGGER_LOG("ERR", LOGGER_LEVEL_E, format, __VA_ARGS__)
 #else
-#define DEBUG_LOG(debug_string, debug_level, format, ...)  \
+#define LOGGER_LOG(logger_string, logger_level, format, ...)  \
 do { \
-  if (DEBUG_LEVEL <= debug_level) \
-    printf("[%s:%s:%d] "format, debug_string, __FILE__, __LINE__, ## __VA_ARGS__); \
+  if (LOGGER_LEVEL <= logger_level) \
+    printf("[%s:%s:%d] "format, logger_string, __FILE__, __LINE__, ## __VA_ARGS__); \
 } while (0)
-#define DEBUG_D(...) DEBUG_LOG("DBG", DEBUG_LEVEL_D, ## __VA_ARGS__)
-#define DEBUG_I(...) DEBUG_LOG("INF", DEBUG_LEVEL_I, ## __VA_ARGS__)
-#define DEBUG_W(...) DEBUG_LOG("WRN", DEBUG_LEVEL_W, ## __VA_ARGS__)
-#define DEBUG_E(...) DEBUG_LOG("ERR", DEBUG_LEVEL_E, ## __VA_ARGS__)
+#define LOG_D(...) LOGGER_LOG("DBG", LOGGER_LEVEL_D, ## __VA_ARGS__)
+#define LOG_I(...) LOGGER_LOG("INF", LOGGER_LEVEL_I, ## __VA_ARGS__)
+#define LOG_W(...) LOGGER_LOG("WRN", LOGGER_LEVEL_W, ## __VA_ARGS__)
+#define LOG_E(...) LOGGER_LOG("ERR", LOGGER_LEVEL_E, ## __VA_ARGS__)
 #endif
 #else
-#define DEBUG_D(...) 
-#define DEBUG_I(...) 
-#define DEBUG_W(...) 
-#define DEBUG_E(...)
+#define LOG_D(...)
+#define LOG_I(...)
+#define LOG_W(...)
+#define LOG_E(...)
 #endif
 
-#endif // __DEBUG_H__
+#endif // __LOGGER_H__

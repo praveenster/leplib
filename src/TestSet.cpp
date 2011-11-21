@@ -21,7 +21,7 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "Debug.h"
+#include "Logger.h"
 #include "TestSet.h"
 
 using std::vector;
@@ -37,19 +37,19 @@ TestSet::~TestSet()
 
 void TestSet::run(unsigned int& passCount, unsigned int& failCount)
 {
-  DEBUG_D("Starting tests ...\n");
+  LOG_D("Starting tests ...\n");
   for (unsigned int i = 0; i < testModules.size(); i++) {
-    DEBUG_D("TestModule: %s started\n", testModules[i]->name().toCharArray());
+    LOG_D("TestModule: %s started\n", testModules[i]->name().toCharArray());
     unsigned int p = 0;
     unsigned int f = 0;
     testModules[i]->run(p, f);
-    DEBUG_D("TestModule: %s complete. Pass = %d, Fail = %d\n", 
+    LOG_D("TestModule: %s complete. Pass = %d, Fail = %d\n",
       testModules[i]->name().toCharArray(), p, f);
     passCount += p;
     failCount += f;
   }
 
-  DEBUG_D("Tests complete. Total PassCount = %d, Total FailCount = %d\n", 
+  LOG_D("Tests complete. Total PassCount = %d, Total FailCount = %d\n",
     passCount, failCount);
 }
 
