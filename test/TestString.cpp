@@ -1024,6 +1024,64 @@ class TestStringTokenize5 : public TestCase
     }
 };
 
+class TestStringTokenize6 : public TestCase
+{
+  public:
+    TestStringTokenize6()
+      : TestCase("TestStringTokenize6: of empty string")
+    {
+    }
+
+    bool test()
+    {
+      String s1;
+      std::vector<String> tokens;
+      s1.tokenize('#', tokens);
+      std::vector<String> tokensExpected;
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenize7 : public TestCase
+{
+  public:
+    TestStringTokenize7()
+      : TestCase("TestStringTokenize7: with string of one character")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "T";
+      std::vector<String> tokens;
+      s1.tokenize('#', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("T"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenize8 : public TestCase
+{
+  public:
+    TestStringTokenize8()
+      : TestCase("TestStringTokenize8: with string of one character as delimiter")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "T";
+      std::vector<String> tokens;
+      s1.tokenize('T', tokens);
+      std::vector<String> tokensExpected;
+
+      return (tokens == tokensExpected);
+    }
+};
+
 TestString::TestString()
   : TestModule("String class tester")
 {
@@ -1084,4 +1142,7 @@ TestString::TestString()
   add(new TestStringTokenize3());
   add(new TestStringTokenize4());
   add(new TestStringTokenize5());
+  add(new TestStringTokenize6());
+  add(new TestStringTokenize7());
+  add(new TestStringTokenize8());
 }
