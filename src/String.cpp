@@ -249,10 +249,10 @@ String& String::operator+=(const char c1)
   return *this;
 }
 
-int String::indexOf(char c, int fromIndex)
+unsigned int String::indexOf(char c, unsigned int fromIndex)
 {
-  int index = -1;
-  for (int i = fromIndex; i < length(); i++) {
+  unsigned int index = -1;
+  for (unsigned int i = fromIndex; i < length(); i++) {
     if (mBuffer[i] == c) {
       index = i;
       break;
@@ -262,9 +262,9 @@ int String::indexOf(char c, int fromIndex)
   return index;
 }
 
-String String::substring(int beginIndex)
+String String::substring(unsigned int beginIndex)
 {
-  if (length() && (beginIndex >= 0)) {
+  if (length()) {
     return substring(beginIndex, length() - 1);
   }
   else {
@@ -273,13 +273,9 @@ String String::substring(int beginIndex)
 
 }
 
-String String::substring(int beginIndex, int endIndex)
+String String::substring(unsigned int beginIndex, unsigned int endIndex)
 {
   String s;
-
-  if ((beginIndex < 0) || (endIndex < 0)) {
-    return s;
-  }
 
   if (endIndex >= length()) {
     endIndex = length() - 1;
@@ -293,15 +289,15 @@ String String::substring(int beginIndex, int endIndex)
   return s;
 }
 
-void String::replace(int beginIndex, int count, const String& replacement)
+void String::replace(unsigned int beginIndex, unsigned int count, const String& replacement)
 {
-  int lreplacement = replacement.length();
-  int lold = length();
+  unsigned int lreplacement = replacement.length();
+  unsigned int lold = length();
   if ((lreplacement != 0) &&
-      (beginIndex > 0) &&
-      (count > 0) &&
+      (beginIndex < lold) &&
+      (count < lold) &&
       ((beginIndex + count) < lold)) {
-    int lnew = lold + lreplacement;
+    unsigned int lnew = lold + lreplacement;
     char* temp = new char[lnew + 1];
     memcpy(temp, mBuffer, beginIndex);
     memcpy(temp + beginIndex, replacement.mBuffer, lreplacement);
