@@ -24,6 +24,8 @@
 #ifndef __STRING_H__
 #define __STRING_H__
 
+#include <vector>
+
 namespace lepcpplib {
   class String
   {
@@ -63,12 +65,14 @@ namespace lepcpplib {
       int compare(const String& s) const;
       int compare(const char* c) const;
 
-      unsigned int indexOf(char c, unsigned int fromIndex = 0);
+      int indexOf(char c, unsigned int fromIndex = 0);
 
       String substring(unsigned int beginIndex);
       String substring(unsigned int beginIndex, unsigned int endIndex);
 
       void replace(unsigned int beginIndex, unsigned int count, const String& replacement);
+
+      void tokenize(const char delimiter, std::vector<String>& tokens);
 
       unsigned int length() const;
 

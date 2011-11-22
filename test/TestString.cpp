@@ -842,6 +842,22 @@ class TestStringSubstring8 : public TestCase
     }
 };
 
+class TestStringSubstring9 : public TestCase
+{
+  public:
+    TestStringSubstring9()
+      : TestCase("TestStringSubstring9: same beginIndex and endIndex")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "987654321`";
+
+      return (s1.substring(5, 5) == "4");
+    }
+};
+
 class TestStringReplace1 : public TestCase
 {
   public:
@@ -890,6 +906,121 @@ class TestStringReplace3 : public TestCase
       s1.replace(4, -1, "abcd");
 
       return ((s1 == "9876543210") && (s1.length() == 10));
+    }
+};
+
+class TestStringTokenize1 : public TestCase
+{
+  public:
+    TestStringTokenize1()
+      : TestCase("TestStringTokenize1: with delimiter present multiple times")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "This$is$a$test";
+      std::vector<String> tokens;
+      s1.tokenize('$', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("This"));
+      tokensExpected.push_back(String("is"));
+      tokensExpected.push_back(String("a"));
+      tokensExpected.push_back(String("test"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenize2 : public TestCase
+{
+  public:
+    TestStringTokenize2()
+      : TestCase("TestStringTokenize2: with delimiter present at begin and end")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "$This$is$a$test$";
+      std::vector<String> tokens;
+      s1.tokenize('$', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("This"));
+      tokensExpected.push_back(String("is"));
+      tokensExpected.push_back(String("a"));
+      tokensExpected.push_back(String("test"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenize3 : public TestCase
+{
+  public:
+    TestStringTokenize3()
+      : TestCase("TestStringTokenize3: with delimiter present consequtively")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "$$This$$is$a$test$$";
+      std::vector<String> tokens;
+      s1.tokenize('$', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("This"));
+      tokensExpected.push_back(String("is"));
+      tokensExpected.push_back(String("a"));
+      tokensExpected.push_back(String("test"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenize4 : public TestCase
+{
+  public:
+    TestStringTokenize4()
+      : TestCase("TestStringTokenize4: with delimiter between single character tokens.")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "%a%b%c%d%e%f%g%";
+      std::vector<String> tokens;
+      s1.tokenize('%', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("a"));
+      tokensExpected.push_back(String("b"));
+      tokensExpected.push_back(String("c"));
+      tokensExpected.push_back(String("d"));
+      tokensExpected.push_back(String("e"));
+      tokensExpected.push_back(String("f"));
+      tokensExpected.push_back(String("g"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenize5 : public TestCase
+{
+  public:
+    TestStringTokenize5()
+      : TestCase("TestStringTokenize5: with delimiter absent")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "$$This$$is$a$test$$";
+      std::vector<String> tokens;
+      s1.tokenize('#', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("$$This$$is$a$test$$"));
+
+      return (tokens == tokensExpected);
     }
 };
 
@@ -944,7 +1075,13 @@ TestString::TestString()
   add(new TestStringSubstring6());
   add(new TestStringSubstring7());
   add(new TestStringSubstring8());
+  add(new TestStringSubstring9());
   add(new TestStringReplace1());
   add(new TestStringReplace2());
   add(new TestStringReplace3());
+  add(new TestStringTokenize1());
+  add(new TestStringTokenize2());
+  add(new TestStringTokenize3());
+  add(new TestStringTokenize4());
+  add(new TestStringTokenize5());
 }

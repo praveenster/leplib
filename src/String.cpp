@@ -30,6 +30,7 @@ using lepcpplib::String;
 using std::memcpy;
 using std::strcmp;
 using std::strlen;
+using std::vector;
 
 String::String()
   : mBuffer(0)
@@ -249,10 +250,10 @@ String& String::operator+=(const char c1)
   return *this;
 }
 
-unsigned int String::indexOf(char c, unsigned int fromIndex)
+int String::indexOf(char c, unsigned int fromIndex)
 {
-  unsigned int index = -1;
-  for (unsigned int i = fromIndex; i < length(); i++) {
+  int index = -1;
+  for (int i = fromIndex; i < length(); i++) {
     if (mBuffer[i] == c) {
       index = i;
       break;
@@ -282,7 +283,7 @@ String String::substring(unsigned int beginIndex, unsigned int endIndex)
   }
 
   if ((beginIndex < length()) &&
-      (beginIndex < endIndex)) {
+      (beginIndex <= endIndex)) {
     s.append((mBuffer + beginIndex), (endIndex - beginIndex + 1));
   }
 
@@ -307,4 +308,29 @@ void String::replace(unsigned int beginIndex, unsigned int count, const String& 
     mBuffer = temp;
   }
 }
+
+void String::tokenize(const char delimiter, vector<String>& tokens)
+{
+  int p = 0;
+  int pnext = 0;
+  while(p < length()) {
+    pnext = indexOf(delimiter, p);
+
+    // if not delimiter exists, the entire string from p to pnext
+    // is the token.
+    if (pnext == -1) {
+      pnext = length();
+    }
+
+    // check if the string starts with a delimiter and
+    // if delimiters exist consequitively.
+    if ((pnext != 0) && (mBuffer[pnext - 1] != delimiter)){
+      String token = substring(p, pnext - 1);
+      tokens.push_back(token);
+    }
+
+    p = pnext + 1;
+  }
+}
+
 
