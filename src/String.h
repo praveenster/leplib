@@ -68,6 +68,8 @@ namespace lepcpplib {
       String substring(int beginIndex);
       String substring(int beginIndex, int endIndex);
 
+      void replace(int beginIndex, int count, const String& replacement);
+
       unsigned int length() const;
 
     private:

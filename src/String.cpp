@@ -292,3 +292,23 @@ String String::substring(int beginIndex, int endIndex)
 
   return s;
 }
+
+void String::replace(int beginIndex, int count, const String& replacement)
+{
+  int lreplacement = replacement.length();
+  int lold = length();
+  if ((lreplacement != 0) &&
+      (beginIndex > 0) &&
+      (count > 0) &&
+      ((beginIndex + count) < lold)) {
+    int lnew = lold + lreplacement;
+    char* temp = new char[lnew + 1];
+    memcpy(temp, mBuffer, beginIndex);
+    memcpy(temp + beginIndex, replacement.mBuffer, lreplacement);
+    memcpy(temp + beginIndex + lreplacement, (mBuffer + beginIndex + count), lold - count);
+    temp[lnew] = '\0';
+    delete[] mBuffer;
+    mBuffer = temp;
+  }
+}
+

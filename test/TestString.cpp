@@ -842,6 +842,57 @@ class TestStringSubstring8 : public TestCase
     }
 };
 
+class TestStringReplace1 : public TestCase
+{
+  public:
+    TestStringReplace1()
+      : TestCase("TestStringReplace1: with valid beginIndex and size")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "9876543210";
+      s1.replace(2, 2, "abcd");
+
+      return ((s1 == "98abcd543210") && (s1.length() == 12));
+    }
+};
+
+class TestStringReplace2 : public TestCase
+{
+  public:
+    TestStringReplace2()
+      : TestCase("TestStringReplace2: with valid beginIndex but invalid size")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "9876543210";
+      s1.replace(2, 10, "abcd");
+
+      return ((s1 == "9876543210") && (s1.length() == 10));
+    }
+};
+
+class TestStringReplace3 : public TestCase
+{
+  public:
+    TestStringReplace3()
+      : TestCase("TestStringReplace3: with invalid beginIndex and invalid size")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "9876543210";
+      s1.replace(4, -1, "abcd");
+
+      return ((s1 == "9876543210") && (s1.length() == 10));
+    }
+};
+
 TestString::TestString()
   : TestModule("String class tester")
 {
@@ -893,4 +944,7 @@ TestString::TestString()
   add(new TestStringSubstring6());
   add(new TestStringSubstring7());
   add(new TestStringSubstring8());
+  add(new TestStringReplace1());
+  add(new TestStringReplace2());
+  add(new TestStringReplace3());
 }
