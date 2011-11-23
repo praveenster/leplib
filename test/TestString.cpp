@@ -145,6 +145,23 @@ class TestStringConstructorFromCString3 : public TestCase
     }
 };
 
+class TestStringConstructorFromCString4 : public TestCase
+{
+  public:
+    TestStringConstructorFromCString4()
+      : TestCase("TestStringConstructorFromCString4: cstring with custom length")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "This is a test";
+      String s2(s1, 4);
+
+      return ((s2 == "This") && (s2.length() == 4));
+    }
+};
+
 class TestStringConstructorFromChar : public TestCase
 {
   public:
@@ -1082,6 +1099,179 @@ class TestStringTokenize8 : public TestCase
     }
 };
 
+class TestStringTokenizeStatic1 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic1()
+      : TestCase("TestStringTokenizeStatic1: with delimiter present multiple times")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "This$is$a$test";
+      std::vector<String> tokens;
+      String::tokenize(s1, '$', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("This"));
+      tokensExpected.push_back(String("is"));
+      tokensExpected.push_back(String("a"));
+      tokensExpected.push_back(String("test"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenizeStatic2 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic2()
+      : TestCase("TestStringTokenizeStatic2: with delimiter present at begin and end")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "$This$is$a$test$";
+      std::vector<String> tokens;
+      String::tokenize(s1, '$', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("This"));
+      tokensExpected.push_back(String("is"));
+      tokensExpected.push_back(String("a"));
+      tokensExpected.push_back(String("test"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenizeStatic3 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic3()
+      : TestCase("TestStringTokenizeStatic3: with delimiter present consequtively")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "$$This$$is$a$test$$";
+      std::vector<String> tokens;
+      String::tokenize(s1, '$', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("This"));
+      tokensExpected.push_back(String("is"));
+      tokensExpected.push_back(String("a"));
+      tokensExpected.push_back(String("test"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenizeStatic4 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic4()
+      : TestCase("TestStringTokenizeStatic4: with delimiter between single character tokens.")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "%a%b%c%d%e%f%g%";
+      std::vector<String> tokens;
+      String::tokenize(s1, '%', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("a"));
+      tokensExpected.push_back(String("b"));
+      tokensExpected.push_back(String("c"));
+      tokensExpected.push_back(String("d"));
+      tokensExpected.push_back(String("e"));
+      tokensExpected.push_back(String("f"));
+      tokensExpected.push_back(String("g"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenizeStatic5 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic5()
+      : TestCase("TestStringTokenizeStatic5: with delimiter absent")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "$$This$$is$a$test$$";
+      std::vector<String> tokens;
+      String::tokenize(s1, '#', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("$$This$$is$a$test$$"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenizeStatic6 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic6()
+      : TestCase("TestStringTokenizeStatic6: of empty string")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "";
+      std::vector<String> tokens;
+      String::tokenize(s1, '#', tokens);
+      std::vector<String> tokensExpected;
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenizeStatic7 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic7()
+      : TestCase("TestStringTokenizeStatic7: with string of one character")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "T";
+      std::vector<String> tokens;
+      String::tokenize(s1, '#', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String("T"));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenizeStatic8 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic8()
+      : TestCase("TestStringTokenizeStatic8: with string of one character as delimiter")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "T";
+      std::vector<String> tokens;
+      String::tokenize(s1, 'T', tokens);
+      std::vector<String> tokensExpected;
+
+      return (tokens == tokensExpected);
+    }
+};
+
 TestString::TestString()
   : TestModule("String class tester")
 {
@@ -1092,6 +1282,7 @@ TestString::TestString()
   add(new TestStringConstructorFromCString1());
   add(new TestStringConstructorFromCString2());
   add(new TestStringConstructorFromCString3());
+  add(new TestStringConstructorFromCString4());
   add(new TestStringConstructorFromChar());
   add(new TestStringCopyConstructor1());
   add(new TestStringCopyConstructor2());
@@ -1145,4 +1336,12 @@ TestString::TestString()
   add(new TestStringTokenize6());
   add(new TestStringTokenize7());
   add(new TestStringTokenize8());
+  add(new TestStringTokenizeStatic1());
+  add(new TestStringTokenizeStatic2());
+  add(new TestStringTokenizeStatic3());
+  add(new TestStringTokenizeStatic4());
+  add(new TestStringTokenizeStatic5());
+  add(new TestStringTokenizeStatic6());
+  add(new TestStringTokenizeStatic7());
+  add(new TestStringTokenizeStatic8());
 }
