@@ -73,7 +73,7 @@ namespace lepcpplib {
 
       void replace(unsigned int beginIndex, unsigned int count, const String& replacement);
 
-      void tokenize(const char delimiter, std::vector<String>& tokens);
+      void tokenize(const char delimiter, std::vector<String>& tokens) const;
       static void tokenize(const char* input, const char delimiter, std::vector<String>& tokens);
 
       unsigned int length() const;

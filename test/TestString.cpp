@@ -1272,6 +1272,25 @@ class TestStringTokenizeStatic8 : public TestCase
     }
 };
 
+class TestStringTokenizeStatic9 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic9()
+      : TestCase("TestStringTokenizeStatic9: with null cstring")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = NULL;
+      std::vector<String> tokens;
+      String::tokenize(s1, 'T', tokens);
+      std::vector<String> tokensExpected;
+
+      return (tokens == tokensExpected);
+    }
+};
+
 TestString::TestString()
   : TestModule("String class tester")
 {
@@ -1344,4 +1363,5 @@ TestString::TestString()
   add(new TestStringTokenizeStatic6());
   add(new TestStringTokenizeStatic7());
   add(new TestStringTokenizeStatic8());
+  add(new TestStringTokenizeStatic9());
 }

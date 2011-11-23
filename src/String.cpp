@@ -315,28 +315,11 @@ void String::replace(unsigned int beginIndex, unsigned int count, const String& 
   }
 }
 
-void String::tokenize(const char delimiter, vector<String>& tokens)
+void String::tokenize(const char delimiter, vector<String>& tokens) const
 {
-  int p = 0;
-  int pnext = 0;
-  while(p < length()) {
-    pnext = indexOf(delimiter, p);
-
-    // if not delimiter exists, the entire string from p to pnext
-    // is the token.
-    if (pnext == -1) {
-      pnext = length();
-    }
-
-    // check if the string starts with a delimiter and
-    // if delimiters exist consequitively.
-    if ((pnext != 0) && (mBuffer[pnext - 1] != delimiter)) {
-      String token = substring(p, pnext - 1);
-      tokens.push_back(token);
-    }
-
-    p = pnext + 1;
-  }
+  // call the static version as this function does not really
+  // alter any member variables. it only produces tokens.
+  String::tokenize(mBuffer, delimiter, tokens);
 }
 
 void String::tokenize(const char* input, const char delimiter, std::vector<String>& tokens)
@@ -346,18 +329,15 @@ void String::tokenize(const char* input, const char delimiter, std::vector<Strin
     int pnext = 0;
     int l = strlen(input);
     while(p < l) {
-      pnext = -1;
+      // if not delimiter exists, the entire string from p to pnext
+      // is the token.
+      pnext = l;
+
       for (int i = p; i < l; i++) {
         if (input[i] == delimiter) {
           pnext = i;
           break;
         }
-      }
-
-      // if not delimiter exists, the entire string from p to pnext
-      // is the token.
-      if (pnext == -1) {
-        pnext = l;
       }
 
       // check if the string starts with a delimiter and
