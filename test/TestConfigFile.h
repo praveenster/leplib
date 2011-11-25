@@ -21,32 +21,16 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#ifndef LEPCPPLIB_TESTCONFIGFILE_H_
+#define	LEPCPPLIB_TESTCONFIGFILE_H_
 
-#include "../src/TestSet.h"
-#include "TestString.h"
-#include "TestConfigFile.h"
+#include "../src/TestModule.h"
+using lepcpplib::TestModule;
 
-using lepcpplib::TestSet;
-
-class TestMain : public TestSet
+class TestConfigFile : public TestModule
 {
   public:
-    TestMain()
-    {
-      add(new TestString());
-      add(new TestConfigFile());
-    };
+    TestConfigFile();
 };
 
-int main(int argc, char** argv)
-{
-  TestMain* pTest = new TestMain();
-  unsigned int passCount = 0;
-  unsigned int failCount = 0;
-  pTest->run(passCount, failCount);
-  delete pTest;
-
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
-}
+#endif	// LEPCPPLIB_TESTCONFIGFILE_H_

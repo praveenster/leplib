@@ -21,32 +21,17 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#ifndef LEPCPPLIB_KEYVALUE_H_
+#define	LEPCPPLIB_KEYVALUE_H_
 
-#include "../src/TestSet.h"
-#include "TestString.h"
-#include "TestConfigFile.h"
+#include "String.h"
 
-using lepcpplib::TestSet;
-
-class TestMain : public TestSet
+namespace lepcpplib {
+struct KeyValue
 {
-  public:
-    TestMain()
-    {
-      add(new TestString());
-      add(new TestConfigFile());
-    };
+  String key;
+  String value;
 };
+} // namespace lepcpplib
 
-int main(int argc, char** argv)
-{
-  TestMain* pTest = new TestMain();
-  unsigned int passCount = 0;
-  unsigned int failCount = 0;
-  pTest->run(passCount, failCount);
-  delete pTest;
-
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
-}
+#endif	// LEPCPPLIB_KEYVALUE_H_
