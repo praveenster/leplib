@@ -33,30 +33,30 @@ using std::strlen;
 using std::vector;
 
 String::String()
-  : mBuffer(0)
+  : buffer_(0)
 {
 }
 
 String::String(const String& s)
-  : mBuffer(0)
+  : buffer_(0)
 {
   *this = s;
 }
 
 String::String(const char* c)
-  : mBuffer(0)
+  : buffer_(0)
 {
   *this = c;
 }
 
 String::String(const char c)
-  : mBuffer(0)
+  : buffer_(0)
 {
   *this = c;
 }
 
 String::String(const char* c, int count)
-  : mBuffer(0)
+  : buffer_(0)
 {
   clone(c, count);
 }
@@ -64,7 +64,7 @@ String::String(const char* c, int count)
 String& String::operator=(const String& s)
 {
   if (this != &s) {
-    clone(s.mBuffer, s.length());
+    clone(s.buffer_, s.length());
   }
 
   return *this;
@@ -99,7 +99,7 @@ bool lepcpplib::operator==(const String& s1, const String& s2)
     result = true;
   }
   else if ((s1.length() > 0) && (s2.length() > 0)) {
-    result = (strcmp(s1.mBuffer, s2.mBuffer) == 0);
+    result = (strcmp(s1.buffer_, s2.buffer_) == 0);
   }
 
   return result;
@@ -112,28 +112,28 @@ bool lepcpplib::operator!=(const String& s1, const String& s2)
 
 String::~String()
 {
-  delete[] mBuffer;
+  delete[] buffer_;
 }
 
 const char* String::toCharArray() const
 {
-  return mBuffer;
+  return buffer_;
 }
 
 unsigned int String::length() const
 {
-  return (mBuffer == 0) ? 0 : strlen(mBuffer);
+  return (buffer_ == 0) ? 0 : strlen(buffer_);
 }
 
 void String::clone(const char* c, unsigned int l)
 {
-  delete[] mBuffer;
-  mBuffer = 0;
+  delete[] buffer_;
+  buffer_ = 0;
 
   if ((l > 0) && (c != NULL)) {
-    mBuffer = new char[l + 1];
-    memcpy(mBuffer, c, l);
-    mBuffer[l] = 0;
+    buffer_ = new char[l + 1];
+    memcpy(buffer_, c, l);
+    buffer_[l] = 0;
   }
 }
 
@@ -143,11 +143,11 @@ void String::append(const char* c, unsigned int l)
     int lold = length();
     int lnew = lold + l;
     char* temp = new char[lnew + 1];
-    std::memcpy(temp, mBuffer, lold);
+    std::memcpy(temp, buffer_, lold);
     std::memcpy(temp + lold, c, l);
     temp[lnew] = '\0';
-    delete[] mBuffer;
-    mBuffer = temp;
+    delete[] buffer_;
+    buffer_ = temp;
   }
 }
 
@@ -230,7 +230,7 @@ String lepcpplib::operator+(const String& s1, const char c2)
 
 String& String::operator+=(const String& s1)
 {
-  this->append(s1.mBuffer, s1.length());
+  this->append(s1.buffer_, s1.length());
   return *this;
 }
 
@@ -260,7 +260,7 @@ int String::indexOf(char c, unsigned int fromIndex)
 {
   int index = -1;
   for (int i = fromIndex; i < length(); i++) {
-    if (mBuffer[i] == c) {
+    if (buffer_[i] == c) {
       index = i;
       break;
     }
@@ -290,7 +290,7 @@ String String::substring(unsigned int beginIndex, unsigned int endIndex)
 
   if ((beginIndex < length()) &&
       (beginIndex <= endIndex)) {
-    s.append((mBuffer + beginIndex), (endIndex - beginIndex + 1));
+    s.append((buffer_ + beginIndex), (endIndex - beginIndex + 1));
   }
 
   return s;
@@ -306,12 +306,12 @@ void String::replace(unsigned int beginIndex, unsigned int count, const String& 
       ((beginIndex + count) < lold)) {
     unsigned int lnew = lold + lreplacement;
     char* temp = new char[lnew + 1];
-    memcpy(temp, mBuffer, beginIndex);
-    memcpy(temp + beginIndex, replacement.mBuffer, lreplacement);
-    memcpy(temp + beginIndex + lreplacement, (mBuffer + beginIndex + count), lold - count);
+    memcpy(temp, buffer_, beginIndex);
+    memcpy(temp + beginIndex, replacement.buffer_, lreplacement);
+    memcpy(temp + beginIndex + lreplacement, (buffer_ + beginIndex + count), lold - count);
     temp[lnew] = '\0';
-    delete[] mBuffer;
-    mBuffer = temp;
+    delete[] buffer_;
+    buffer_ = temp;
   }
 }
 
@@ -319,7 +319,7 @@ void String::tokenize(const char delimiter, vector<String>& tokens) const
 {
   // call the static version as this function does not really
   // alter any member variables. it only produces tokens.
-  String::tokenize(mBuffer, delimiter, tokens);
+  String::tokenize(buffer_, delimiter, tokens);
 }
 
 void String::tokenize(const char* input, const char delimiter, std::vector<String>& tokens)

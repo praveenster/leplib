@@ -82,7 +82,7 @@ namespace lepcpplib {
       void clone(const char* c, unsigned int l);
       void append(const char* c, unsigned int l);
 
-      char* mBuffer;
+      char* buffer_;
   };
 
   bool operator==(const String& s1, const String& s2);
