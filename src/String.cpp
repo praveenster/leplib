@@ -341,7 +341,7 @@ void String::tokenize(const char* input, const char delimiter, std::vector<Strin
       }
 
       // check if the string starts with a delimiter and
-      // if delimiters exist consequitively.
+      // if delimiters exist consecutively.
       if ((pnext != 0) && (input[pnext - 1] != delimiter)) {
         String token(input + p, pnext - p);
         tokens.push_back(token);

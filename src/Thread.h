@@ -21,53 +21,27 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_CONFIGFILE_H_
-#define	LEPCPPLIB_CONFIGFILE_H_
-
-#include <vector>
-#include "KeyValue.h"
-#include "String.h"
-
-// Utility class for processing and storing config files that contain
-// key value pairs in the form KEY=VALUE
-// Sample Usage:
-//   ConfigFile configfile("test.cfg");
-//   bool loaded = configfile.Load();
-//   if (loaded) {
-//     String value;
-//     bool b = configfile.ValueOf("DEFAULT_TIMEOUT", value);
-//     if (b) {
-//       .....
+#ifndef LEPCPPLIB_THREAD_H_
+#define	LEPCPPLIB_THREAD_H_
 
 namespace lepcpplib {
-class ConfigFile {
+class Thread
+{
   public:
-    ConfigFile(const String& filename);
-    ~ConfigFile();
+    Thread();
+    virtual ~Thread();
+    static void* runner(void* parameter);
 
-    // Loads and processes the key value pairs from filename.
-    // If an error occurs during load, the function returns false.
-    bool Load(); //or read filename as param?
+    void Start(void* parameter);
+    virtual void* Run(void* parameter) = 0;
 
-    void Save();
-
-    void Add(const String& key, const String& value);
-    void Remove(const String& key);
-
-    bool ValueOf(const String& key, String& value);
-
-    //vector<String> Keys();
-
-    const String& filename();
-    void set_filename(const String& filename);
+    void Sleep(int seconds);
+    void Yield();
+    void Join(Thread& joinee);
 
   private:
-    ConfigFile();
-    ConfigFile(const ConfigFile& configfile);
-
-    std::vector<KeyValue> keyvalues_;
-    String filename_;
 };
 } // namespace lepcpplib
 
-#endif	// LEPCPPLIB_CONFIGFILE_H_
+
+#endif	// LEPCPPLIB_THREAD_H_

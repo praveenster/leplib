@@ -21,34 +21,46 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-
-#include "../src/TestSet.h"
-#include "TestString.h"
-#include "TestConfigFile.h"
+#include <fstream>
 #include "TestThread.h"
+#include "../src/Thread.h"
+#include "../src/Logger.h"
 
-using lepcpplib::TestSet;
+using lepcpplib::Thread;
+using lepcpplib::TestCase;
+using lepcpplib::TestModule;
 
-class TestMain : public TestSet
+class Thread1 : public Thread
 {
   public:
-    TestMain()
+    void* Run(void* parameter)
     {
-      add(new TestString());
-      add(new TestConfigFile());
-      add(new TestThread());
-    };
+      int i = (long)parameter;
+      LOG_D("Parameter = %d\n", i);
+    }
 };
 
-int main(int argc, char** argv)
+class TestThreadRun : public TestCase
 {
-  TestMain* pTest = new TestMain();
-  unsigned int passCount = 0;
-  unsigned int failCount = 0;
-  pTest->run(passCount, failCount);
-  delete pTest;
+  public:
+    TestThreadRun()
+      : TestCase("TestThreadRun")
+    {
+    }
 
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
+    bool test()
+    {
+      Thread1 t1;
+      t1.Start((void*)1);
+
+      Thread1 t2;
+      t2.Start((void*)2);
+      return false;
+    }
+};
+
+TestThread::TestThread()
+  : TestModule("Thread class tester")
+{
+  add(new TestThreadRun());
 }
