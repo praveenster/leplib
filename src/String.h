@@ -55,6 +55,9 @@ namespace lepcpplib {
       friend String operator+(const String& s1, const char c2);
       friend String operator+(const char c1, const String& s2);
 
+      bool operator<(const String& s1) const;
+      bool operator>(const String& s1) const;
+
       static String fromInt(int i);
       static String fromInt(int i, int width, char pad);
 
@@ -90,6 +93,8 @@ namespace lepcpplib {
   String operator+(const String& s1, const String& s2);
   String operator+(const String& s1, const char* s2);
   String operator+(const char* s1, const String& s2);
+  String operator+(const String& s1, const char c2);
+  String operator+(const char c1, const String& s2);
 }
 
 #endif // __STRING_H__

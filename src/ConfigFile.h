@@ -24,8 +24,7 @@
 #ifndef LEPCPPLIB_CONFIGFILE_H_
 #define	LEPCPPLIB_CONFIGFILE_H_
 
-#include <vector>
-#include "KeyValue.h"
+#include <map>
 #include "String.h"
 
 // Utility class for processing and storing config files that contain
@@ -47,7 +46,7 @@ class ConfigFile {
 
     // Loads and processes the key value pairs from filename.
     // If an error occurs during load, the function returns false.
-    bool Load(); //or read filename as param?
+    bool Load();
 
     void Save();
 
@@ -65,7 +64,7 @@ class ConfigFile {
     ConfigFile();
     ConfigFile(const ConfigFile& configfile);
 
-    std::vector<KeyValue> keyvalues_;
+    std::map<String, String> keyvalues_;
     String filename_;
 };
 } // namespace lepcpplib

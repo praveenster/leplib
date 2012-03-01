@@ -16,10 +16,6 @@
           <df name="CompilerIdCXX">
             <in>CMakeCXXCompilerId.cpp</in>
           </df>
-          <df name="Progress">
-            <in>3</in>
-            <in>count.txt</in>
-          </df>
         </df>
         <df name="src">
           <df name="CMakeFiles">

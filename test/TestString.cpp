@@ -1291,6 +1291,92 @@ class TestStringTokenizeStatic9 : public TestCase
     }
 };
 
+
+class TestStringComparison1 : public TestCase
+{
+  public:
+    TestStringComparison1()
+      : TestCase("TestStringComparison1: empty with valid string")
+    {
+    }
+
+    bool test()
+    {
+      String s1;
+      String s2("somestring");
+
+      return ((s1 < s2) == true);
+    }
+};
+
+class TestStringComparison2 : public TestCase
+{
+  public:
+    TestStringComparison2()
+      : TestCase("TestStringComparison2: valid with empty string")
+    {
+    }
+
+    bool test()
+    {
+      String s1("somestring");
+      String s2;
+
+      return ((s1 > s2) == true);
+    }
+};
+
+class TestStringComparison3 : public TestCase
+{
+  public:
+    TestStringComparison3()
+      : TestCase("TestStringComparison3: s1 < s2")
+    {
+    }
+
+    bool test()
+    {
+      String s1("abcd");
+      String s2("efgh");
+
+      return ((s1 < s2) == true);
+    }
+};
+
+class TestStringComparison4 : public TestCase
+{
+  public:
+    TestStringComparison4()
+      : TestCase("TestStringComparison4: s1 > s2")
+    {
+    }
+
+    bool test()
+    {
+      String s1("5678");
+      String s2("1234");
+
+      return ((s1 > s2) == true);
+    }
+};
+
+class TestStringComparison5 : public TestCase
+{
+  public:
+    TestStringComparison5()
+      : TestCase("TestStringComparison5: s1 = s2")
+    {
+    }
+
+    bool test()
+    {
+      String s1("@#$%");
+      String s2(s1);
+
+      return ((s1 > s2) == false);
+    }
+};
+
 TestString::TestString()
   : TestModule("String class tester")
 {
@@ -1364,4 +1450,9 @@ TestString::TestString()
   add(new TestStringTokenizeStatic7());
   add(new TestStringTokenizeStatic8());
   add(new TestStringTokenizeStatic9());
+  add(new TestStringComparison1());
+  add(new TestStringComparison2());
+  add(new TestStringComparison3());
+  add(new TestStringComparison4());
+  add(new TestStringComparison5());
 }

@@ -250,10 +250,32 @@ String& String::operator+=(const char c1)
 {
   char temp[2];
   temp[0] = c1;
-  temp[2] = '\0';
+  temp[1] = '\0';
   this->append(temp, sizeof(temp));
 
   return *this;
+}
+
+bool String::operator<(const String& s1) const
+{
+  bool result = false;
+
+  if ((this->buffer_ == NULL) && s1.buffer_ != NULL) {
+    result = true;
+  }
+  else if ((this->buffer_ != NULL) && s1.buffer_ == NULL) {
+    result = false;
+  }
+  else {
+    result = (strcmp(this->buffer_, s1.buffer_) < 0);
+  }
+
+  return result;
+}
+
+bool String::operator>(const String& s1) const
+{
+ return !((*this == s1) || (*this < s1));
 }
 
 int String::indexOf(char c, unsigned int fromIndex)

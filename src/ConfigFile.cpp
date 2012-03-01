@@ -25,6 +25,7 @@
 #include "ConfigFile.h"
 
 using std::ifstream;
+using std::map;
 
 namespace lepcpplib {
 const int kConfigFileMaxLineLength = 256;
@@ -56,10 +57,9 @@ bool ConfigFile::Load()
 
         if (q != -1)
         {
-          KeyValue kv;
-          kv.key = line.substring(0, q - 1);
-          kv.value = line.substring(q + 1);
-          keyvalues_.push_back(kv);
+          String key = line.substring(0, q - 1);
+          String value = line.substring(q + 1);
+          keyvalues_[key] = value;
         }
       }
     }
@@ -73,17 +73,10 @@ bool ConfigFile::Load()
 bool ConfigFile::ValueOf(const String& key, String& value)
 {
   bool result = false;
-
-  //TODO: use map instead of vector.
-  for (int i = 0; i < keyvalues_.size(); i++) {
-    //LOG_D("[%d] key = %s, value = %s\n", i,
-    //      keyvalues_[i].key.toCharArray(),
-    //      keyvalues_[i].value.toCharArray());
-    if (keyvalues_[i].key == key) {
-      value = keyvalues_[i].value;
-      result = true;
-      break;
-    }
+  map<String, String>::iterator it = keyvalues_.find(key);
+  if (it != keyvalues_.end()) {
+    value = it->second;
+    result = true;
   }
 
   return result;
