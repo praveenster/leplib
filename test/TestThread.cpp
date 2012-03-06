@@ -37,6 +37,8 @@ class Thread1 : public Thread
     {
       int i = (long)parameter;
       LOG_D("Parameter = %d\n", i);
+
+      return 0;
     }
 };
 

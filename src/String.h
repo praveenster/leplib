@@ -74,10 +74,13 @@ namespace lepcpplib {
       String substring(unsigned int beginIndex);
       String substring(unsigned int beginIndex, unsigned int endIndex);
 
+      String trim();
+
       void replace(unsigned int beginIndex, unsigned int count, const String& replacement);
 
       void tokenize(const char delimiter, std::vector<String>& tokens) const;
       static void tokenize(const char* input, const char delimiter, std::vector<String>& tokens);
+      static void tokenize(const String& input, const char delimiter, std::vector<String>& tokens);
 
       unsigned int length() const;
 

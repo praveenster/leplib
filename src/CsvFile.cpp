@@ -21,36 +21,63 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#include "CsvFile.h"
 
-#include "../src/TestSet.h"
-#include "TestConfigFile.h"
-#include "TestCsvFile.h"
-#include "TestString.h"
-#include "TestThread.h"
+using std::vector;
 
-using lepcpplib::TestSet;
-
-class TestMain : public TestSet
+namespace lepcpplib {
+CsvFile::CsvFile(const String& filename)
+  : filename_(filename), separator_(',')
 {
-  public:
-    TestMain()
-    {
-      add(new TestConfigFile());
-      add(new TestCsvFile());
-      add(new TestString());
-      // add(new TestThread());
-    };
-};
+}
 
-int main(int argc, char** argv)
+CsvFile::CsvFile(const String& filename, char separator)
+  : filename_(filename), separator_(separator)
 {
-  TestMain* pTest = new TestMain();
-  unsigned int passCount = 0;
-  unsigned int failCount = 0;
-  pTest->run(passCount, failCount);
-  delete pTest;
+}
 
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
+CsvFile::~CsvFile()
+{
+}
+
+bool CsvFile::Load()
+{
+  return false;
+}
+
+void CsvFile::Save()
+{
+}
+
+void CsvFile::Add(const std::vector<String>& record)
+{
+}
+
+void CsvFile::Remove(int row)
+{
+}
+
+String CsvFile::ValueOf(int row, int column)
+{
+  return "";
+}
+
+const String& CsvFile::filename()
+{
+  return filename_;
+}
+
+void CsvFile::set_filename(const String& filename)
+{
+}
+
+int CsvFile::RowCount()
+{
+  return 0;
+}
+
+int CsvFile::ColumnCount()
+{
+  return 0;
+}
 }

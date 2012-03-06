@@ -36,7 +36,7 @@ class Thread
     virtual void* Run(void* parameter) = 0;
 
     void Sleep(int seconds);
-    void Yield();
+    //void Yield();
     void Join(Thread& joinee);
 
   private:

@@ -21,36 +21,48 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#ifndef LEPCPPLIB_CSVFILE_H_
+#define LEPCPPLIB_CSVFILE_H_
 
-#include "../src/TestSet.h"
-#include "TestConfigFile.h"
-#include "TestCsvFile.h"
-#include "TestString.h"
-#include "TestThread.h"
+#include <vector>
+#include "String.h"
 
-using lepcpplib::TestSet;
+// Utility class for processing and storing csv files that contain
+// rows and columns of data
 
-class TestMain : public TestSet
-{
+namespace lepcpplib {
+class CsvFile {
   public:
-    TestMain()
-    {
-      add(new TestConfigFile());
-      add(new TestCsvFile());
-      add(new TestString());
-      // add(new TestThread());
-    };
+    CsvFile(const String& filename);
+    CsvFile(const String& filename, char separator);
+    ~CsvFile();
+
+    // Loads and processes the rows and columns from filename,
+    // using separator (usually space or comma or tab) as the separator.
+    // If an error occurs during load, the function returns false.
+    bool Load();
+
+    void Save();
+
+    void Add(const std::vector<String>& record);
+    void Remove(int row);
+
+    String ValueOf(int row, int column);
+
+    int RowCount();
+    int ColumnCount();
+
+    const String& filename();
+    void set_filename(const String& filename);
+
+  private:
+    CsvFile();
+    CsvFile(const CsvFile& csvfile);
+
+    std::vector<std::vector<String>> records_;
+    String filename_;
+    char separator_;
 };
+} // namespace lepcpplib
 
-int main(int argc, char** argv)
-{
-  TestMain* pTest = new TestMain();
-  unsigned int passCount = 0;
-  unsigned int failCount = 0;
-  pTest->run(passCount, failCount);
-  delete pTest;
-
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
-}
+#endif  // LEPCPPLIB_CSVFILE_H_

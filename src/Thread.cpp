@@ -48,6 +48,8 @@ void* Thread::runner(void* parameter)
 
     delete temp;
   }
+
+  return 0;
 }
 
 void Thread::Start(void* parameter)
@@ -59,12 +61,12 @@ void Thread::Start(void* parameter)
 #ifdef WIN32
   DWORD threadId;
   HANDLE hThread = CreateThread(
-    NULL,                                 // default security attributes
-    0,                                    // use default stack size
-    (LPTHREAD_START_ROUTINE)startAddress, // thread function
-    parameter,                            // argument to thread function
-    0,                                    // use default creation flags
-    &threadId);                           // returns the thread identifier
+    NULL,                                   // default security attributes
+    0,                                      // use default stack size
+    (LPTHREAD_START_ROUTINE)Thread::runner, // thread function
+    temp,                                   // argument to thread function
+    0,                                      // use default creation flags
+    &threadId);                             // returns the thread identifier
 #else
   pthread_t thread;
   int result;

@@ -281,7 +281,7 @@ bool String::operator>(const String& s1) const
 int String::indexOf(char c, unsigned int fromIndex)
 {
   int index = -1;
-  for (int i = fromIndex; i < length(); i++) {
+  for (int i = fromIndex; i < (int)length(); i++) {
     if (buffer_[i] == c) {
       index = i;
       break;
@@ -344,6 +344,11 @@ void String::tokenize(const char delimiter, vector<String>& tokens) const
   String::tokenize(buffer_, delimiter, tokens);
 }
 
+void String::tokenize(const String& input, const char delimiter, std::vector<String>& tokens)
+{
+  String::tokenize(input.buffer_, delimiter, tokens);
+}
+
 void String::tokenize(const char* input, const char delimiter, std::vector<String>& tokens)
 {
   if (input != NULL) {
@@ -374,3 +379,30 @@ void String::tokenize(const char* input, const char delimiter, std::vector<Strin
   }
 }
 
+String String::trim()
+{
+  int s = 0;
+  int e = 0;
+
+  // check leading whitespace.
+  for (s = 0; s < length(); s++) {
+    if (buffer_[s] != ' ') {
+      break;
+    }
+  }
+
+  // check if the entire string is just whitespace.
+  if (s >= length()) {
+    return "";
+  }
+  else {
+    // check trailing whitespace.
+    for (e = length() - 1; e > s; e--) {
+      if (buffer_[e] != ' ') {
+        break;
+      }
+    }
+
+    return String(buffer_ + s, e + 1 - s);
+  }
+}
