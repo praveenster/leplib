@@ -1110,6 +1110,28 @@ class TestStringTokenize8 : public TestCase
     }
 };
 
+class TestStringTokenize9 : public TestCase
+{
+  public:
+    TestStringTokenize9()
+      : TestCase("TestStringTokenize9: with string of two characters, both as delimiters")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "TT";
+      std::vector<String> tokens;
+      s1.tokenize('T', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String(""));
+      tokensExpected.push_back(String(""));
+      tokensExpected.push_back(String(""));
+
+      return (tokens == tokensExpected);
+    }
+};
+
 class TestStringTokenizeStatic1 : public TestCase
 {
   public:
@@ -1298,7 +1320,29 @@ class TestStringTokenizeStatic9 : public TestCase
 {
   public:
     TestStringTokenizeStatic9()
-      : TestCase("TestStringTokenizeStatic9: with null cstring")
+      : TestCase("TestStringTokenizeStatic9: with string of two characters, both as delimiters")
+    {
+    }
+
+    bool test()
+    {
+      const char* s1 = "TT";
+      std::vector<String> tokens;
+      String::tokenize(s1, 'T', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String(""));
+      tokensExpected.push_back(String(""));
+      tokensExpected.push_back(String(""));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenizeStatic10 : public TestCase
+{
+  public:
+    TestStringTokenizeStatic10()
+      : TestCase("TestStringTokenizeStatic10: with null cstring")
     {
     }
 
@@ -1491,6 +1535,28 @@ class TestStringTokenizeStaticString8 : public TestCase
       std::vector<String> tokens;
       String::tokenize(s1, 'T', tokens);
       std::vector<String> tokensExpected;
+      tokensExpected.push_back(String(""));
+      tokensExpected.push_back(String(""));
+
+      return (tokens == tokensExpected);
+    }
+};
+
+class TestStringTokenizeStaticString9 : public TestCase
+{
+  public:
+    TestStringTokenizeStaticString9()
+      : TestCase("TestStringTokenizeStaticString9: with string of two characters, both as delimiters")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "TT";
+      std::vector<String> tokens;
+      s1.tokenize('T', tokens);
+      std::vector<String> tokensExpected;
+      tokensExpected.push_back(String(""));
       tokensExpected.push_back(String(""));
       tokensExpected.push_back(String(""));
 
@@ -1773,6 +1839,7 @@ TestString::TestString()
   add(new TestStringTokenize6());
   add(new TestStringTokenize7());
   add(new TestStringTokenize8());
+  add(new TestStringTokenize9());
   add(new TestStringTokenizeStatic1());
   add(new TestStringTokenizeStatic2());
   add(new TestStringTokenizeStatic3());
@@ -1782,6 +1849,7 @@ TestString::TestString()
   add(new TestStringTokenizeStatic7());
   add(new TestStringTokenizeStatic8());
   add(new TestStringTokenizeStatic9());
+  add(new TestStringTokenizeStatic10());
   add(new TestStringTokenizeStaticString1());
   add(new TestStringTokenizeStaticString2());
   add(new TestStringTokenizeStaticString3());
@@ -1790,6 +1858,7 @@ TestString::TestString()
   add(new TestStringTokenizeStaticString6());
   add(new TestStringTokenizeStaticString7());
   add(new TestStringTokenizeStaticString8());
+  add(new TestStringTokenizeStaticString9());
   add(new TestStringComparison1());
   add(new TestStringComparison2());
   add(new TestStringComparison3());
