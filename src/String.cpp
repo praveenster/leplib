@@ -355,25 +355,62 @@ void String::tokenize(const char* input, const char delimiter, std::vector<Strin
     int p = 0;
     int pnext = 0;
     int l = strlen(input);
+    bool found = false;
     while(p < l) {
       // if not delimiter exists, the entire string from p to pnext
       // is the token.
       pnext = l;
+      found = false;
 
       for (int i = p; i < l; i++) {
         if (input[i] == delimiter) {
           pnext = i;
+          found = true;
           break;
         }
       }
 
+      if (found) {
+        // check if the string starts with a delimiter and
+        // if delimiters exist consecutively.
+        if ((pnext == 0) || (input[pnext - 1] == delimiter)) {
+          tokens.push_back("");
+        }
+        else {
+          String token(input + p, pnext - p);
+          tokens.push_back(token);
+        }
+
+        // if this is a delimiter at the end of the string.
+        // then also add an empty token
+        if ((pnext + 1) == l) {
+          tokens.push_back("");
+        }
+      }
+      else {
+        String token(input + p, pnext - p);
+        tokens.push_back(token);
+      }
+#if 0
       // check if the string starts with a delimiter and
       // if delimiters exist consecutively.
       if ((pnext != 0) && (input[pnext - 1] != delimiter)) {
         String token(input + p, pnext - p);
         tokens.push_back(token);
       }
+      else {
+        // check if the string starts with a delimiter and
+        // if delimiters exist consecutively. if so, add an empty token.
+        empty_token = true;
+      }
 
+      // if this is a delimiter at the end of the string.
+      // then also add an empty token
+      if ((empty_token) || (found && (pnext + 1) == l)) {
+        // insert an empty token.
+        tokens.push_back("");
+      }
+#endif
       p = pnext + 1;
     }
   }
