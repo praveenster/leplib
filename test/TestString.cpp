@@ -1775,6 +1775,91 @@ class TestStringTrim7 : public TestCase
     }
 };
 
+class TestStringCharAt1 : public TestCase
+{
+  public:
+    TestStringCharAt1()
+      : TestCase("TestStringCharAt1: empty string")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "";
+      char c = s1.charAt(0);
+
+      return (c == '\0');
+    }
+};
+
+class TestStringCharAt2 : public TestCase
+{
+  public:
+    TestStringCharAt2()
+      : TestCase("TestStringCharAt2: string with one character")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "a";
+      char c = s1.charAt(0);
+
+      return (c == 'a');
+    }
+};
+
+class TestStringCharAt3 : public TestCase
+{
+  public:
+    TestStringCharAt3()
+      : TestCase("TestStringCharAt3: string with multiple characters")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "abcdef";
+      char c = s1.charAt(4);
+
+      return (c == 'e');
+    }
+};
+
+class TestStringCharAt4 : public TestCase
+{
+  public:
+    TestStringCharAt4()
+      : TestCase("TestStringCharAt4: string with multiple characters but request index greater than length")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "abcdef";
+      char c = s1.charAt(6);
+
+      return (c == '\0');
+    }
+};
+
+class TestStringCharAt5 : public TestCase
+{
+  public:
+    TestStringCharAt5()
+      : TestCase("TestStringCharAt5: string with multiple characters but request negative index")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "abcdef";
+      char c = s1.charAt(-1);
+
+      return (c == '\0');
+    }
+};
+
 TestString::TestString()
   : TestModule("String class tester")
 {
@@ -1871,4 +1956,9 @@ TestString::TestString()
   add(new TestStringTrim5());
   add(new TestStringTrim6());
   add(new TestStringTrim7());
+  add(new TestStringCharAt1());
+  add(new TestStringCharAt2());
+  add(new TestStringCharAt3());
+  add(new TestStringCharAt4());
+  add(new TestStringCharAt5());
 }

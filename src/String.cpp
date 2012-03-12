@@ -291,6 +291,16 @@ int String::indexOf(char c, unsigned int fromIndex)
   return index;
 }
 
+char String::charAt(int index)
+{
+  char result = '\0';
+  if ((index >= 0) && (index < length())) {
+    result = buffer_[index];
+  }
+
+  return result;
+}
+
 String String::substring(unsigned int beginIndex)
 {
   if (length()) {
