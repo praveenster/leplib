@@ -414,12 +414,12 @@ class TestCsvFile7 : public TestCase
       csvfile.Insert(row, 5);
       csvfile.Save();
 
-      String s = r0c0 + separator + " " + r0c1 + separator + " " + r0c2 + "\n" +
-                 r1c0 + separator + " " + r1c1 + separator + " " + r1c2 + "\n" +
+      String s = r0c0 + separator + r0c1 + separator + r0c2 + "\n" +
+                 r1c0 + separator + r1c1 + separator + r1c2 + "\n" +
                  ",," + "\n" +
                  ",," + "\n" +
                  ",," + "\n" +
-                 r5c0 + separator + " " + r5c1 + separator + " " + r5c2 + "\n" +
+                 r5c0 + separator + r5c1 + separator + r5c2 + "\n" +
                  "\n";
 
       ifstream file2("test.csv");

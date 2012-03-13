@@ -117,11 +117,6 @@ void CsvFile::Save()
     vector<String>& row = records_[i];
     for (int j = 0; j < row.size(); j++) {
       if (row[j].length()) {
-        // put whitespace only before the second column onwards.
-        if (j > 0) {
-          file << " ";
-        }
-
         file << row[j].toCharArray();
       }
       else {
