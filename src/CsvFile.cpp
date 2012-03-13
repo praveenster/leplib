@@ -103,7 +103,7 @@ bool CsvFile::Load()
     // the new set of characters read.
     if (pbegin < pcurrent) {
       String part(buffer + pbegin, pend - pbegin);
-      line = part;
+      line = line + part;
     }
   }
 
