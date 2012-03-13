@@ -44,7 +44,8 @@ class CsvFile {
 
     void Save();
 
-    void Add(const std::vector<String>& record);
+    void Append(const std::vector<String>& record);
+    void Insert(const std::vector<String>& record, int row);
     void Remove(int row);
 
     String ValueOf(int row, int column);

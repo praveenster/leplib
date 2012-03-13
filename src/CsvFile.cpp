@@ -26,6 +26,8 @@
 
 using std::vector;
 using std::ifstream;
+using std::ofstream;
+using std::endl;
 
 namespace lepcpplib {
 CsvFile::CsvFile(const String& filename)
@@ -74,9 +76,11 @@ bool CsvFile::Load()
         else if ((l > 2) && 
             (line.charAt(l - 2) == '\r') &&
             (line.charAt(l - 1) == '\n')) {
+              // crlf delimited line. parse it out.
               line = line.substring(0, l - 3);
         }
         else if ((l > 1) && 
+            // cr delimited line. parse it out.
             (line.charAt(l - 1) == '\n')) {
               line = line.substring(0, l - 2);
         }
@@ -85,6 +89,7 @@ bool CsvFile::Load()
           vector<String> row;
           line.tokenize(separator_, row);
           records_.push_back(row);
+          line = "";
         }
 
         pbegin = pcurrent + 1;
@@ -93,6 +98,9 @@ bool CsvFile::Load()
       pcurrent++;
     }
 
+    // if no delimiter was found in this pass, store the 
+    // residue in line so that it gets appended with
+    // the new set of characters read.
     if (pbegin < pcurrent) {
       String part(buffer + pbegin, pend - pbegin);
       line = part;
@@ -104,14 +112,62 @@ bool CsvFile::Load()
 
 void CsvFile::Save()
 {
+  ofstream file(filename_.toCharArray());
+  for (int i = 0; i < records_.size(); i++) {
+    vector<String>& row = records_[i];
+    for (int j = 0; j < row.size(); j++) {
+      if (row[j].length()) {
+        // put whitespace only before the second column onwards.
+        if (j > 0) {
+          file << " ";
+        }
+
+        file << row[j].toCharArray();
+      }
+      else {
+        file << "";
+      }
+
+      // no separator for last column.
+      if (j != row.size() - 1) {
+        file << separator_;
+      }
+    }
+
+    file << endl;
+  }
+
+  file << endl;
 }
 
-void CsvFile::Add(const std::vector<String>& record)
+void CsvFile::Append(const std::vector<String>& record)
 {
+  records_.push_back(record);
+}
+
+void CsvFile::Insert(const std::vector<String>& record, int row)
+{
+  if (row > 0) {
+    if (row > records_.size()) {
+      int new_entries = row - records_.size();
+      vector<String> blank;
+      blank.insert(blank.begin(), record.size(), "");
+
+      for (int i = 0; i < new_entries; i++) {
+        records_.push_back(blank);
+      }
+    }
+
+    records_.insert(records_.begin() + row, record);
+  }
 }
 
 void CsvFile::Remove(int row)
 {
+  if ((row < records_.size()) && (row >= 0)) {
+    vector<vector<String>>::iterator it = records_.begin();
+    records_.erase(it + row);
+  }
 }
 
 String CsvFile::ValueOf(int row, int column)
