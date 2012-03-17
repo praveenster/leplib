@@ -21,11 +21,13 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 #include <fstream>
+#include <vector>
 #include "Logger.h"
 #include "ConfigFile.h"
 
 using std::ifstream;
 using std::map;
+using std::vector;
 
 namespace lepcpplib {
 const int kConfigFileMaxLineLength = 256;
@@ -47,26 +49,26 @@ bool ConfigFile::Load()
     ifstream file(filename_.toCharArray());
     char buffer[kConfigFileMaxLineLength];
 
-    //LOG_D("Processing config file: %s\n", filename_.toCharArray());
+    result = file.good();
+
     while ((!file.eof()) && (!file.fail())) {
       file.getline(buffer, sizeof(buffer));
-
       if (file.gcount()) {
         String line(buffer);
-        int q = line.indexOf('=');
-
-        if (q != -1)
+        vector<String> key_value;
+        line.tokenize('=', key_value);
+        if (key_value.size() >= 2)
         {
-          String key = line.substring(0, q - 1);
-          String value = line.substring(q + 1);
-          keyvalues_[key] = value;
+          keyvalues_[key_value[0]] = key_value[1];
+          result &= true;
+        }
+        else {
+          result &= false;
         }
       }
     }
   }
 
-  result = true;
-  //LOG_D("Done processing config file: %s\n", filename_.toCharArray());
   return result;
 }
 
