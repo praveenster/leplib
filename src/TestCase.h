@@ -32,6 +32,7 @@ namespace lepcpplib {
     public:
       virtual bool test() = 0;
       const String& name();
+      virtual ~TestCase();
 
     protected:
       TestCase(String name);

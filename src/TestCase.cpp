@@ -31,6 +31,10 @@ TestCase::TestCase(String name)
 {
 }
 
+TestCase::~TestCase()
+{
+}
+
 const String& TestCase::name()
 {
   return mName;
