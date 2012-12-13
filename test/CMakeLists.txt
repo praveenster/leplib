@@ -1,12 +1,13 @@
-include_directories (${lepcpplib_SOURCE_DIR}/lepcpplib)
+include_directories (${leplib_SOURCE_DIR}/leplib)
 
-link_directories (${lepcpplib_BINARY_DIR})
+link_directories (${leplib_BINARY_DIR})
 
-add_executable (lepcpplibTests
+add_executable (leplibTests
                 TestCsvFile.cpp
                 TestConfigFile.cpp
                 TestMain.cpp
+                TestSmartPointer.cpp
                 TestString.cpp
                 TestThread.cpp)
 
-target_link_libraries (lepcpplibTests lepcpplib)
+target_link_libraries (leplibTests leplib)

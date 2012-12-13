@@ -1,4 +1,4 @@
-add_library (lepcpplib
+add_library (leplib
              ConfigFile.cpp
              CsvFile.cpp
              Logger.cpp
