@@ -25,6 +25,7 @@
 #include "../src/TestSet.h"
 #include "TestConfigFile.h"
 #include "TestCsvFile.h"
+#include "TestSmartPointer.h"
 #include "TestString.h"
 #include "TestThread.h"
 
@@ -37,6 +38,7 @@ class TestMain : public TestSet
     {
       add(new TestConfigFile());
       add(new TestCsvFile());
+      add(new TestSmartPointer());
       add(new TestString());
       // add(new TestThread());
     };
