@@ -40,7 +40,7 @@ class TestMain : public TestSet
       add(new TestCsvFile());
       add(new TestSmartPointer());
       add(new TestString());
-      // add(new TestThread());
+      add(new TestThread());
     };
 };
 

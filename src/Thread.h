@@ -37,11 +37,11 @@ class Thread
 
     void Sleep(int seconds);
     //void Yield();
-    void Join(Thread& joinee);
+    void Join();
 
   private:
+    void* opaque_;
 };
 } // namespace lepcpplib
-
 
 #endif	// LEPCPPLIB_THREAD_H_

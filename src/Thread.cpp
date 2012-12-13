@@ -31,6 +31,15 @@
 #include "Thread.h"
 
 namespace lepcpplib {
+struct ThreadAttributes {
+#ifdef WIN32
+  DWORD thread_id_;
+  HANDLE thread_handle_;
+#else
+  pthread_t thread;
+#endif
+};
+
 struct ThreadParameters
 {
   Thread* this_;
@@ -59,16 +68,16 @@ void Thread::Start(void* parameter)
   temp->parameter_ = parameter;
 
 #ifdef WIN32
-  DWORD threadId;
-  HANDLE hThread = CreateThread(
+  ThreadAttributes* ta = (ThreadAttributes*)opaque_;
+  ta->thread_handle_ = CreateThread(
     NULL,                                   // default security attributes
     0,                                      // use default stack size
     (LPTHREAD_START_ROUTINE)Thread::runner, // thread function
     temp,                                   // argument to thread function
     0,                                      // use default creation flags
-    &threadId);                             // returns the thread identifier
+    &ta->thread_id_);                       // returns the thread identifier
 #else
-  pthread_t thread;
+  pthread_t thread_id;
   int result;
   result = pthread_create(&thread, NULL, &Thread::runner, (void*)temp);
   if (result != 0)
@@ -76,7 +85,7 @@ void Thread::Start(void* parameter)
     LOG_D("Thread creation error = %d\n", result);
   }
 
-  pthread_detach(thread);
+  pthread_detach(thread_id);
 
   if (result != 0)
   {
@@ -86,11 +95,22 @@ void Thread::Start(void* parameter)
 }
 
 Thread::Thread()
+  : opaque_(0)
 {
+  opaque_ = new ThreadAttributes();
 }
 
 Thread::~Thread()
 {
+  delete opaque_;
 }
 
+void Thread::Join()
+{
+#ifdef WIN32
+  WaitForSingleObject(((ThreadAttributes*)opaque_)->thread_handle_, INFINITE);
+#else
+  pthread_join(((ThreadAttributes*)opaque_)->thread_id, NULL);
+#endif
+}
 } // namespace lepcpplib

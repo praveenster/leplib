@@ -57,7 +57,10 @@ class TestThreadRun : public TestCase
 
       Thread1 t2;
       t2.Start((void*)2);
-      return false;
+
+      t1.Join();
+      t2.Join();
+      return true;
     }
 };
 
