@@ -22,15 +22,17 @@
 */
 
 #include <string>
+#include <vector>
 #include "TestSmartPointer.h"
 #include "../src/SmartPointer.h"
 
 using std::string;
+using std::vector;
 using lepcpplib::SmartPointer;
 using lepcpplib::TestCase;
 using lepcpplib::TestModule;
 
-class TestSmartPointerReferenceCounting : public TestCase
+class TestSmartPointerReferenceCounting1 : public TestCase
 {
   public:
     class TestFixture
@@ -72,8 +74,106 @@ class TestSmartPointerReferenceCounting : public TestCase
         SmartPointer<string> d;
     };
 
-    TestSmartPointerReferenceCounting()
-      : TestCase("TestSmartPointerReferenceCounting: test reference counting mechanishm.")
+    TestSmartPointerReferenceCounting1()
+      : TestCase("TestSmartPointerReferenceCounting1: test reference counting mechanishm.")
+    {
+    }
+
+    bool test()
+    {
+      // create the test fixture and call its entry point. this will call 
+      // f1 and it creates the string, thereby increasing its reference count.
+      // but it does not delete the pointer, allowing it to get deleted 
+      // automatically when the fixture is deleted.
+      TestFixture* t = new TestFixture();
+      t->run();
+      delete t;
+
+      // if there is no memory leak, everything should be ok!
+      // if there is a double delete there will be a seg fault.
+      return true;
+    }
+};
+
+class TestSmartPointerReferenceCounting2 : public TestCase
+{
+  public:
+    class TestFixture
+    {
+      public:
+        TestFixture()
+        {
+        }
+
+        void run()
+        {
+          SmartPointer<string> a = f1();
+          a->append("appending. ");
+        }
+
+      private:
+        SmartPointer<string> f1()
+        {
+          string* s = new string("Hello!");
+          SmartPointer<string> s1(s);
+          return s1;
+        }
+    };
+
+    TestSmartPointerReferenceCounting2()
+      : TestCase("TestSmartPointerReferenceCounting2: test reference counting by producer/consumer.")
+    {
+    }
+
+    bool test()
+    {
+      // create the test fixture and call its entry point. this will call 
+      // f1 and it creates the string, thereby increasing its reference count.
+      // but it does not delete the pointer, allowing it to get deleted 
+      // automatically when the fixture is deleted.
+      TestFixture* t = new TestFixture();
+      t->run();
+      delete t;
+
+      // if there is no memory leak, everything should be ok!
+      // if there is a double delete there will be a seg fault.
+      return true;
+    }
+};
+
+class TestSmartPointerReferenceCounting3 : public TestCase
+{
+  public:
+    class TestFixture
+    {
+      public:
+        TestFixture()
+        {
+        }
+
+        void run()
+        {
+          vector<SmartPointer<string>> v2 = f1();
+        }
+
+      private:
+        vector<SmartPointer<string>> f1()
+        {
+          v.push_back(new string("Hello1!"));
+          v.push_back(new string("Hello2!"));
+          v.push_back(new string("Hello3!"));
+          v.push_back(new string("Hello4!"));
+          v.push_back(new string("Hello5!"));
+          v.push_back(new string("Hello6!"));
+          return v;
+        }
+
+      private:
+        vector<SmartPointer<string>> v;
+    };
+
+    TestSmartPointerReferenceCounting3()
+      : TestCase("TestSmartPointerReferenceCounting3: test reference counting using container.")
     {
     }
 
@@ -276,7 +376,9 @@ TestSmartPointer::TestSmartPointer()
   : TestModule("SmartPointer class tester")
 {
   add(new TestSmartPointerAssignment());
-  add(new TestSmartPointerReferenceCounting());
+  add(new TestSmartPointerReferenceCounting1());
+  add(new TestSmartPointerReferenceCounting2());
+  add(new TestSmartPointerReferenceCounting3());
   add(new TestSmartPointerDereference());
   add(new TestSmartPointerEquality1());
   add(new TestSmartPointerEquality2());
