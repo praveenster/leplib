@@ -88,10 +88,169 @@ class TestSmartPointerReferenceCounting : public TestCase
       delete t;
 
       // if there is no memory leak, everything should be ok!
+      // if there is a double delete there will be a seg fault.
       return true;
     }
 };
 
+class TestSmartPointerDereference : public TestCase
+{
+  public:
+    TestSmartPointerDereference()
+      : TestCase("TestSmartPointerDereference: test dereferencing.")
+    {
+    }
+
+    bool test()
+    {
+      string* s1 = new string("Hello!");
+      string s2("Hello!");
+      SmartPointer<string> s3(s1);
+
+      return ((*s1).compare(s2) == 0);
+    }
+};
+
+class TestSmartPointerEquality1 : public TestCase
+{
+  public:
+    TestSmartPointerEquality1()
+      : TestCase("TestSmartPointerEquality1: test same pointed values.")
+    {
+    }
+
+    bool test()
+    {
+      string* s1 = new string("Hello!");
+      SmartPointer<string> s2(s1);
+      SmartPointer<string> s3(s2);
+
+      return (s2 == s3);
+    }
+};
+
+class TestSmartPointerEquality2 : public TestCase
+{
+  public:
+    TestSmartPointerEquality2()
+      : TestCase("TestSmartPointerEquality2: test different pointed values.")
+    {
+    }
+
+    bool test()
+    {
+      string* s1 = new string("Hello!");
+      string* s2 = new string("Hello!");
+      SmartPointer<string> s3(s1);
+      SmartPointer<string> s4(s2);
+
+      return !(s3 == s4);
+    }
+};
+
+class TestSmartPointerEquality3 : public TestCase
+{
+  public:
+    TestSmartPointerEquality3()
+      : TestCase("TestSmartPointerEquality3: test different pointed values.")
+    {
+    }
+
+    bool test()
+    {
+      string* s1 = new string("Hello!");
+      string* s2 = new string("Hello!");
+      SmartPointer<string> s3(s1);
+      SmartPointer<string> s4(s2);
+
+      return (s3 != s4);
+    }
+};
+
+class TestSmartPointerEquality4 : public TestCase
+{
+  public:
+    TestSmartPointerEquality4()
+      : TestCase("TestSmartPointerEquality4: test null pointer with null smartpointer.")
+    {
+    }
+
+    bool test()
+    {
+      string* s1 = new string("Hello!");
+      SmartPointer<string> s3(s1);
+      SmartPointer<string> s4(0);
+
+      return (s3 != s4);
+    }
+};
+
+class TestSmartPointerEquality5 : public TestCase
+{
+  public:
+    TestSmartPointerEquality5()
+      : TestCase("TestSmartPointerEquality5: test null pointer.")
+    {
+    }
+
+    bool test()
+    {
+      string* s1 = new string("Hello!");
+      SmartPointer<string> s3(s1);
+
+      return (s3 != 0);
+    }
+};
+
+class TestSmartPointerEquality6 : public TestCase
+{
+  public:
+    TestSmartPointerEquality6()
+      : TestCase("TestSmartPointerEquality6: compare two null pointers.")
+    {
+    }
+
+    bool test()
+    {
+      SmartPointer<string> s1(0);
+      SmartPointer<string> s2(0);
+
+      return (s1 == s2);
+    }
+};
+
+class TestSmartPointerIsNull1 : public TestCase
+{
+  public:
+    TestSmartPointerIsNull1()
+      : TestCase("TestSmartPointerIsNull1: test if null pointer.")
+    {
+    }
+
+    bool test()
+    {
+      SmartPointer<string> s1(0);
+
+      return (s1.IsNull());
+    }
+};
+
+class TestSmartPointerIsNull2 : public TestCase
+{
+  public:
+    TestSmartPointerIsNull2()
+      : TestCase("TestSmartPointerIsNull2: test if not null pointer.")
+    {
+    }
+
+    bool test()
+    {
+      string* s1 = new string("Hello!");
+      SmartPointer<string> s2(s1);
+
+      return !(s2.IsNull());
+    }
+};
 class TestSmartPointerAssignment : public TestCase
 {
   public:
@@ -118,4 +277,13 @@ TestSmartPointer::TestSmartPointer()
 {
   add(new TestSmartPointerAssignment());
   add(new TestSmartPointerReferenceCounting());
+  add(new TestSmartPointerDereference());
+  add(new TestSmartPointerEquality1());
+  add(new TestSmartPointerEquality2());
+  add(new TestSmartPointerEquality3());
+  add(new TestSmartPointerEquality4());
+  add(new TestSmartPointerEquality5());
+  add(new TestSmartPointerEquality6());
+  add(new TestSmartPointerIsNull1());
+  add(new TestSmartPointerIsNull2());
 }

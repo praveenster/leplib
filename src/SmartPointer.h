@@ -85,6 +85,26 @@ namespace lepcpplib {
       return ((r_ != 0) ? r_->p_ : 0);
     }
 
+    T& operator*()
+    {
+      return *(r_->p_);
+    }
+
+    bool operator==(const SmartPointer<T>& that)
+    {
+      bool result = false;
+      if ((r_ != 0) &&  (that.r_ != 0)) {
+        result = ((r_->p_) == (that.r_->p_));
+      }
+
+      return result;
+    }
+
+    bool operator!=(const SmartPointer<T>& that)
+    {
+      return !(this->operator==(that));
+    }
+
     const SmartPointer<T>& operator=(const SmartPointer<T>& that)
     {
       if (r_ != 0) {
@@ -103,6 +123,11 @@ namespace lepcpplib {
       r_->count_++;
 
       return *this;
+    }
+
+    bool IsNull()
+    {
+      return ((r_ == 0) || (r_->p_ == 0));
     }
 
   private:
