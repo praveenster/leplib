@@ -53,7 +53,7 @@ namespace lepcpplib {
 
     ~SmartPointer()
     {
-      DeleteReference();
+      RemoveReference();
     }
 
     SmartPointer(const SmartPointer<T>& that)
@@ -130,7 +130,7 @@ namespace lepcpplib {
   void AddReference(ReferenceCounter* r)
   {
     if (r_ != 0) {
-      DeleteReference();
+      RemoveReference();
     }
 
     if (r != 0) {
@@ -139,7 +139,7 @@ namespace lepcpplib {
     }
   }
 
-  void DeleteReference()
+  void RemoveReference()
   {
     if (r_ != 0) {
       r_->count_--;
