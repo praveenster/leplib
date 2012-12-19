@@ -129,13 +129,16 @@ namespace lepcpplib {
   private:
   void AddReference(ReferenceCounter* r)
   {
-    if (r_ != 0) {
-      RemoveReference();
-    }
+    // ignore this in case this is a self reference.
+    if (r_ != r) {
+      if (r_ != 0) {
+        RemoveReference();
+      }
 
-    if (r != 0) {
-      r_ = r;
-      r_->count_++;
+      if (r != 0) {
+        r_ = r;
+        r_->count_++;
+      }
     }
   }
 

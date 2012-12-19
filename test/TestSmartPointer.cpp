@@ -193,6 +193,24 @@ class TestSmartPointerReferenceCounting3 : public TestCase
     }
 };
 
+class TestSmartPointerSelfReference : public TestCase
+{
+  public:
+    TestSmartPointerSelfReference()
+      : TestCase("TestSmartPointerSelfReference: test reference to selt.")
+    {
+    }
+
+    bool test()
+    {
+      string* s1 = new string("Hello!");
+      SmartPointer<string> s2(s1);
+      s2 = s2;
+
+      return (s2->compare(*s1) == 0);
+    }
+};
+
 class TestSmartPointerDereference : public TestCase
 {
   public:
@@ -379,6 +397,7 @@ TestSmartPointer::TestSmartPointer()
   add(new TestSmartPointerReferenceCounting1());
   add(new TestSmartPointerReferenceCounting2());
   add(new TestSmartPointerReferenceCounting3());
+  add(new TestSmartPointerSelfReference());
   add(new TestSmartPointerDereference());
   add(new TestSmartPointerEquality1());
   add(new TestSmartPointerEquality2());
