@@ -58,7 +58,6 @@ namespace lepcpplib {
     SmartPointer(const SmartPointer<T>& that)
       : r_(0)
     {
-      DeleteReference();
       AddReference(that.r_);
     }
 
@@ -111,9 +110,7 @@ namespace lepcpplib {
 
     const SmartPointer<T>& operator=(const SmartPointer<T>& that)
     {
-      DeleteReference();
       AddReference(that.r_);
-
       return *this;
     }
 
