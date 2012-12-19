@@ -41,13 +41,14 @@ namespace lepcpplib {
     SmartPointer(T* p)
       : r_(0)
     {
-      NewReference(p);
+      ReferenceCounter* r = new ReferenceCounter;
+      r->p_ = p;
+      AddReference(r);
     }
 
     SmartPointer()
       : r_(0)
     {
-      NewReference(0);
     }
 
     ~SmartPointer()
@@ -56,6 +57,12 @@ namespace lepcpplib {
     }
 
     SmartPointer(const SmartPointer<T>& that)
+      : r_(0)
+    {
+      AddReference(that.r_);
+    }
+
+    SmartPointer(SmartPointer<T>& that)
       : r_(0)
     {
       AddReference(that.r_);
@@ -120,21 +127,16 @@ namespace lepcpplib {
     }
 
   private:
-  void NewReference(T* p)
-  {
-    ReferenceCounter* r = new ReferenceCounter;
-    r->p_ = p;
-    AddReference(r);
-  }
-
   void AddReference(ReferenceCounter* r)
   {
     if (r_ != 0) {
       DeleteReference();
     }
 
-    r_ = r;
-    r_->count_++;
+    if (r != 0) {
+      r_ = r;
+      r_->count_++;
+    }
   }
 
   void DeleteReference()
