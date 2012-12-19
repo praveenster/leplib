@@ -21,40 +21,17 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#include "JsonBool.h"
 
-#include "../src/TestSet.h"
-#include "TestConfigFile.h"
-#include "TestCsvFile.h"
-#include "TestJson.h"
-#include "TestSmartPointer.h"
-#include "TestString.h"
-#include "TestThread.h"
+namespace lepcpplib {
+  JsonBool::JsonBool(bool value)
+    : value_(value)
+  {
+  }
 
-using lepcpplib::TestSet;
-
-class TestMain : public TestSet
-{
-  public:
-    TestMain()
-    {
-      add(new TestConfigFile());
-      add(new TestCsvFile());
-      add(new TestJson());
-      add(new TestSmartPointer());
-      add(new TestString());
-      add(new TestThread());
-    };
-};
-
-int main(int argc, char** argv)
-{
-  TestMain* pTest = new TestMain();
-  unsigned int passCount = 0;
-  unsigned int failCount = 0;
-  pTest->run(passCount, failCount);
-  delete pTest;
-
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
-}
+  SmartPointer<String> JsonBool::ToString()
+  {
+    SmartPointer<String> result(new String((value_) ? "true" : "false"));
+    return result;
+  }
+} // namespace lepcpplib

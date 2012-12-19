@@ -21,40 +21,36 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#include "JsonArray.h"
 
-#include "../src/TestSet.h"
-#include "TestConfigFile.h"
-#include "TestCsvFile.h"
-#include "TestJson.h"
-#include "TestSmartPointer.h"
-#include "TestString.h"
-#include "TestThread.h"
+namespace lepcpplib {
+  JsonArray::JsonArray()
+    : values_()
+  {
+  }
 
-using lepcpplib::TestSet;
+  SmartPointer<String> JsonArray::ToString()
+  {
+    String* s = new String("[");
+    bool first = true;
+    for (int i = 0; i < values_.size(); i++) {
+      if (!first) {
+        *s += ",";
+      }
+      else {
+        first = false;
+      }
 
-class TestMain : public TestSet
-{
-  public:
-    TestMain()
-    {
-      add(new TestConfigFile());
-      add(new TestCsvFile());
-      add(new TestJson());
-      add(new TestSmartPointer());
-      add(new TestString());
-      add(new TestThread());
-    };
-};
+      *s += *((*values_[i]).ToString());
+    }
+    *s += "]";
 
-int main(int argc, char** argv)
-{
-  TestMain* pTest = new TestMain();
-  unsigned int passCount = 0;
-  unsigned int failCount = 0;
-  pTest->run(passCount, failCount);
-  delete pTest;
+    SmartPointer<String> result(s);
+    return result;
+  }
 
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
-}
+  void JsonArray::Add(SmartPointer<JsonValue> value)
+  {
+    values_.push_back(value);
+  }
+} // namespace lepcpplib

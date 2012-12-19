@@ -21,40 +21,16 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#ifndef LEPCPPLIB_TESTJSON_H_
+#define LEPCPPLIB_TESTJSON_H_
 
-#include "../src/TestSet.h"
-#include "TestConfigFile.h"
-#include "TestCsvFile.h"
-#include "TestJson.h"
-#include "TestSmartPointer.h"
-#include "TestString.h"
-#include "TestThread.h"
+#include "../src/TestModule.h"
+using lepcpplib::TestModule;
 
-using lepcpplib::TestSet;
-
-class TestMain : public TestSet
+class TestJson : public TestModule
 {
   public:
-    TestMain()
-    {
-      add(new TestConfigFile());
-      add(new TestCsvFile());
-      add(new TestJson());
-      add(new TestSmartPointer());
-      add(new TestString());
-      add(new TestThread());
-    };
+    TestJson();
 };
 
-int main(int argc, char** argv)
-{
-  TestMain* pTest = new TestMain();
-  unsigned int passCount = 0;
-  unsigned int failCount = 0;
-  pTest->run(passCount, failCount);
-  delete pTest;
-
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
-}
+#endif // LEPCPPLIB_TESTJSON_H_

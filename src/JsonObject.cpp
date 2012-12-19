@@ -21,40 +21,42 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#include "JsonObject.h"
 
-#include "../src/TestSet.h"
-#include "TestConfigFile.h"
-#include "TestCsvFile.h"
-#include "TestJson.h"
-#include "TestSmartPointer.h"
-#include "TestString.h"
-#include "TestThread.h"
+using std::map;
+namespace lepcpplib {
+  JsonObject::JsonObject()
+  {
+  }
 
-using lepcpplib::TestSet;
+  void JsonObject::Add(SmartPointer<JsonString> name, SmartPointer<JsonValue> value)
+  {
+    pairs_[name] = value;
+  }
 
-class TestMain : public TestSet
-{
-  public:
-    TestMain()
-    {
-      add(new TestConfigFile());
-      add(new TestCsvFile());
-      add(new TestJson());
-      add(new TestSmartPointer());
-      add(new TestString());
-      add(new TestThread());
-    };
-};
+  SmartPointer<String> JsonObject::ToString()
+  {
+    map<SmartPointer<JsonString>, SmartPointer<JsonValue>>::iterator it;
+    String* s = new String();
+    *s += "{";
+    bool first = true;
+    for (it = pairs_.begin(); it != pairs_.end(); it++) {
+      if (!first) {
+        *s += ",";
+      }
+      else {
+        first = false;
+      }
 
-int main(int argc, char** argv)
-{
-  TestMain* pTest = new TestMain();
-  unsigned int passCount = 0;
-  unsigned int failCount = 0;
-  pTest->run(passCount, failCount);
-  delete pTest;
+      SmartPointer<JsonString> sp1 = it->first;
+      *s += *((*sp1).ToString());
+      *s += ":";
+      SmartPointer<JsonValue> sp2 = it->second;
+      *s += *((*sp2).ToString());
+    }
+    *s += "}";
 
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
-}
+    SmartPointer<String> result(s);
+    return result;
+  }
+} // namespace lepcpplib
