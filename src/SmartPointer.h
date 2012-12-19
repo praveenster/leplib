@@ -82,10 +82,10 @@ namespace lepcpplib {
     {
       bool result = false;
 
-      if ((this->r_ == NULL) && that.r_ != NULL) {
+      if ((this->r_ == 0) && that.r_ != 0) {
         result = true;
       }
-      else if ((this->r_ != NULL) && that.r_ == NULL) {
+      else if ((this->r_ != 0) && that.r_ == 0) {
         result = false;
       }
       else {
