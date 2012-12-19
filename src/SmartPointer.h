@@ -27,8 +27,8 @@
 namespace lepcpplib {
   template <class T> class SmartPointer {
   private:
-    struct RefCounter {
-      RefCounter() 
+    struct ReferenceCounter {
+      ReferenceCounter() 
         : p_(0), count_(0)
       {
       }
@@ -41,51 +41,25 @@ namespace lepcpplib {
     SmartPointer(T* p)
       : r_(0)
     {
-      r_ = new RefCounter;
-      r_->p_ = p;
-      r_->count_++;
+      NewReference(p);
     }
 
     SmartPointer()
       : r_(0)
     {
-      r_ = new RefCounter;
-      r_->p_ = 0;
-      r_->count_++;
+      NewReference(0);
     }
 
     ~SmartPointer()
     {
-      if (r_ != 0) {
-        r_->count_--;
-        if (r_->count_ <= 0) {
-          r_->count_ = 0;
-          delete r_->p_;
-          r_->p_ = 0;
-          delete r_;
-        }
-
-        r_ = 0;
-      }
+      DeleteReference();
     }
 
     SmartPointer(const SmartPointer<T>& that)
       : r_(0)
     {
-      if (r_ != 0) {
-        r_->count_--;
-        if (r_->count_ <= 0) {
-          r_->count_ = 0;
-          delete r_->p_;
-          r_->p_ = 0;
-          delete r_;
-        }
-
-        r_ = 0;
-      }
-
-      r_ = that.r_;
-      r_->count_++;
+      DeleteReference();
+      AddReference(that.r_);
     }
 
     T* operator->()
@@ -137,20 +111,8 @@ namespace lepcpplib {
 
     const SmartPointer<T>& operator=(const SmartPointer<T>& that)
     {
-      if (r_ != 0) {
-        r_->count_--;
-        if (r_->count_ <= 0) {
-          r_->count_ = 0;
-          delete r_->p_;
-          r_->p_ = 0;
-          delete r_;
-        }
-
-        r_ = 0;
-      }
-
-      r_ = that.r_;
-      r_->count_++;
+      DeleteReference();
+      AddReference(that.r_);
 
       return *this;
     }
@@ -161,7 +123,40 @@ namespace lepcpplib {
     }
 
   private:
-    RefCounter* r_;
+  void NewReference(T* p)
+  {
+    ReferenceCounter* r = new ReferenceCounter;
+    r->p_ = p;
+    AddReference(r);
+  }
+
+  void AddReference(ReferenceCounter* r)
+  {
+    if (r_ != 0) {
+      DeleteReference();
+    }
+
+    r_ = r;
+    r_->count_++;
+  }
+
+  void DeleteReference()
+  {
+    if (r_ != 0) {
+      r_->count_--;
+      if (r_->count_ <= 0) {
+        r_->count_ = 0;
+        delete r_->p_;
+        r_->p_ = 0;
+        delete r_;
+      }
+
+      r_ = 0;
+    }
+  }
+
+  private:
+    ReferenceCounter* r_;
   };
 }
 
