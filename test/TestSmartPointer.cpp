@@ -193,6 +193,56 @@ class TestSmartPointerReferenceCounting3 : public TestCase
     }
 };
 
+class TestSmartPointerPassByReference : public TestCase
+{
+  public:
+    class TestFixture
+    {
+      public:
+        TestFixture()
+        {
+        }
+
+        void run()
+        {
+          SmartPointer<string> g;
+          producer(g);
+          consumer(g);
+        }
+
+      private:
+        void producer(SmartPointer<string>& s)
+        {
+          s = new string("the quick brown fox was not too quick after all.");
+        }
+
+        void consumer(SmartPointer<string> s)
+        {
+          *s += " or was he?";
+        }
+    };
+
+    TestSmartPointerPassByReference()
+      : TestCase("TestSmartPointerPassByReference: test pass pointer by reference.")
+    {
+    }
+
+    bool test()
+    {
+      // create the test fixture and call its entry point. this will call 
+      // f1 and it creates the string, thereby increasing its reference count.
+      // but it does not delete the pointer, allowing it to get deleted 
+      // automatically when the fixture is deleted.
+      TestFixture* t = new TestFixture();
+      t->run();
+      delete t;
+
+      // if there is no memory leak, everything should be ok!
+      // if there is a double delete there will be a seg fault.
+      return true;
+    }
+};
+
 class TestSmartPointerSelfReference : public TestCase
 {
   public:
@@ -397,6 +447,7 @@ TestSmartPointer::TestSmartPointer()
   add(new TestSmartPointerReferenceCounting1());
   add(new TestSmartPointerReferenceCounting2());
   add(new TestSmartPointerReferenceCounting3());
+  add(new TestSmartPointerPassByReference());
   add(new TestSmartPointerSelfReference());
   add(new TestSmartPointerDereference());
   add(new TestSmartPointerEquality1());
