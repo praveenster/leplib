@@ -8,7 +8,9 @@ add_executable (leplibTests
                 TestJson.cpp
                 TestMain.cpp
                 TestSmartPointer.cpp
+                TestSocketAddress.cpp
                 TestString.cpp
+                TestStringBuilder.cpp
                 TestThread.cpp)
 
 target_link_libraries (leplibTests leplib)

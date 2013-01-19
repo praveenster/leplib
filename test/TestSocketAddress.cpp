@@ -77,10 +77,94 @@ class TestSocketAddressNullString : public TestCase
       return (*sa.ToString() == *(*SocketAddress::ForAny(port)).ToString());
     }
 };
+
+class TestSocketAddressAccessors : public TestCase
+{
+  public:
+    TestSocketAddressAccessors()
+      : TestCase("TestSocketAddressAccessors: test accessors for address and port")
+    {
+    }
+
+    bool test()
+    {
+      int port = 4444;
+      char* address = "255.255.255.255";
+      SocketAddress sa(address, port);
+      return ((*sa.address() == address) && 
+        (sa.port() == port));
+    }
+};
+
+class TestSocketAddressSetters : public TestCase
+{
+  public:
+    TestSocketAddressSetters()
+      : TestCase("TestSocketAddressSetters: test setters for address and port")
+    {
+    }
+
+    bool test()
+    {
+      int port1 = 4444;
+      char* address1 = "123.456.789.012";
+      int port2 = 5555;
+      char* address2 = "987.654.321.000";
+      SocketAddress sa(address1, port1);
+      sa.set_address(address2);
+      sa.set_port(port2);
+      return ((*sa.address() == address2) && 
+        (sa.port() == port2));
+    }
+};
+
+class TestSocketAddressCopyConstructor : public TestCase
+{
+  public:
+    TestSocketAddressCopyConstructor()
+      : TestCase("TestSocketAddressCopyConstructor: test copy constructor")
+    {
+    }
+
+    bool test()
+    {
+      int port = 4444;
+      char* address = "255.255.255.255";
+      SocketAddress sa1(address, port);
+      SocketAddress sa2(sa1);
+      return ((*sa1.address() == *sa2.address()) && 
+        (sa1.port() == sa2.port()));
+    }
+};
+
+class TestSocketAddressAssignmentOperator : public TestCase
+{
+  public:
+    TestSocketAddressAssignmentOperator()
+      : TestCase("TestSocketAddressAssignmentOperator: test operator=")
+    {
+    }
+
+    bool test()
+    {
+      int port = 4444;
+      char* address = "255.255.255.255";
+      SocketAddress sa1(address, port);
+      SocketAddress sa2;
+      sa2 = sa1;
+      return ((*sa1.address() == *sa2.address()) && 
+        (sa1.port() == sa2.port()));
+    }
+};
+
 TestSocketAddress::TestSocketAddress()
   : TestModule("SocketAddress class tester")
 {
   add(new TestSocketAddressAny());
   add(new TestSocketAddressLoopback());
   add(new TestSocketAddressNullString());
+  add(new TestSocketAddressAccessors());
+  add(new TestSocketAddressSetters());
+  add(new TestSocketAddressCopyConstructor());
+  add(new TestSocketAddressAssignmentOperator());
 }

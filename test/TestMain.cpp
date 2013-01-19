@@ -27,7 +27,9 @@
 #include "TestCsvFile.h"
 #include "TestJson.h"
 #include "TestSmartPointer.h"
+#include "TestSocketAddress.h"
 #include "TestString.h"
+#include "TestStringBuilder.h"
 #include "TestThread.h"
 
 using lepcpplib::TestSet;
@@ -41,7 +43,9 @@ class TestMain : public TestSet
       add(new TestCsvFile());
       add(new TestJson());
       add(new TestSmartPointer());
+      add(new TestSocketAddress());
       add(new TestString());
+      add(new TestStringBuilder());
       add(new TestThread());
     };
 };

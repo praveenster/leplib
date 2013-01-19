@@ -22,6 +22,7 @@
 */
 
 #include "SocketAddress.h"
+#include "StringBuilder.h"
 
 #ifdef WIN32
 #include "winsock2.h"
@@ -37,56 +38,89 @@
 #include <sys/ioctl.h>
 #endif
 
-
 namespace lepcpplib {
-  SocketAddress::SocketAddress(const String& address, int port)
-    : opaque_(0)
-  {
-    if (address.length() == 0) {
-      Initialize(INADDR_ANY, port);
-    }
-    else {
-      Initialize(inet_addr(address.toCharArray()), port);
-    }
+SocketAddress::SocketAddress()
+  : address_(""), port_(0)
+{
+}
+
+SocketAddress::SocketAddress(const char* address, int port)
+  : address_(address), port_(port)
+{
+}
+
+SocketAddress::SocketAddress(const String& address, int port)
+  : address_(address), port_(port)
+{
+}
+
+SocketAddress::SocketAddress(int address, int port)
+  : address_(""), port_(port)
+{
+  in_addr a;
+  a.S_un.S_addr = address;
+  inet_ntoa(a);
+}
+
+SocketAddress::SocketAddress(const SocketAddress& that)
+  : address_(""), port_()
+{
+  *this = that;
+}
+
+SocketAddress::~SocketAddress()
+{
+}
+
+SocketAddress& SocketAddress::operator=(const SocketAddress& that)
+{
+  if (this != &that) {
+    address_ = that.address_;
+    port_ = that.port_;
   }
 
-  SocketAddress::SocketAddress(int address, int port)
-    : opaque_(0)
-  {
-    Initialize(address, port);
-  }
+  return *this;
+}
 
-  SocketAddress::~SocketAddress()
-  {
-    delete (sockaddr_in*)opaque_;
-  }
+SmartPointer<SocketAddress> SocketAddress::ForAny(int port)
+{
+  SmartPointer<SocketAddress> s = new SocketAddress(0, port);
+  return s;
+}
 
-  void SocketAddress::Initialize(int address, int port)
-  {
-    sockaddr_in* p = new sockaddr_in;
-    memset(p, 0, sizeof(sockaddr_in));
-    opaque_ = p;
-    p->sin_family = AF_INET;
-    p->sin_port = htons(port);
-    p->sin_addr.s_addr = address;
-  }
+SmartPointer<SocketAddress> SocketAddress::ForLoopback(int port)
+{
+  SmartPointer<SocketAddress> s = new SocketAddress("127.0.0.1", port);
+  return s;
+}
 
-  SmartPointer<SocketAddress> SocketAddress::ForAny(int port)
-  {
-    SmartPointer<SocketAddress> s = new SocketAddress(INADDR_ANY, port);
-    return s;
-  }
+SmartPointer<String> SocketAddress::ToString()
+{
+  StringBuilder sb;
+  sb.Append(address_);
+  sb.Append(":");
+  sb.Append(port_);
+  return sb.ToString();
+}
 
-  SmartPointer<SocketAddress> SocketAddress::ForLoopback(int port)
-  {
-    SmartPointer<SocketAddress> s = new SocketAddress("127.0.0.1", port);
-    return s;
-  }
+SmartPointer<String> SocketAddress::address()
+{
+  SmartPointer<String> sp = new String(address_);
+  return sp;
+}
 
-  SmartPointer<String> SocketAddress::ToString()
-  {
-    String* s = new String(inet_ntoa(((sockaddr_in*)opaque_)->sin_addr));
-    SmartPointer<String> sp(s);
-    return sp;
-  }
+int SocketAddress::port()
+{
+  return port_;
+}
+
+void SocketAddress::set_address(const char* address)
+{
+  address_ = address;
+}
+
+void SocketAddress::set_port(int port)
+{
+  port_ = port;
+}
 } // namespace lepcpplib

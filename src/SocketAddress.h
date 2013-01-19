@@ -30,22 +30,29 @@
 namespace lepcpplib {
 class SocketAddress {
   public:
+    SocketAddress();
+    SocketAddress(const char* address, int port);
     SocketAddress(const String& address, int port);
     SocketAddress(int address, int port);
+    SocketAddress(const SocketAddress& that);
     virtual ~SocketAddress();
 
+    SocketAddress& operator=(const SocketAddress& that);
+
     SmartPointer<String> ToString();
+    SmartPointer<String> address();
+    int port();
+
+    void set_address(const char* address);
+    void set_port(int port);
+
     static SmartPointer<SocketAddress> ForAny(int port);
     static SmartPointer<SocketAddress> ForLoopback(int port);
     static SmartPointer<SocketAddress> ForHostName(int port);
 
   private:
-    void Initialize(int address, int port);
-    SocketAddress(const SocketAddress& that);
-    SocketAddress& operator=(const SocketAddress& that);
-
-  private:
-    void* opaque_;
+    String address_;
+    int port_;
 };
 } // namespace lepcpplib
 
