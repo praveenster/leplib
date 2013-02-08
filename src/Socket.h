@@ -49,6 +49,12 @@ class Socket {
       kSend
     };
 
+    enum Flags {
+      kPeek,
+      kOutOfBand,
+      kWaitAll
+    };
+
     Socket(AddressFamily address_family, Type type, Protocol protocol);
     ~Socket();
 
@@ -57,17 +63,23 @@ class Socket {
     int Bind(SocketAddress& server_address);
     int Listen(int backlog);
     SmartPointer<Socket> Accept(int backlog);
+    int Receive(char* buffer, int length, int flags);
 
     int SetOptionReuse();
+    int GetLastError();
+
+    const SocketAddress& local_address();
+    const SocketAddress& remote_address();
 
     void Send();
     void SendTo();
     void Shutdown();
     void Receive();
     void ReceiveFrom();
-    void GetLocalAddress();
-    void GetRemoteAddress();
-    int GetLastError();
+    //static void Select(vector<SmartPointer<Socket>>& check_read, 
+    //  vector<SmartPointer<Socket>>& check_write, 
+    //  vector<SmartPointer<Socket>>& check_error,
+    //  int timeout);
 
   private:
     int socket_;

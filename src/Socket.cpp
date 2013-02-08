@@ -26,16 +26,6 @@
 #include "winsock2.h"
 #include "Ws2tcpip.h"
 #define socklen_t int
-inline int SocketGetLastError()
-{
-  return WSAGetLastError();
-}
-
-inline int SocketClose(int socket)
-{
-  shutdown(socket, SD_BOTH);
-  return closesocket(socket);
-}
 #else
 #include <unistd.h>
 #include <sys/types.h>
@@ -46,16 +36,7 @@ inline int SocketClose(int socket)
 #include <sys/ioctl.h>
 #include <pthread.h>
 #include <errno.h>
-inline int SocketGetLastError()
-{
-  return errno;
-}
-
-inline int SocketClose(int socket)
-{
-  return close(socket);
-}
-#endif
+#endif // WIN32
 
 namespace lepcpplib {
 
@@ -133,5 +114,24 @@ int Socket::SetOptionReuse()
 {
   int value = 1;
   return setsockopt(socket_, SOL_SOCKET, SO_REUSEADDR, (char*)&value, sizeof(value));
+}
+
+int Socket::GetLastError()
+{
+#ifdef WIN32
+  return WSAGetLastError();
+#else
+  return errno;
+#endif //WIN32
+}
+
+const SocketAddress& Socket::local_address()
+{
+  return local_address_;
+}
+
+const SocketAddress& Socket::remote_address()
+{
+  return remote_address_;
 }
 } // namespace lepcpplib
