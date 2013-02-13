@@ -47,7 +47,7 @@ static void SocketAddressObjectToStruct(SocketAddress& address, sockaddr_in& soc
   memset(&socket_address, 0, sizeof(socket_address));
   socket_address.sin_family = AF_INET;
   socket_address.sin_addr.s_addr = inet_addr((*address.address()).toCharArray());
-  socket_address.sin_port = address.port();
+  socket_address.sin_port = htons(address.port());
 }
 
 static void SocketAddressStructToObject(sockaddr_in& socket_address, SocketAddress& address)
@@ -108,6 +108,16 @@ SmartPointer<Socket> Socket::Accept(int backlog)
   SocketAddressStructToObject(client_socket_address, (*rs).remote_address_);
   (*rs).local_address_ = local_address_;
   return rs;
+}
+
+int Socket::Receive(char* buffer, int length, int flags)
+{
+  return recv(socket_, buffer, length, flags);
+}
+
+int Socket::Send(const char* buffer, int length, int flags)
+{
+  return send(socket_, buffer, length, flags);
 }
 
 int Socket::SetOptionReuse()

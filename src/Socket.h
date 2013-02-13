@@ -64,6 +64,7 @@ class Socket {
     int Listen(int backlog);
     SmartPointer<Socket> Accept(int backlog);
     int Receive(char* buffer, int length, int flags);
+    int Send(const char* buffer, int length, int flags);
 
     int SetOptionReuse();
     int GetLastError();
@@ -71,7 +72,6 @@ class Socket {
     const SocketAddress& local_address();
     const SocketAddress& remote_address();
 
-    void Send();
     void SendTo();
     void Shutdown();
     void Receive();
