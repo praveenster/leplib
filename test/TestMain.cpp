@@ -21,7 +21,6 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-
 #include "../src/TestSet.h"
 #include "TestConfigFile.h"
 #include "TestCsvFile.h"
@@ -52,13 +51,15 @@ class TestMain : public TestSet
 
 int main(int argc, char** argv)
 {
+#ifdef WIN32
+  // enable debug heap allocations and perform automatic leak
+  // checking 
+  _CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
+#endif
+
   TestMain* pTest = new TestMain();
   unsigned int passCount = 0;
   unsigned int failCount = 0;
   pTest->run(passCount, failCount);
   delete pTest;
-
-#ifdef WIN32
-  _CrtDumpMemoryLeaks();
-#endif
 }
