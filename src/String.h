@@ -69,8 +69,10 @@ namespace lepcpplib {
       int compare(const String& s) const;
       int compare(const char* c) const;
 
-      int indexOf(char c, unsigned int fromIndex = 0);
-      char charAt(int index);
+      int indexOf(const String& s);
+      int indexOf(const String& s, int start);
+
+      char charAt(int index) const;
 
       String substring(unsigned int beginIndex);
       String substring(unsigned int beginIndex, unsigned int endIndex);

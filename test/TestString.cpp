@@ -683,6 +683,38 @@ class TestStringIndexOf2 : public TestCase
     }
 };
 
+class TestStringIndexOf3 : public TestCase
+{
+  public:
+    TestStringIndexOf3()
+      : TestCase("TestStringIndexOf3: of string present")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+
+      return (s1.indexOf("xc") == 1);
+    }
+};
+
+class TestStringIndexOf4 : public TestCase
+{
+  public:
+    TestStringIndexOf4()
+      : TestCase("TestStringIndexOf4: of string absent")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcv";
+
+      return (s1.indexOf("yc") == -1);
+    }
+};
+
 class TestStringIndexOfFromIndex1 : public TestCase
 {
   public:
@@ -728,6 +760,54 @@ class TestStringIndexOfFromIndex3 : public TestCase
       String s1 = "zxcv";
 
       return (s1.indexOf('c', 4) == -1);
+    }
+};
+
+class TestStringIndexOfFromIndex4 : public TestCase
+{
+  public:
+    TestStringIndexOfFromIndex4()
+      : TestCase("TestStringIndexOfFromIndex4: of string present")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "vxcvx";
+
+      return (s1.indexOf("vx", 2) == 3);
+    }
+};
+
+class TestStringIndexOfFromIndex5 : public TestCase
+{
+  public:
+    TestStringIndexOfFromIndex5()
+      : TestCase("TestStringIndexOfFromIndex5: of string absent")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcvyrwwdt";
+
+      return (s1.indexOf("zxc", 3) == -1);
+    }
+};
+
+class TestStringIndexOfFromIndex6 : public TestCase
+{
+  public:
+    TestStringIndexOfFromIndex6()
+      : TestCase("TestStringIndexOfFromIndex6: of invalid index")
+    {
+    }
+
+    bool test()
+    {
+      String s1 = "zxcvpoiuyt";
+
+      return (s1.indexOf("cvpo", 10) == -1);
     }
 };
 
@@ -1901,9 +1981,14 @@ TestString::TestString()
   add(new TestStringMegaMix());
   add(new TestStringIndexOf1());
   add(new TestStringIndexOf2());
+  add(new TestStringIndexOf3());
+  add(new TestStringIndexOf4());
   add(new TestStringIndexOfFromIndex1());
   add(new TestStringIndexOfFromIndex2());
   add(new TestStringIndexOfFromIndex3());
+  add(new TestStringIndexOfFromIndex4());
+  add(new TestStringIndexOfFromIndex5());
+  add(new TestStringIndexOfFromIndex6());
   add(new TestStringSubstring1());
   add(new TestStringSubstring2());
   add(new TestStringSubstring3());

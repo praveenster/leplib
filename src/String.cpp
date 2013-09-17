@@ -278,20 +278,33 @@ bool String::operator>(const String& s1) const
  return !((*this == s1) || (*this < s1));
 }
 
-int String::indexOf(char c, unsigned int fromIndex)
+int String::indexOf(const String& s)
 {
-  int index = -1;
-  for (int i = fromIndex; i < (int)length(); i++) {
-    if (buffer_[i] == c) {
-      index = i;
-      break;
+  int result = -1;
+  if ((buffer_ != NULL) && (s.buffer_ != NULL)) {
+    char* p = strstr(buffer_, s.buffer_);
+    if (p != NULL) {
+      result = p - buffer_;
     }
   }
 
-  return index;
+  return result;
 }
 
-char String::charAt(int index)
+int String::indexOf(const String& s, int start)
+{
+  int result = -1;
+  if ((buffer_ != NULL) && (s.buffer_ != NULL) && (start < length())) {
+    char* p = strstr(buffer_ + start, s.buffer_);
+    if (p != NULL) {
+      result = p - buffer_;
+    }
+  }
+
+  return result;
+}
+
+char String::charAt(int index) const
 {
   char result = '\0';
   if ((index >= 0) && (index < length())) {
