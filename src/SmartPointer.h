@@ -27,27 +27,19 @@
 namespace lepcpplib {
   template <class T> class SmartPointer {
   private:
-    struct ReferenceCounter {
-      ReferenceCounter() 
-        : p_(0), count_(0)
-      {
-      }
-
-      T* p_;
-      int count_;
-    };
+    T* p_;
+    int* count_;
 
   public:
     SmartPointer(T* p)
-      : r_(0)
+      : p_(p), count_(0)
     {
-      ReferenceCounter* r = new ReferenceCounter;
-      r->p_ = p;
-      AddReference(r);
+      count_ = new int;
+      *count_ =  1;
     }
 
     SmartPointer()
-      : r_(0)
+      : p_(0), count_(0)
     {
     }
 
@@ -57,39 +49,39 @@ namespace lepcpplib {
     }
 
     SmartPointer(const SmartPointer<T>& that)
-      : r_(0)
+      : p_(0), count_(0)
     {
-      AddReference(that.r_);
+      AddReference(that.p_, that.count_);
     }
 
     SmartPointer(SmartPointer<T>& that)
-      : r_(0)
+      : p_(0), count_(0)
     {
-      AddReference(that.r_);
+      AddReference(that.p_, that.count_);
     }
 
     T* operator->()
     {
-      return ((r_ != 0) ? r_->p_ : 0);
+      return p_;
     }
 
     T& operator*()
     {
-      return *(r_->p_);
+      return *p_;
     }
 
     bool operator<(const SmartPointer<T>& that) const
     {
       bool result = false;
 
-      if ((this->r_ == 0) && that.r_ != 0) {
+      if ((this->p_ == 0) && that.p_ != 0) {
         result = true;
       }
-      else if ((this->r_ != 0) && that.r_ == 0) {
+      else if ((this->p_ != 0) && that.p_ == 0) {
         result = false;
       }
       else {
-        result = (this->r_ < that.r_);
+        result = (this->p_ < that.p_);
       }
 
       return result;
@@ -102,12 +94,7 @@ namespace lepcpplib {
 
     bool operator==(const SmartPointer<T>& that)
     {
-      bool result = false;
-      if ((r_ != 0) &&  (that.r_ != 0)) {
-        result = ((r_->p_) == (that.r_->p_));
-      }
-
-      return result;
+      return (p_ == that.p_);
     }
 
     bool operator!=(const SmartPointer<T>& that)
@@ -117,49 +104,46 @@ namespace lepcpplib {
 
     const SmartPointer<T>& operator=(const SmartPointer<T>& that)
     {
-      AddReference(that.r_);
+      AddReference(that.p_, that.count_);
       return *this;
     }
 
     bool IsNull()
     {
-      return ((r_ == 0) || (r_->p_ == 0));
+      return (p_ == 0);
     }
 
   private:
-  void AddReference(ReferenceCounter* r)
+  void AddReference(T*p, int* count)
   {
-    // ignore this in case this is a self reference.
-    if (r_ != r) {
-      if (r_ != 0) {
+    // ignore in case it is a self reference.
+    if (p_ != p) {
+      if (count_ != 0) {
         RemoveReference();
       }
 
-      if (r != 0) {
-        r_ = r;
-        r_->count_++;
+      if (count != 0) {
+        p_ = p;
+        count_ = count;
+        (*count_)++;
       }
     }
   }
 
   void RemoveReference()
   {
-    if (r_ != 0) {
-      r_->count_--;
-      if (r_->count_ <= 0) {
-        r_->count_ = 0;
-        delete r_->p_;
-        r_->p_ = 0;
-        delete r_;
+    if (count_ != 0) {
+      (*count_)--;
+      if (*count_ <= 0) {
+        delete p_;
+        p_ = 0;
+        delete count_;
       }
 
-      r_ = 0;
+      count_ = 0;
     }
   }
-
-  private:
-    ReferenceCounter* r_;
-  };
+};
 }
 
 #endif // LEPCPPLIB_SMARTPOINTER_H_
