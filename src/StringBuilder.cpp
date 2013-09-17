@@ -54,6 +54,13 @@ StringBuilder::~StringBuilder()
 
 void StringBuilder::Initialize(int buffer_size)
 {
+  // prevent accidental leak!
+  if (buffer_ != NULL) {
+    free(buffer_);
+    buffer_ = NULL;
+    buffer_size_ = 0;
+  }
+
   buffer_size_ = buffer_size;
   buffer_ = (char*)malloc(buffer_size_);
 
@@ -64,6 +71,8 @@ void StringBuilder::Initialize(int buffer_size)
   else {
     buffer_size_ = 0;
   }
+
+  used_size_ = 0;
 }
 
 void StringBuilder::Resize(int buffer_size)
@@ -80,15 +89,21 @@ void StringBuilder::Resize(int buffer_size)
 void StringBuilder::Append(const char* s)
 {
   if (s != NULL) {
-    int size = strlen(s);
-    if (buffer_size_ - used_size_ <= size) {
-        int new_size = (size > buffer_size_) ? size : buffer_size_;
+    Append(s, strlen(s));
+  }
+}
+
+void StringBuilder::Append(const char* s, int length)
+{
+  if ((s != NULL) && (length > 0)) {
+    if (buffer_size_ - used_size_ <= length) {
+        int new_size = (length > buffer_size_) ? length : buffer_size_;
         new_size *= 2;
         Resize(new_size);
     }
 
-    memcpy(buffer_ + used_size_, s, size);
-    used_size_ += size;
+    memcpy(buffer_ + used_size_, s, length);
+    used_size_ += length;
   }
 }
 
@@ -100,6 +115,113 @@ void StringBuilder::Append(int i)
 void StringBuilder::Append(const String& s)
 {
   Append(s.toCharArray());
+}
+
+int StringBuilder::IndexOf(const String& s)
+{
+  int result = -1;
+  int rhs_size = s.length();
+  if ((used_size_ > 0) && (rhs_size > 0)) {
+    int i = 0;
+    int j = 0;
+
+    // i = pointer to stringbuilder chars, 
+    // j = pointer to string chars.
+    // make sure both i and j don't go beyond bounds
+    // and if the number of chars to compare in strinbuilder
+    // is less than the length of the string, there is no
+    // need to keep checking.
+    bool match = false;
+    while ((i < used_size_) && (j < rhs_size) && ((used_size_ - i) >= (rhs_size - j))) {
+      if (buffer_[i] == s.charAt(j)) {
+        match = true;
+        j++;
+      }
+      else {
+        match = false;
+        j = 0;
+      }
+
+      i++;
+    }
+
+    // check if there was a match and also that
+    // all the characters in the string were checked.
+    if ((match) && (j >= rhs_size)) {
+      result = i - rhs_size;
+    }
+  }
+
+  return result;
+}
+
+SmartPointer<String> StringBuilder::Substring(int start)
+{
+  return Substring(start, used_size_);
+}
+
+SmartPointer<String> StringBuilder::Substring(int start, int end)
+{
+  SmartPointer<String> result;
+  if ((start >= 0) && (end >= 0) && 
+      (used_size_ > 0) && 
+      (start < used_size_) && (end <= used_size_) && 
+      (start < end)) {
+    result = new String(buffer_ + start, end - start);
+  }
+
+  return result;
+}
+
+void StringBuilder::Remove(int start, int end)
+{
+  if ((start >= 0) && (end >= 0) && 
+      (used_size_ > 0) && 
+      (start < used_size_) && (end <= used_size_) && 
+      (start < end)) {
+
+    // special case: if the end is the end of the stringbuilder then
+    // there is no need to copy into a new buffer. just reduce the
+    // used size.
+    if (end == Length()) {
+      used_size_ = start;
+    }
+    else {
+      // first keep the current buffer aside and create a new internal buffer.
+      // then copy over the parts that need to be retained.
+      char* temp = buffer_;
+      int temp_size = buffer_size_;
+      int temp_used_size = used_size_;
+
+      buffer_ = NULL;
+      buffer_size_ = 0;
+      Initialize(temp_size);
+
+      // if the cut point is in the beginning, nothing from the beginning needs
+      // to be copied. if it is beyond the first character, then the characters
+      // from the beginning upto the cut point need to be copied over.
+      if (start != 0) {
+        memcpy(buffer_, temp, start);
+      }
+
+      // now copy over the characters past the cut point.
+      memcpy(buffer_ + start, temp + end, temp_used_size - end);
+
+      // update the new used size to be the old size minus the count of bytes removed.
+      used_size_ = temp_used_size - (end - start);
+      free(temp);
+    }
+  }
+}
+
+void StringBuilder::Clear()
+{
+  used_size_ = 0;
+}
+
+int StringBuilder::Length()
+{
+  return used_size_;
 }
 
 SmartPointer<String> StringBuilder::ToString()

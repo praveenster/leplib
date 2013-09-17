@@ -35,8 +35,22 @@ class StringBuilder {
     virtual ~StringBuilder();
     SmartPointer<String> ToString();
     void Append(const char* s);
+    void Append(const char* s, int length);
     void Append(int i);
     void Append(const String& s);
+
+    int IndexOf(char c);
+    int IndexOf(char c, int from_index);
+    int IndexOf(const String& s);
+    int IndexOf(const String& s, int from_index);
+
+    SmartPointer<String> Substring(int start);
+    SmartPointer<String> Substring(int start, int end);
+
+    void Remove(int start, int end);
+
+    void Clear();
+    int Length();
 
   private:
     void Initialize(int buffer_size);
