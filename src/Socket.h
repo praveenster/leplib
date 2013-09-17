@@ -65,6 +65,7 @@ class Socket {
     SmartPointer<Socket> Accept(int backlog);
     int Receive(char* buffer, int length, int flags);
     int Send(const char* buffer, int length, int flags);
+    int Send(const String& buffer, int flags);
 
     int SetOptionReuse();
     int GetLastError();

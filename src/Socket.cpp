@@ -59,6 +59,16 @@ static void SocketAddressStructToObject(sockaddr_in& socket_address, SocketAddre
 Socket::Socket(AddressFamily address_family, Type type, Protocol protocol)
   : socket_(0)
 {
+#ifdef WIN32
+  // win32 needs special initialization for using sockets.
+  // documentation indicates that this can be called multiple times
+  // (without any performance hit in calls after first one), as long
+  // as the cleanup is called the same number of times during
+  // the unwind process.
+  WSADATA wsaData;
+  WSAStartup(MAKEWORD(2,2), &wsaData);
+#endif
+
   int f = (address_family == kInternet) ? AF_INET : AF_INET;
   int t = (type == kStream) ? SOCK_STREAM : SOCK_DGRAM;
   int p = (protocol == kTcp) ? IPPROTO_TCP : IPPROTO_UDP;
@@ -68,6 +78,11 @@ Socket::Socket(AddressFamily address_family, Type type, Protocol protocol)
 Socket::~Socket()
 {
   this->Close();
+
+#ifdef WIN32
+  // win32 needs special initialization for using sockets.
+  WSACleanup();
+#endif
 }
 
 void Socket::Close()
@@ -118,6 +133,11 @@ int Socket::Receive(char* buffer, int length, int flags)
 int Socket::Send(const char* buffer, int length, int flags)
 {
   return send(socket_, buffer, length, flags);
+}
+
+int Socket::Send(const String& buffer, int flags)
+{
+  return send(socket_, buffer.toCharArray(), buffer.length(), flags);
 }
 
 int Socket::SetOptionReuse()
