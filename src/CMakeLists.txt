@@ -1,6 +1,7 @@
 add_library (leplib
              ConfigFile.cpp
              CsvFile.cpp
+             HttpClient.cpp
              JsonArray.cpp
              JsonBool.cpp
              JsonNull.cpp

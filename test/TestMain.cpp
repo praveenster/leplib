@@ -24,6 +24,7 @@
 #include "../src/TestSet.h"
 #include "TestConfigFile.h"
 #include "TestCsvFile.h"
+#include "TestHttpClient.h"
 #include "TestJson.h"
 #include "TestSmartPointer.h"
 #include "TestSocketAddress.h"
@@ -40,6 +41,7 @@ class TestMain : public TestSet
     {
       add(new TestConfigFile());
       add(new TestCsvFile());
+      add(new TestHttpClient());
       add(new TestJson());
       add(new TestSmartPointer());
       add(new TestSocketAddress());

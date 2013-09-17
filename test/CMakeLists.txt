@@ -5,6 +5,7 @@ link_directories (${leplib_BINARY_DIR})
 add_executable (leplibTests
                 TestCsvFile.cpp
                 TestConfigFile.cpp
+                TestHttpClient.cpp
                 TestJson.cpp
                 TestMain.cpp
                 TestSmartPointer.cpp

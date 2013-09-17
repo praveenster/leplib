@@ -20,20 +20,43 @@
   OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+#ifndef LEPCPPLIB_HTTPCLIENT_H_
+#define LEPCPPLIB_HTTPCLIENT_H_
 
-#ifndef __HTTPCLIENT_H__
-#define __HTTPCLIENT_H__
+#include <vector>
+#include "String.h"
+#include "StringBuilder.h"
+#include "SmartPointer.h"
 
 namespace lepcpplib {
-  class HttpClient {
-    public:
-      class DownloadProgressObserver {
-        virtual void onHeaderParsed() = 0;
-        virtual void onContentDownloaded() = 0;
-      };
+class HttpClient {
+  public:
+    class DownloadProgressObserver {
+      virtual void OnHeaderParsed() = 0;
+      virtual void OnContentDownloaded() = 0;
+      virtual void OnContentSegmentDownloaded() = 0;
+    };
 
-      void addDownloadProgressObserver(DownloadProgressObserver* pObserver);
-  };
+    HttpClient();
+    void AddDownloadProgressObserver(DownloadProgressObserver* observer);
+    bool Execute(String address, String command);
+    bool Get(String url);
+    std::vector<SmartPointer<String>> headers();
+    SmartPointer<String> content();
+
+private:
+    bool ParseResponse(char* buffer, int length);
+    void Clear();
+
+  private:
+    std::vector<SmartPointer<String>> headers_;
+    int content_length_;
+    StringBuilder residue_;
+    bool header_parsed_;
+    int port_;
+    int response_buffer_size_;
+    char* response_buffer_;
+};
 } // namespace lepcpplib
 
-#endif // __HTTPCLIENT_H__
+#endif // LEPCPPLIB_HTTPCLIENT_H_
