@@ -58,7 +58,11 @@ SocketAddress::SocketAddress(int address, int port)
   : address_(""), port_(port)
 {
   in_addr a;
+#ifdef WIN32
   a.S_un.S_addr = address;
+#else
+  a.s_addr = address;
+#endif
   inet_ntoa(a);
 }
 

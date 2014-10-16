@@ -39,7 +39,7 @@ class JsonObject: public JsonValue {
     virtual SmartPointer<String> ToString();
 
   private:
-    std::map<SmartPointer<JsonString>, SmartPointer<JsonValue>> pairs_;
+    std::map< SmartPointer<JsonString>, SmartPointer<JsonValue> > pairs_;
 };
 } // namespace lepcpplib
 

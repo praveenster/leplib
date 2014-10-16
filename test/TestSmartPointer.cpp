@@ -81,9 +81,9 @@ class TestSmartPointerReferenceCounting1 : public TestCase
 
     bool test()
     {
-      // create the test fixture and call its entry point. this will call 
+      // create the test fixture and call its entry point. this will call
       // f1 and it creates the string, thereby increasing its reference count.
-      // but it does not delete the pointer, allowing it to get deleted 
+      // but it does not delete the pointer, allowing it to get deleted
       // automatically when the fixture is deleted.
       TestFixture* t = new TestFixture();
       t->run();
@@ -127,9 +127,9 @@ class TestSmartPointerReferenceCounting2 : public TestCase
 
     bool test()
     {
-      // create the test fixture and call its entry point. this will call 
+      // create the test fixture and call its entry point. this will call
       // f1 and it creates the string, thereby increasing its reference count.
-      // but it does not delete the pointer, allowing it to get deleted 
+      // but it does not delete the pointer, allowing it to get deleted
       // automatically when the fixture is deleted.
       TestFixture* t = new TestFixture();
       t->run();
@@ -153,11 +153,11 @@ class TestSmartPointerReferenceCounting3 : public TestCase
 
         void run()
         {
-          vector<SmartPointer<string>> v2 = f1();
+          vector< SmartPointer<string> > v2 = f1();
         }
 
       private:
-        vector<SmartPointer<string>> f1()
+        vector< SmartPointer<string> > f1()
         {
           v.push_back(new string("Hello1!"));
           v.push_back(new string("Hello2!"));
@@ -169,7 +169,7 @@ class TestSmartPointerReferenceCounting3 : public TestCase
         }
 
       private:
-        vector<SmartPointer<string>> v;
+        vector< SmartPointer<string> > v;
     };
 
     TestSmartPointerReferenceCounting3()
@@ -179,9 +179,9 @@ class TestSmartPointerReferenceCounting3 : public TestCase
 
     bool test()
     {
-      // create the test fixture and call its entry point. this will call 
+      // create the test fixture and call its entry point. this will call
       // f1 and it creates the string, thereby increasing its reference count.
-      // but it does not delete the pointer, allowing it to get deleted 
+      // but it does not delete the pointer, allowing it to get deleted
       // automatically when the fixture is deleted.
       TestFixture* t = new TestFixture();
       t->run();
@@ -229,9 +229,9 @@ class TestSmartPointerPassByReference : public TestCase
 
     bool test()
     {
-      // create the test fixture and call its entry point. this will call 
+      // create the test fixture and call its entry point. this will call
       // f1 and it creates the string, thereby increasing its reference count.
-      // but it does not delete the pointer, allowing it to get deleted 
+      // but it does not delete the pointer, allowing it to get deleted
       // automatically when the fixture is deleted.
       TestFixture* t = new TestFixture();
       t->run();

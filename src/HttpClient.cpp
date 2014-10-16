@@ -22,6 +22,7 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "HttpClient.h"
 #include "Socket.h"
 #include "String.h"
@@ -73,7 +74,7 @@ bool HttpClient::ParseResponse(char* buffer, int length)
         SmartPointer<String> header = residue_.Substring(0, p);
         residue_.Remove(0, p + CRLF.length());
 
-        // check if this header is Content-Length: 
+        // check if this header is Content-Length:
         int q = (*header).indexOf(CONTENT_LENGTH);
         if (q == 0) {
           content_length_ = (*header).substring(CONTENT_LENGTH.length()).toInt();
@@ -156,7 +157,7 @@ bool HttpClient::Execute(String address, String command)
   return parsing_done;
 }
 
-vector<SmartPointer<String>> HttpClient::headers()
+vector<SmartPointer<String> > HttpClient::headers()
 {
   return headers_;
 }

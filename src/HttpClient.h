@@ -41,7 +41,7 @@ class HttpClient {
     void AddDownloadProgressObserver(DownloadProgressObserver* observer);
     bool Execute(String address, String command);
     bool Get(String url);
-    std::vector<SmartPointer<String>> headers();
+    std::vector< SmartPointer<String> > headers();
     SmartPointer<String> content();
 
 private:
@@ -49,7 +49,7 @@ private:
     void Clear();
 
   private:
-    std::vector<SmartPointer<String>> headers_;
+    std::vector< SmartPointer<String> > headers_;
     int content_length_;
     StringBuilder residue_;
     bool header_parsed_;

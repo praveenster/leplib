@@ -35,7 +35,7 @@ class JsonArray : public JsonValue {
     virtual SmartPointer<String> ToString();
 
   private:
-    std::vector<SmartPointer<JsonValue>> values_;
+    std::vector< SmartPointer<JsonValue> > values_;
 };
 } // namespace lepcpplib
 

@@ -36,7 +36,7 @@ struct ThreadAttributes {
   DWORD thread_id_;
   HANDLE thread_handle_;
 #else
-  pthread_t thread;
+  pthread_t thread_id_;
 #endif
 };
 
@@ -77,15 +77,14 @@ void Thread::Start(void* parameter)
     0,                                      // use default creation flags
     &ta->thread_id_);                       // returns the thread identifier
 #else
-  pthread_t thread_id;
   int result;
-  result = pthread_create(&thread, NULL, &Thread::runner, (void*)temp);
+  result = pthread_create(&(((ThreadAttributes*)opaque_)->thread_id_), NULL, &Thread::runner, (void*)temp);
   if (result != 0)
   {
     LOG_D("Thread creation error = %d\n", result);
   }
 
-  pthread_detach(thread_id);
+  pthread_detach(((ThreadAttributes*)opaque_)->thread_id_);
 
   if (result != 0)
   {
@@ -102,7 +101,7 @@ Thread::Thread()
 
 Thread::~Thread()
 {
-  delete opaque_;
+  delete (ThreadAttributes*)opaque_;
 }
 
 void Thread::Join()
@@ -110,7 +109,7 @@ void Thread::Join()
 #ifdef WIN32
   WaitForSingleObject(((ThreadAttributes*)opaque_)->thread_handle_, INFINITE);
 #else
-  pthread_join(((ThreadAttributes*)opaque_)->thread_id, NULL);
+  pthread_join(((ThreadAttributes*)opaque_)->thread_id_, NULL);
 #endif
 }
 } // namespace lepcpplib

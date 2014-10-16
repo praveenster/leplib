@@ -21,6 +21,7 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#include <cstring>
 #include <fstream>
 #include <vector>
 #include "TestCsvFile.h"
@@ -76,9 +77,9 @@ class TestCsvFile1 : public TestCase
 
       CsvFile csvfile(filename);
       bool loaded = csvfile.Load();
-      
-      bool found = (csvfile.ValueOf(0, 0) == r0c0) && (csvfile.ValueOf(0, 1) == r0c1) && 
-        (csvfile.ValueOf(0, 2) == r0c2) && 
+
+      bool found = (csvfile.ValueOf(0, 0) == r0c0) && (csvfile.ValueOf(0, 1) == r0c1) &&
+        (csvfile.ValueOf(0, 2) == r0c2) &&
         (csvfile.ValueOf(1, 0) == r1c0) && (csvfile.ValueOf(1, 1) == r1c1) &&
         (csvfile.ValueOf(1, 2) == r1c2);
 
@@ -137,7 +138,7 @@ class TestCsvFile2 : public TestCase
 
       csvfile.Insert(row, 2);
 
-      bool found = (csvfile.ValueOf(2, 0) == r2c0) && (csvfile.ValueOf(2, 1) == r2c1) && 
+      bool found = (csvfile.ValueOf(2, 0) == r2c0) && (csvfile.ValueOf(2, 1) == r2c1) &&
         (csvfile.ValueOf(2, 2) == r2c2);
 
       return ((loaded) && (found) && (csvfile.RowCount() == 3) &&
@@ -195,7 +196,7 @@ class TestCsvFile3 : public TestCase
 
       csvfile.Insert(row, 5);
 
-      bool found = (csvfile.ValueOf(5, 0) == r5c0) && (csvfile.ValueOf(5, 1) == r5c1) && 
+      bool found = (csvfile.ValueOf(5, 0) == r5c0) && (csvfile.ValueOf(5, 1) == r5c1) &&
         (csvfile.ValueOf(5, 2) == r5c2);
 
       return ((loaded) && (found) && (csvfile.RowCount() == 6) &&
@@ -246,7 +247,7 @@ class TestCsvFile4 : public TestCase
 
       csvfile.Remove(0);
 
-      bool found = (csvfile.ValueOf(0, 0) == r1c0) && (csvfile.ValueOf(0, 1) == r1c1) && 
+      bool found = (csvfile.ValueOf(0, 0) == r1c0) && (csvfile.ValueOf(0, 1) == r1c1) &&
         (csvfile.ValueOf(0, 2) == r1c2);
 
       return ((loaded) && (found) && (csvfile.RowCount() == 1) &&
@@ -297,7 +298,7 @@ class TestCsvFile5 : public TestCase
 
       csvfile.Remove(5);
 
-      bool found = (csvfile.ValueOf(0, 0) == r0c0) && (csvfile.ValueOf(0, 1) == r0c1) && 
+      bool found = (csvfile.ValueOf(0, 0) == r0c0) && (csvfile.ValueOf(0, 1) == r0c1) &&
         (csvfile.ValueOf(0, 2) == r0c2);
 
       return ((loaded) && (found) && (csvfile.RowCount() == 2) &&
@@ -355,7 +356,7 @@ class TestCsvFile6 : public TestCase
 
       csvfile.Append(row);
 
-      bool found = (csvfile.ValueOf(2, 0) == r2c0) && (csvfile.ValueOf(2, 1) == r2c1) && 
+      bool found = (csvfile.ValueOf(2, 0) == r2c0) && (csvfile.ValueOf(2, 1) == r2c1) &&
         (csvfile.ValueOf(2, 2) == r2c2);
 
       return ((loaded) && (found) && (csvfile.RowCount() == 3) &&
@@ -498,7 +499,7 @@ class TestCsvFile10 : public TestCase
       CsvFile csvfile(filename);
       bool loaded = csvfile.Load();
 
-      bool found = (csvfile.ValueOf(0, 0) == "") && (csvfile.ValueOf(0, 1) == "") && 
+      bool found = (csvfile.ValueOf(0, 0) == "") && (csvfile.ValueOf(0, 1) == "") &&
         (csvfile.ValueOf(0, 2) == "");
 
       return ((loaded) && (found) && (csvfile.RowCount() == 1) && (csvfile.ColumnCount() == 3));
@@ -533,7 +534,7 @@ class TestCsvFile11 : public TestCase
       CsvFile csvfile2(filename);
       bool loaded = csvfile2.Load();
 
-      bool found = (csvfile2.ValueOf(0, 0) == r0c0) && (csvfile2.ValueOf(0, 1) == r0c1) && 
+      bool found = (csvfile2.ValueOf(0, 0) == r0c0) && (csvfile2.ValueOf(0, 1) == r0c1) &&
         (csvfile2.ValueOf(0, 2) == r0c2);
 
       return ((loaded) && (found) && (csvfile2.RowCount() == 1) && (csvfile2.ColumnCount() == 3));

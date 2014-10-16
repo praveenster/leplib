@@ -73,13 +73,13 @@ bool CsvFile::Load()
           // empty line. ignore.
           line = "";
         }
-        else if ((l > 2) && 
+        else if ((l > 2) &&
             (line.charAt(l - 2) == '\r') &&
             (line.charAt(l - 1) == '\n')) {
               // crlf delimited line. parse it out.
               line = line.substring(0, l - 3);
         }
-        else if ((l > 1) && 
+        else if ((l > 1) &&
             // cr delimited line. parse it out.
             (line.charAt(l - 1) == '\n')) {
               line = line.substring(0, l - 2);
@@ -98,7 +98,7 @@ bool CsvFile::Load()
       pcurrent++;
     }
 
-    // if no delimiter was found in this pass, store the 
+    // if no delimiter was found in this pass, store the
     // residue in line so that it gets appended with
     // the new set of characters read.
     if (pbegin < pcurrent) {
@@ -160,7 +160,7 @@ void CsvFile::Insert(const std::vector<String>& record, int row)
 void CsvFile::Remove(int row)
 {
   if ((row < records_.size()) && (row >= 0)) {
-    vector<vector<String>>::iterator it = records_.begin();
+    vector< vector<String> >::iterator it = records_.begin();
     records_.erase(it + row);
   }
 }

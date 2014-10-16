@@ -89,9 +89,9 @@ class TestSocketAddressAccessors : public TestCase
     bool test()
     {
       int port = 4444;
-      char* address = "255.255.255.255";
+      const char* address = "255.255.255.255";
       SocketAddress sa(address, port);
-      return ((*sa.address() == address) && 
+      return ((*sa.address() == address) &&
         (sa.port() == port));
     }
 };
@@ -107,13 +107,13 @@ class TestSocketAddressSetters : public TestCase
     bool test()
     {
       int port1 = 4444;
-      char* address1 = "123.456.789.012";
+      const char* address1 = "123.456.789.012";
       int port2 = 5555;
-      char* address2 = "987.654.321.000";
+      const char* address2 = "987.654.321.000";
       SocketAddress sa(address1, port1);
       sa.set_address(address2);
       sa.set_port(port2);
-      return ((*sa.address() == address2) && 
+      return ((*sa.address() == address2) &&
         (sa.port() == port2));
     }
 };
@@ -129,10 +129,10 @@ class TestSocketAddressCopyConstructor : public TestCase
     bool test()
     {
       int port = 4444;
-      char* address = "255.255.255.255";
+      const char* address = "255.255.255.255";
       SocketAddress sa1(address, port);
       SocketAddress sa2(sa1);
-      return ((*sa1.address() == *sa2.address()) && 
+      return ((*sa1.address() == *sa2.address()) &&
         (sa1.port() == sa2.port()));
     }
 };
@@ -148,11 +148,11 @@ class TestSocketAddressAssignmentOperator : public TestCase
     bool test()
     {
       int port = 4444;
-      char* address = "255.255.255.255";
+      const char* address = "255.255.255.255";
       SocketAddress sa1(address, port);
       SocketAddress sa2;
       sa2 = sa1;
-      return ((*sa1.address() == *sa2.address()) && 
+      return ((*sa1.address() == *sa2.address()) &&
         (sa1.port() == sa2.port()));
     }
 };

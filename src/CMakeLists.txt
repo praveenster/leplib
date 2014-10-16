@@ -23,3 +23,7 @@ add_library (leplib
 if(CMAKE_HOST_WIN32)
     target_link_libraries(leplib ${target_link_libraries} ws2_32)
 endif(CMAKE_HOST_WIN32)
+
+if(CMAKE_HOST_UNIX)
+    target_link_libraries(leplib ${target_link_libraries} pthread)
+endif(CMAKE_HOST_UNIX)

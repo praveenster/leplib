@@ -36,7 +36,7 @@ namespace lepcpplib {
 
   SmartPointer<String> JsonObject::ToString()
   {
-    map<SmartPointer<JsonString>, SmartPointer<JsonValue>>::iterator it;
+    map< SmartPointer<JsonString>, SmartPointer<JsonValue> >::iterator it;
     String* s = new String();
     *s += "{";
     bool first = true;

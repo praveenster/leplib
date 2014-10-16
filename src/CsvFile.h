@@ -60,7 +60,7 @@ class CsvFile {
     CsvFile();
     CsvFile(const CsvFile& csvfile);
 
-    std::vector<std::vector<String>> records_;
+    std::vector< std::vector<String> > records_;
     String filename_;
     char separator_;
 };

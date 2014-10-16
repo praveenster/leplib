@@ -33,9 +33,6 @@ using lepcpplib::SocketAddress;
 using lepcpplib::TestCase;
 using lepcpplib::TestModule;
 
-#include "winsock2.h"
-#include "Ws2tcpip.h"
-
 class TestHttpClientExecute : public TestCase
 {
   public:
@@ -48,7 +45,7 @@ class TestHttpClientExecute : public TestCase
     {
       HttpClient hc;
       hc.Execute("98.139.183.24", "GET /index.html");
-      std::vector<SmartPointer<String>> h = hc.headers();
+      std::vector< SmartPointer<String> > h = hc.headers();
       String s = *hc.content();
 
       return ((h.size() > 0) && (s.length() > 0));

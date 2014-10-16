@@ -36,6 +36,7 @@
 #include <sys/ioctl.h>
 #include <pthread.h>
 #include <errno.h>
+#include <cstring>
 #endif // WIN32
 
 namespace lepcpplib {

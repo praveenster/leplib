@@ -70,10 +70,10 @@ class TestStringBuilderAppendCStringOfLength : public TestCase
     bool test()
     {
       StringBuilder sb;
-      char* s1 = "This asdfg";
-      char* s2 = "is qwert";
-      char* s3 = "a zxcv";
-      char* s4 = "test. poiuy";
+      const char* s1 = "This asdfg";
+      const char* s2 = "is qwert";
+      const char* s3 = "a zxcv";
+      const char* s4 = "test. poiuy";
       sb.Append(s1, 4);
       sb.Append(" ");
       sb.Append(s2, 2);
