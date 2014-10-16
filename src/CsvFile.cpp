@@ -22,6 +22,7 @@
 */
 
 #include <fstream>
+#include <string>
 #include "CsvFile.h"
 
 using std::vector;
@@ -47,63 +48,19 @@ CsvFile::~CsvFile()
 bool CsvFile::Load()
 {
   bool parsable = false;
-  char buffer[10];
-  String line;
+  std::string buffer;
   ifstream file(filename_.toCharArray(), ifstream::binary);
 
   while((!file.eof()) && (file.good())) {
-    file.read(buffer, sizeof(buffer));
-    int pend = file.gcount();
     parsable = true;
-    int pbegin = 0;
-    int pcurrent = 0;
+    getline(file, buffer);
+    String line(buffer.c_str());
 
-    while (pcurrent < pend) {
-      if (buffer[pcurrent] == '\n') {
-
-        String part(buffer + pbegin, (pcurrent - pbegin + 1));
-        line += part;
-        int l = line.length();
-
-        if ((l == 1) && (line.charAt(0) == '\n')) {
-          // empty line. ignore.
-          line = "";
-        }
-        else if ((l == 2) && (line.charAt(0) == '\r') && (line.charAt(1) == '\n')) {
-          // empty line. ignore.
-          line = "";
-        }
-        else if ((l > 2) &&
-            (line.charAt(l - 2) == '\r') &&
-            (line.charAt(l - 1) == '\n')) {
-              // crlf delimited line. parse it out.
-              line = line.substring(0, l - 3);
-        }
-        else if ((l > 1) &&
-            // cr delimited line. parse it out.
-            (line.charAt(l - 1) == '\n')) {
-              line = line.substring(0, l - 2);
-        }
-
-        if (line.length() > 0) {
-          vector<String> row;
-          line.tokenize(separator_, row);
-          records_.push_back(row);
-          line = "";
-        }
-
-        pbegin = pcurrent + 1;
-      }
-
-      pcurrent++;
-    }
-
-    // if no delimiter was found in this pass, store the
-    // residue in line so that it gets appended with
-    // the new set of characters read.
-    if (pbegin < pcurrent) {
-      String part(buffer + pbegin, pend - pbegin);
-      line = line + part;
+    if (line.length() > 0) {
+      vector<String> row;
+      line.tokenize(separator_, row);
+      records_.push_back(row);
+      line = "";
     }
   }
 
