@@ -22,6 +22,7 @@
 */
 #include <fstream>
 #include <vector>
+#include <string>
 #include "Logger.h"
 #include "ConfigFile.h"
 
@@ -47,14 +48,13 @@ bool ConfigFile::Load()
 
   if (filename_ != "") {
     ifstream file(filename_.toCharArray());
-    char buffer[kConfigFileMaxLineLength];
-
     result = file.good();
 
     while ((!file.eof()) && (!file.fail())) {
-      file.getline(buffer, sizeof(buffer));
-      if (file.gcount()) {
-        String line(buffer);
+      std::string buffer;
+      getline(file, buffer);
+      if (buffer.length() > 0) {
+        String line(buffer.c_str());
         vector<String> key_value;
         line.tokenize('=', key_value);
         if (key_value.size() >= 2)
