@@ -40,7 +40,7 @@ class SocketAddress {
     SocketAddress& operator=(const SocketAddress& that);
 
     SmartPointer<String> ToString();
-    const SmartPointer<String> address() const;
+    const String& address() const;
     const int port() const;
 
     void set_address(const char* address);

@@ -47,7 +47,7 @@ static void SocketAddressObjectToStruct(SocketAddress& address, sockaddr_in& soc
 {
   memset(&socket_address, 0, sizeof(socket_address));
   socket_address.sin_family = AF_INET;
-  socket_address.sin_addr.s_addr = inet_addr((*address.address()).toCharArray());
+  socket_address.sin_addr.s_addr = inet_addr(address.address().toCharArray());
   socket_address.sin_port = htons(address.port());
 }
 
