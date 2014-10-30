@@ -65,7 +65,17 @@ namespace lepcpplib {
       return p_;
     }
 
+    const T* operator->() const
+    {
+      return p_;
+    }
+
     T& operator*()
+    {
+      return *p_;
+    }
+
+    const T& operator*() const
     {
       return *p_;
     }

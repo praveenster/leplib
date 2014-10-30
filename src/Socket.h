@@ -70,15 +70,15 @@ class Socket {
     int SetOptionReuse();
     int GetLastError();
 
-    const SocketAddress& local_address();
-    const SocketAddress& remote_address();
+    const SocketAddress& local_address() const;
+    const SocketAddress& remote_address() const;
 
     void SendTo();
     void Shutdown();
     void Receive();
     void ReceiveFrom();
-    //static void Select(vector<SmartPointer<Socket>>& check_read, 
-    //  vector<SmartPointer<Socket>>& check_write, 
+    //static void Select(vector<SmartPointer<Socket>>& check_read,
+    //  vector<SmartPointer<Socket>>& check_write,
     //  vector<SmartPointer<Socket>>& check_error,
     //  int timeout);
 

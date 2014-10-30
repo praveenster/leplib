@@ -107,13 +107,13 @@ SmartPointer<String> SocketAddress::ToString()
   return sb.ToString();
 }
 
-SmartPointer<String> SocketAddress::address()
+const SmartPointer<String> SocketAddress::address() const
 {
   SmartPointer<String> sp = new String(address_);
   return sp;
 }
 
-int SocketAddress::port()
+const int SocketAddress::port() const
 {
   return port_;
 }

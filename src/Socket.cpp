@@ -156,12 +156,12 @@ int Socket::GetLastError()
 #endif //WIN32
 }
 
-const SocketAddress& Socket::local_address()
+const SocketAddress& Socket::local_address() const
 {
   return local_address_;
 }
 
-const SocketAddress& Socket::remote_address()
+const SocketAddress& Socket::remote_address() const
 {
   return remote_address_;
 }
