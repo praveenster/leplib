@@ -27,3 +27,6 @@ The unit tests get built under tests, lepcpplibTests.
 Logging can be disabled by commenting out -D__ENABLE_LOGGER_ from the top level
 CMakeLists.txt
 
+    # cd build
+    # cmake ../
+    # make
