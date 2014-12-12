@@ -55,12 +55,32 @@ bool CsvFile::Load()
     parsable = true;
     getline(file, buffer);
     String line(buffer.c_str());
+    unsigned int length = line.length();
 
-    if (line.length() > 0) {
+    // getline reads up to \n. if the terminator is \r\n
+    // then "line" will contain an extra \r in the end.
+    // we can't use String::trim here because it might remove
+    // valid trailing whitespace. we just need to handle
+    // this unexpected behavior of getline.
+    if ((length >= 1) && (line.charAt(length - 1) == '\r')) {
+      // if the line was just \r\n, then getline would return a string
+      // with just \r. in that case, there is nothing on that line
+      // to include as it is an empty line.
+      if (length == 1) {
+        line = "";
+      }
+      else {
+        line = line.substring(0, length - 2);
+      }
+
+      // update the new length as we removed a \r
+      length -= 1;
+    }
+
+    if (length > 0) {
       vector<String> row;
       line.tokenize(separator_, row);
       records_.push_back(row);
-      line = "";
     }
   }
 
