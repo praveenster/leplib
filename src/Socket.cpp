@@ -121,6 +121,7 @@ SmartPointer<Socket> Socket::Accept(int backlog)
   int address_length = sizeof(client_socket_address);
   int client_socket = accept(socket_, (struct sockaddr *)&client_socket_address, (socklen_t*)&address_length);
   SmartPointer<Socket> rs = new Socket(kInternet, kStream, kTcp);
+  rs->socket_ = client_socket;
   SocketAddressStructToObject(client_socket_address, (*rs).remote_address_);
   (*rs).local_address_ = local_address_;
   return rs;
