@@ -1,4 +1,5 @@
 add_library (leplib
+             CgiHelper.cpp
              ConfigFile.cpp
              CsvFile.cpp
              HttpClient.cpp
