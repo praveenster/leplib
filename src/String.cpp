@@ -165,6 +165,13 @@ String String::fromInt(int value, int width, char pad)
    return String(ss.str().c_str());
 }
 
+String String::fromFloat(float value)
+{
+  std::stringstream ss;
+  ss << value;
+  return String(ss.str().c_str());
+}
+
 int String::toInt() const
 {
   std::stringstream ss;
@@ -179,6 +186,15 @@ int String::toInt(const char* c)
   std::stringstream ss;
   ss << c;
   int value;
+  ss >> value;
+  return value;
+}
+
+float String::toFloat() const
+{
+  std::stringstream ss;
+  ss << toCharArray();
+  float value;
   ss >> value;
   return value;
 }

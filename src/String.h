@@ -60,9 +60,13 @@ namespace lepcpplib {
 
       static String fromInt(int i);
       static String fromInt(int i, int width, char pad);
+      static String fromFloat(float f);
 
       int toInt() const;
       static int toInt(const char* c);
+
+      float toFloat() const;
+      static float toFloat(const char* c);
 
       const char* toCharArray() const;
 
