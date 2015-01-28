@@ -11,6 +11,7 @@ add_library (leplib
              JsonString.cpp
              JsonValue.cpp
              Logger.cpp
+             Semaphore.cpp
              Socket.cpp
              SocketAddress.cpp
              String.cpp
