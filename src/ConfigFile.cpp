@@ -31,8 +31,6 @@ using std::map;
 using std::vector;
 
 namespace lepcpplib {
-const int kConfigFileMaxLineLength = 256;
-
 ConfigFile::ConfigFile(const String& filename)
   : filename_(filename)
 {
