@@ -30,6 +30,8 @@
 
 using std::vector;
 using std::map;
+using lepcpplib::String;
+using lepcpplib::SmartPointer;
 
 namespace lep {
 const String CgiHelper::kHttpHost = "HTTP_HOST";
