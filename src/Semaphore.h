@@ -28,7 +28,7 @@ namespace lep {
 class Semaphore
 {
   public:
-    Semaphore();
+    Semaphore(int value = 0);
     ~Semaphore();
 
     void Take();
@@ -36,6 +36,7 @@ class Semaphore
 
   private:
     void* opaque_;
+    int value_;
 };
 } // namespace lep
 

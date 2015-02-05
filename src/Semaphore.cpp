@@ -26,11 +26,12 @@
 #include "Semaphore.h"
 
 namespace lep {
-Semaphore::Semaphore()
-: opaque_(NULL)
+Semaphore::Semaphore(int value)
+: opaque_(NULL),
+  value_(value)
 {
   opaque_ = (void*)new sem_t;
-  sem_init((sem_t*) opaque_, 0, 0);
+  sem_init((sem_t*) opaque_, 0, value_);
 }
 
 Semaphore::~Semaphore()
