@@ -21,11 +21,11 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_TESTSMARTPOINTER_H_
-#define LEPCPPLIB_TESTSMARTPOINTER_H_
+#ifndef TEST_TESTSMARTPOINTER_H_
+#define TEST_TESTSMARTPOINTER_H_
 
 #include "../src/TestModule.h"
-using lepcpplib::TestModule;
+using lep::TestModule;
 
 class TestSmartPointer : public TestModule
 {
@@ -33,4 +33,5 @@ class TestSmartPointer : public TestModule
     TestSmartPointer();
 };
 
-#endif // LEPCPPLIB_TESTSMARTPOINTER_H_
+#endif // TEST_TESTSMARTPOINTER_H_
+

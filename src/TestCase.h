@@ -21,12 +21,12 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef __TESTCASE_H__
-#define __TESTCASE_H__
+#ifndef LEP_TESTCASE_H_
+#define LEP_TESTCASE_H_
 
 #include "String.h"
 
-namespace lepcpplib {
+namespace lep {
   class TestCase
   {
     public:
@@ -45,4 +45,5 @@ namespace lepcpplib {
   };
 }
 
-#endif // __TESTCASE_H__
+#endif // LEP_TESTCASE_H_
+

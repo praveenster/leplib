@@ -26,12 +26,12 @@
 #include <iomanip>
 #include "String.h"
 
-using lepcpplib::String;
 using std::memcpy;
 using std::strcmp;
 using std::strlen;
 using std::vector;
 
+namespace lep {
 String::String()
   : buffer_(0)
 {
@@ -91,7 +91,7 @@ String& String::operator=(const char c)
   return *this;
 }
 
-bool lepcpplib::operator==(const String& s1, const String& s2)
+bool operator==(const String& s1, const String& s2)
 {
   bool result = false;
 
@@ -105,7 +105,7 @@ bool lepcpplib::operator==(const String& s1, const String& s2)
   return result;
 }
 
-bool lepcpplib::operator!=(const String& s1, const String& s2)
+bool operator!=(const String& s1, const String& s2)
 {
   return !(operator==(s1, s2));
 }
@@ -199,7 +199,7 @@ float String::toFloat() const
   return value;
 }
 
-String lepcpplib::operator+(const String& s1, const String& s2)
+String operator+(const String& s1, const String& s2)
 {
   String s3;
   s3 += s1;
@@ -208,7 +208,7 @@ String lepcpplib::operator+(const String& s1, const String& s2)
   return s3;
 }
 
-String lepcpplib::operator+(const char* s1, const String& s2)
+String operator+(const char* s1, const String& s2)
 {
   String s3;
   s3 += s1;
@@ -217,7 +217,7 @@ String lepcpplib::operator+(const char* s1, const String& s2)
   return s3;
 }
 
-String lepcpplib::operator+(const String& s1, const char* s2)
+String operator+(const String& s1, const char* s2)
 {
   String s3;
   s3 += s1;
@@ -226,7 +226,7 @@ String lepcpplib::operator+(const String& s1, const char* s2)
   return s3;
 }
 
-String lepcpplib::operator+(const char c1, const String& s2)
+String operator+(const char c1, const String& s2)
 {
   String s3;
   s3 += c1;
@@ -235,7 +235,7 @@ String lepcpplib::operator+(const char c1, const String& s2)
   return s3;
 }
 
-String lepcpplib::operator+(const String& s1, const char c2)
+String operator+(const String& s1, const char c2)
 {
   String s3;
   s3 += s1;
@@ -462,3 +462,5 @@ String String::trim()
     return String(buffer_ + s, e + 1 - s);
   }
 }
+} // namespace lep
+

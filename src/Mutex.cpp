@@ -24,7 +24,7 @@
 #include <pthread.h>
 #include "Mutex.h"
 
-namespace lepcpplib {
+namespace lep {
 Mutex::Mutex()
 : opaque_(NULL)
 {
@@ -51,4 +51,5 @@ void Mutex::TryLock()
 {
   pthread_mutex_trylock((pthread_mutex_t*)opaque_);
 }
-} // namespace lepcpplib
+} // namespace lep
+

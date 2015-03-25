@@ -23,7 +23,7 @@
 
 #include "JsonString.h"
 
-namespace lepcpplib {
+namespace lep {
   JsonString::JsonString(const String& s)
     : string_(s)
   {
@@ -40,4 +40,5 @@ namespace lepcpplib {
     SmartPointer<String> result(s);
     return result;
   }
-} // namespace lepcpplib
+} // namespace lep
+

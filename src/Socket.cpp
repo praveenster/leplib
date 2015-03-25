@@ -39,7 +39,7 @@
 #include <cstring>
 #endif // WIN32
 
-namespace lepcpplib {
+namespace lep {
 
 // internal function to convert to struct format used by socket functions.
 // not made as part of class to reduce pollution of native types.
@@ -166,4 +166,5 @@ const SocketAddress& Socket::remote_address() const
 {
   return remote_address_;
 }
-} // namespace lepcpplib
+} // namespace lep
+

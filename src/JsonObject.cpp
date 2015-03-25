@@ -24,7 +24,7 @@
 #include "JsonObject.h"
 
 using std::map;
-namespace lepcpplib {
+namespace lep {
   JsonObject::JsonObject()
   {
   }
@@ -59,4 +59,5 @@ namespace lepcpplib {
     SmartPointer<String> result(s);
     return result;
   }
-} // namespace lepcpplib
+} // namespace lep
+

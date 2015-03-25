@@ -23,7 +23,7 @@
 
 #include "JsonNull.h"
 
-namespace lepcpplib {
+namespace lep {
   JsonNull::JsonNull()
   {
   }
@@ -33,4 +33,5 @@ namespace lepcpplib {
     SmartPointer<String> result(new String("null"));
     return result;
   }
-} // namespace lepcpplib
+} // namespace lep
+

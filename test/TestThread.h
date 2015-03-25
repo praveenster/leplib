@@ -21,11 +21,11 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_TESTTHREAD_H_
-#define	LEPCPPLIB_TESTTHREAD_H_
+#ifndef TEST_TESTTHREAD_H_
+#define	TEST_TESTTHREAD_H_
 
 #include "../src/TestModule.h"
-using lepcpplib::TestModule;
+using lep::TestModule;
 
 class TestThread : public TestModule
 {
@@ -33,4 +33,5 @@ class TestThread : public TestModule
     TestThread();
 };
 
-#endif	// LEPCPPLIB_TESTTHREAD_H_
+#endif	// TEST_TESTTHREAD_H_
+

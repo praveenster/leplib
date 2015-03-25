@@ -21,13 +21,13 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_STRINGBUILDER_H_
-#define LEPCPPLIB_STRINGBUILDER_H_
+#ifndef LEP_STRINGBUILDER_H_
+#define LEP_STRINGBUILDER_H_
 
 #include "SmartPointer.h"
 #include "String.h"
 
-namespace lepcpplib {
+namespace lep {
 class StringBuilder {
   public:
     StringBuilder();
@@ -66,6 +66,7 @@ class StringBuilder {
     int buffer_size_;
     int used_size_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_STRINGBUILDER_H_
+#endif // LEP_STRINGBUILDER_H_
+

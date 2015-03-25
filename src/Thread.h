@@ -21,10 +21,10 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_THREAD_H_
-#define	LEPCPPLIB_THREAD_H_
+#ifndef LEP_THREAD_H_
+#define	LEP_THREAD_H_
 
-namespace lepcpplib {
+namespace lep {
 class Thread
 {
   public:
@@ -42,6 +42,7 @@ class Thread
   private:
     void* opaque_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif	// LEPCPPLIB_THREAD_H_
+#endif	// LEP_THREAD_H_
+

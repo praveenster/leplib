@@ -30,7 +30,7 @@
 #include "Logger.h"
 #include "Thread.h"
 
-namespace lepcpplib {
+namespace lep {
 struct ThreadAttributes {
 #ifdef WIN32
   DWORD thread_id_;
@@ -112,4 +112,5 @@ void Thread::Join()
   pthread_join(((ThreadAttributes*)opaque_)->thread_id_, NULL);
 #endif
 }
-} // namespace lepcpplib
+} // namespace lep
+

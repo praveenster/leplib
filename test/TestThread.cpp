@@ -26,9 +26,9 @@
 #include "../src/Thread.h"
 #include "../src/Logger.h"
 
-using lepcpplib::Thread;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
+using lep::Thread;
+using lep::TestCase;
+using lep::TestModule;
 
 class Thread1 : public Thread
 {
@@ -69,3 +69,4 @@ TestThread::TestThread()
 {
   add(new TestThreadRun());
 }
+

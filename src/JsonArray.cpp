@@ -23,7 +23,7 @@
 
 #include "JsonArray.h"
 
-namespace lepcpplib {
+namespace lep {
   JsonArray::JsonArray()
     : values_()
   {
@@ -53,4 +53,5 @@ namespace lepcpplib {
   {
     values_.push_back(value);
   }
-} // namespace lepcpplib
+} // namespace lep
+

@@ -28,11 +28,11 @@
 #include "../src/String.h"
 #include "../src/SmartPointer.h"
 
-using lepcpplib::StringBuilder;
-using lepcpplib::SmartPointer;
-using lepcpplib::String;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
+using lep::StringBuilder;
+using lep::SmartPointer;
+using lep::String;
+using lep::TestCase;
+using lep::TestModule;
 
 class TestStringBuilderAppendCString : public TestCase
 {
@@ -343,6 +343,7 @@ class TestStringBuilderClear2 : public TestCase
     }
 
     bool test()
+
     {
       StringBuilder sb;
       sb.Append("This is a test.");
@@ -753,3 +754,4 @@ TestStringBuilder::TestStringBuilder()
   add(new TestStringBuilderRemove4());
   add(new TestStringBuilderRemove5());
 }
+

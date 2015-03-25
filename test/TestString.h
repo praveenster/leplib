@@ -21,11 +21,11 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef __TESTSTRING_H__
-#define __TESTSTRING_H__
+#ifndef TEST_TESTSTRING_H_
+#define TEST_TESTSTRING_H_
 
 #include "../src/TestModule.h"
-using lepcpplib::TestModule;
+using lep::TestModule;
 
 class TestString : public TestModule
 {
@@ -33,4 +33,5 @@ class TestString : public TestModule
     TestString();
 };
 
-#endif // __TESTSTRING_H__
+#endif // TEST_TESTSTRING_H_
+

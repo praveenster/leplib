@@ -24,9 +24,9 @@
 #include <cstddef>
 #include "TestString.h"
 
-using lepcpplib::String;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
+using lep::String;
+using lep::TestCase;
+using lep::TestModule;
 
 class TestStringEquality : public TestCase
 {
@@ -2048,3 +2048,4 @@ TestString::TestString()
   add(new TestStringCharAt4());
   add(new TestStringCharAt5());
 }
+

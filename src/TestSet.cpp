@@ -25,9 +25,8 @@
 #include "TestSet.h"
 
 using std::vector;
-using lepcpplib::TestSet;
-using lepcpplib::TestModule;
 
+namespace lep {
 TestSet::~TestSet()
 {
   for (unsigned int i = 0; i < testModules.size(); i++) {
@@ -57,3 +56,5 @@ void TestSet::add(TestModule* testModule)
 {
   testModules.push_back(testModule);
 }
+} // namespace lep
+

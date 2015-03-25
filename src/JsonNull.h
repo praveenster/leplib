@@ -21,17 +21,18 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_JSONNULL_H_
-#define LEPCPPLIB_JSONNULL_H_
+#ifndef LEP_JSONNULL_H_
+#define LEP_JSONNULL_H_
 
 #include "JsonValue.h"
 
-namespace lepcpplib {
+namespace lep {
 class JsonNull : public JsonValue {
   public:
     JsonNull();
     virtual SmartPointer<String> ToString();
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_JSONNULL_H_
+#endif // LEP_JSONNULL_H_
+

@@ -29,7 +29,7 @@
 
 using std::vector;
 
-namespace lepcpplib {
+namespace lep {
 const int RESPONSE_BUFFER_SIZE = 1024;
 const int DEFAULT_HTTP_PORT = 80;
 const String CRLF = "\r\n";
@@ -167,4 +167,5 @@ SmartPointer<String> HttpClient::content()
   return residue_.ToString();
 }
 
-} // namespace lepcpplib
+} // namespace lep
+

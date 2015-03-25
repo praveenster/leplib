@@ -21,12 +21,12 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_JSONBOOL_H_
-#define LEPCPPLIB_JSONBOOL_H_
+#ifndef LEP_JSONBOOL_H_
+#define LEP_JSONBOOL_H_
 
 #include "JsonValue.h"
 
-namespace lepcpplib {
+namespace lep {
 class JsonBool : public JsonValue {
   public:
     JsonBool(bool value);
@@ -35,6 +35,7 @@ class JsonBool : public JsonValue {
   private:
     bool value_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_JSONBOOL_H_
+#endif // LEP_JSONBOOL_H_
+

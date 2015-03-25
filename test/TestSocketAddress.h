@@ -21,11 +21,11 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_TESTSOCKETADDRESS_H_
-#define LEPCPPLIB_TESTSOCKETADDRESS_H_
+#ifndef TEST_TESTSOCKETADDRESS_H_
+#define TEST_TESTSOCKETADDRESS_H_
 
 #include "../src/TestModule.h"
-using lepcpplib::TestModule;
+using lep::TestModule;
 
 class TestSocketAddress : public TestModule
 {
@@ -33,4 +33,5 @@ class TestSocketAddress : public TestModule
     TestSocketAddress();
 };
 
-#endif // LEPCPPLIB_TESTSOCKETADDRESS_H_
+#endif // TEST_TESTSOCKETADDRESS_H_
+

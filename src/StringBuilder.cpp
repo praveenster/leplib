@@ -26,7 +26,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace lepcpplib {
+namespace lep {
 const int StringBuilder::kDefaultBufferSize = 1024;
 
 StringBuilder::StringBuilder()
@@ -229,4 +229,5 @@ SmartPointer<String> StringBuilder::ToString()
   SmartPointer<String> s = new String(buffer_, used_size_);
   return s;
 }
-} // namespace lepcpplib
+} // namespace lep
+

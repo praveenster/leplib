@@ -21,11 +21,11 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_TESTCONFIGFILE_H_
-#define	LEPCPPLIB_TESTCONFIGFILE_H_
+#ifndef TEST_TESTCONFIGFILE_H_
+#define	TEST_TESTCONFIGFILE_H_
 
 #include "../src/TestModule.h"
-using lepcpplib::TestModule;
+using lep::TestModule;
 
 class TestConfigFile : public TestModule
 {
@@ -33,4 +33,5 @@ class TestConfigFile : public TestModule
     TestConfigFile();
 };
 
-#endif	// LEPCPPLIB_TESTCONFIGFILE_H_
+#endif	// TEST_TESTCONFIGFILE_H_
+

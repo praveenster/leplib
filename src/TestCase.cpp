@@ -23,9 +23,10 @@
 
 #include "TestCase.h"
 
-using lepcpplib::TestCase;
-using lepcpplib::String;
+using lep::TestCase;
+using lep::String;
 
+namespace lep {
 TestCase::TestCase(String name)
   :mName(name)
 {
@@ -39,3 +40,5 @@ const String& TestCase::name()
 {
   return mName;
 }
+} // namespace lep
+

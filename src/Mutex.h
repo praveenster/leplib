@@ -21,10 +21,10 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_MUTEX_H_
-#define LEPCPPLIB_MUTEX_H_
+#ifndef LEP_MUTEX_H_
+#define LEP_MUTEX_H_
 
-namespace lepcpplib {
+namespace lep {
 class Mutex
 {
   public:
@@ -38,6 +38,7 @@ class Mutex
   private:
     void* opaque_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_MUTEX_H_
+#endif // LEP_MUTEX_H_
+

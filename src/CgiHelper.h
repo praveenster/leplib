@@ -32,26 +32,26 @@
 namespace lep {
 class CgiHelper {
   public:
-    const static lepcpplib::String kHttpHost;
-    const static lepcpplib::String kHttpUserAgent;
-    const static lepcpplib::String kRemoteAddress;
-    const static lepcpplib::String kPathInfo;
-    const static lepcpplib::String kQueryString;
+    const static String kHttpHost;
+    const static String kHttpUserAgent;
+    const static String kRemoteAddress;
+    const static String kPathInfo;
+    const static String kQueryString;
     const static int kHttpOk;
 
     CgiHelper();
     ~CgiHelper();
 
-    void OutputHeader(int http_status, int content_length, const lepcpplib::String& server_name, const lepcpplib::String& mime_type);
-    void OutputBodyText(const lepcpplib::String& body);
-    void OutputBodyFile(const lepcpplib::String& file_name);
+    void OutputHeader(int http_status, int content_length, const String& server_name, const String& mime_type);
+    void OutputBodyText(const String& body);
+    void OutputBodyFile(const String& file_name);
 
     void ParseEnvironmentVariables();
 
   public:
-    std::map< lepcpplib::String, lepcpplib::SmartPointer<lepcpplib::String> > environment_variables_;
-    std::map< lepcpplib::String, lepcpplib::SmartPointer<lepcpplib::String> > url_parameters_;
-    std::vector< lepcpplib::SmartPointer<lepcpplib::String> > path_elements_;
+    std::map< String, SmartPointer<String> > environment_variables_;
+    std::map< String, SmartPointer<String> > url_parameters_;
+    std::vector< SmartPointer<String> > path_elements_;
 };
 } // namespace lep
 

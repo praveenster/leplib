@@ -21,11 +21,11 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_TESTCSVFILE_H_
-#define LEPCPPLIB_TESTCSVFILE_H_
+#ifndef TEST_TESTCSVFILE_H_
+#define TEST_TESTCSVFILE_H_
 
 #include "../src/TestModule.h"
-using lepcpplib::TestModule;
+using lep::TestModule;
 
 class TestCsvFile : public TestModule
 {
@@ -33,4 +33,5 @@ class TestCsvFile : public TestModule
     TestCsvFile();
 };
 
-#endif	// LEPCPPLIB_TESTCSVFILE_H_
+#endif	// TEST_TESTCSVFILE_H_
+

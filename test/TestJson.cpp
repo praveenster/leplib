@@ -32,17 +32,17 @@
 #include "../src/String.h"
 #include "../src/SmartPointer.h"
 
-using lepcpplib::JsonValue;
-using lepcpplib::JsonObject;
-using lepcpplib::JsonString;
-using lepcpplib::JsonNumber;
-using lepcpplib::JsonArray;
-using lepcpplib::JsonBool;
-using lepcpplib::JsonNull;
-using lepcpplib::SmartPointer;
-using lepcpplib::String;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
+using lep::JsonValue;
+using lep::JsonObject;
+using lep::JsonString;
+using lep::JsonNumber;
+using lep::JsonArray;
+using lep::JsonBool;
+using lep::JsonNull;
+using lep::SmartPointer;
+using lep::String;
+using lep::TestCase;
+using lep::TestModule;
 
 class TestJsonObjects : public TestCase
 {
@@ -96,3 +96,4 @@ TestJson::TestJson()
 {
   add(new TestJsonObjects());
 }
+

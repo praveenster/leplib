@@ -26,12 +26,12 @@
 #include "../src/SocketAddress.h"
 #include "../src/String.h"
 
-using lepcpplib::String;
-using lepcpplib::SmartPointer;
-using lepcpplib::HttpClient;
-using lepcpplib::SocketAddress;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
+using lep::String;
+using lep::SmartPointer;
+using lep::HttpClient;
+using lep::SocketAddress;
+using lep::TestCase;
+using lep::TestModule;
 
 class TestHttpClientExecute : public TestCase
 {
@@ -57,3 +57,4 @@ TestHttpClient::TestHttpClient()
 {
   add(new TestHttpClientExecute());
 }
+

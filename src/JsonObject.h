@@ -21,8 +21,8 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_JSONOBJECT_H_
-#define LEPCPPLIB_JSONOBJECT_H_
+#ifndef LEP_JSONOBJECT_H_
+#define LEP_JSONOBJECT_H_
 
 #include <map>
 #include <vector>
@@ -31,7 +31,7 @@
 #include "JsonValue.h"
 #include "JsonString.h"
 
-namespace lepcpplib {
+namespace lep {
 class JsonObject: public JsonValue {
   public:
     JsonObject();
@@ -41,6 +41,7 @@ class JsonObject: public JsonValue {
   private:
     std::map< SmartPointer<JsonString>, SmartPointer<JsonValue> > pairs_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_JSONOBJECT_H_
+#endif // LEP_JSONOBJECT_H_
+

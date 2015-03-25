@@ -30,7 +30,7 @@ using std::ifstream;
 using std::ofstream;
 using std::endl;
 
-namespace lepcpplib {
+namespace lep {
 CsvFile::CsvFile(const String& filename)
   : filename_(filename), separator_(',')
 {
@@ -178,4 +178,5 @@ int CsvFile::ColumnCount()
 
   return result;
 }
-} // namespace lepcpplib
+} // namespace lep
+

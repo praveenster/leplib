@@ -38,7 +38,7 @@
 #include <sys/ioctl.h>
 #endif
 
-namespace lepcpplib {
+namespace lep {
 SocketAddress::SocketAddress()
   : address_(""), port_(0)
 {
@@ -126,4 +126,5 @@ void SocketAddress::set_port(int port)
 {
   port_ = port;
 }
-} // namespace lepcpplib
+} // namespace lep
+

@@ -21,12 +21,12 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef __STRING_H__
-#define __STRING_H__
+#ifndef LEP_STRING_H_
+#define LEP_STRING_H_
 
 #include <vector>
 
-namespace lepcpplib {
+namespace lep {
   class String
   {
     public:
@@ -107,4 +107,5 @@ namespace lepcpplib {
   String operator+(const char c1, const String& s2);
 }
 
-#endif // __STRING_H__
+#endif // LEP_STRING_H_
+

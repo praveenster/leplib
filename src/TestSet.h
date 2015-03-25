@@ -21,13 +21,13 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef __TESTSET_H__
-#define __TESTSET_H__
+#ifndef LEP_TESTSET_H_
+#define LEP_TESTSET_H_
 
 #include <vector>
 #include "TestModule.h"
 
-namespace lepcpplib {
+namespace lep {
   class TestSet
   {
     public:
@@ -42,4 +42,5 @@ namespace lepcpplib {
   };
 }
 
-#endif // __TESTSET_H__
+#endif // LEP_TESTSET_H_
+

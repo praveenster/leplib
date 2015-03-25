@@ -21,13 +21,13 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_JSONARRAY_H_
-#define LEPCPPLIB_JSONARRAY_H_
+#ifndef LEP_JSONARRAY_H_
+#define LEP_JSONARRAY_H_
 
 #include <vector>
 #include "JsonValue.h"
 
-namespace lepcpplib {
+namespace lep {
 class JsonArray : public JsonValue {
   public:
     JsonArray();
@@ -37,6 +37,7 @@ class JsonArray : public JsonValue {
   private:
     std::vector< SmartPointer<JsonValue> > values_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_JSONARRAY_H_
+#endif // LEP_JSONARRAY_H_
+

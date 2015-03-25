@@ -20,15 +20,15 @@
   OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef LEPCPPLIB_HTTPCLIENT_H_
-#define LEPCPPLIB_HTTPCLIENT_H_
+#ifndef LEP_HTTPCLIENT_H_
+#define LEP_HTTPCLIENT_H_
 
 #include <vector>
 #include "String.h"
 #include "StringBuilder.h"
 #include "SmartPointer.h"
 
-namespace lepcpplib {
+namespace lep {
 class HttpClient {
   public:
     class DownloadProgressObserver {
@@ -57,6 +57,7 @@ private:
     int response_buffer_size_;
     char* response_buffer_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_HTTPCLIENT_H_
+#endif // LEP_HTTPCLIENT_H_
+

@@ -25,10 +25,10 @@
 #include "../src/SocketAddress.h"
 #include "../src/String.h"
 
-using lepcpplib::String;
-using lepcpplib::SocketAddress;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
+using lep::String;
+using lep::SocketAddress;
+using lep::TestCase;
+using lep::TestModule;
 
 class TestSocketAddressAny : public TestCase
 {
@@ -168,3 +168,4 @@ TestSocketAddress::TestSocketAddress()
   add(new TestSocketAddressCopyConstructor());
   add(new TestSocketAddressAssignmentOperator());
 }
+

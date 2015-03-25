@@ -25,10 +25,8 @@
 #include "TestModule.h"
 
 using std::vector;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
-using lepcpplib::String;
 
+namespace lep {
 TestModule::TestModule(String name)
   :mName(name)
 {
@@ -71,3 +69,5 @@ const String& TestModule::name()
 {
   return mName;
 }
+} // namespace lep
+

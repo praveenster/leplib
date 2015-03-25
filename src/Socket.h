@@ -21,12 +21,12 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_SOCKET_H_
-#define LEPCPPLIB_SOCKET_H_
+#ifndef LEP_SOCKET_H_
+#define LEP_SOCKET_H_
 
 #include "SocketAddress.h"
 
-namespace lepcpplib {
+namespace lep {
 class Socket {
   public:
     enum AddressFamily {
@@ -87,6 +87,7 @@ class Socket {
     SocketAddress local_address_;
     SocketAddress remote_address_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_SOCKET_H_
+#endif // LEP_SOCKET_H_
+

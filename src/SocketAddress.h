@@ -21,13 +21,13 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_SOCKETADDRESS_H_
-#define LEPCPPLIB_SOCKETADDRESS_H_
+#ifndef LEP_SOCKETADDRESS_H_
+#define LEP_SOCKETADDRESS_H_
 
 #include "String.h"
 #include "SmartPointer.h"
 
-namespace lepcpplib {
+namespace lep {
 class SocketAddress {
   public:
     SocketAddress();
@@ -54,6 +54,7 @@ class SocketAddress {
     String address_;
     int port_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_SOCKETADDRESS_H_
+#endif // LEP_SOCKETADDRESS_H_
+

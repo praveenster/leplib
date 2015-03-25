@@ -21,13 +21,13 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_JSONSTRING_H_
-#define LEPCPPLIB_JSONSTRING_H_
+#ifndef LEP_JSONSTRING_H_
+#define LEP_JSONSTRING_H_
 
 #include "JsonValue.h"
 #include "String.h"
 
-namespace lepcpplib {
+namespace lep {
 class JsonString : public JsonValue {
   public:
     JsonString(const String& s);
@@ -37,6 +37,7 @@ class JsonString : public JsonValue {
   private:
     String string_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_JSONSTRING_H_
+#endif // LEP_JSONSTRING_H_
+

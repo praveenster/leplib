@@ -23,7 +23,7 @@
 
 #include "JsonValue.h"
 
-namespace lepcpplib {
+namespace lep {
   JsonValue::JsonValue()
   {
   }
@@ -31,4 +31,5 @@ namespace lepcpplib {
   JsonValue::~JsonValue()
   {
   }
-} // namespace lepcpplib
+} // namespace lep
+

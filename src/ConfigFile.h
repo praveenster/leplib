@@ -21,8 +21,8 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_CONFIGFILE_H_
-#define	LEPCPPLIB_CONFIGFILE_H_
+#ifndef LEP_CONFIGFILE_H_
+#define	LEP_CONFIGFILE_H_
 
 #include <map>
 #include "String.h"
@@ -38,7 +38,7 @@
 //     if (b) {
 //       .....
 
-namespace lepcpplib {
+namespace lep {
 class ConfigFile {
   public:
     ConfigFile(const String& filename);
@@ -67,6 +67,7 @@ class ConfigFile {
     std::map<String, String> keyvalues_;
     String filename_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif	// LEPCPPLIB_CONFIGFILE_H_
+#endif	// LEP_CONFIGFILE_H_
+

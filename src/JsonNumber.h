@@ -21,12 +21,12 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_JSONNUMBER_H_
-#define LEPCPPLIB_JSONNUMBER_H_
+#ifndef LEP_JSONNUMBER_H_
+#define LEP_JSONNUMBER_H_
 
 #include "JsonValue.h"
 
-namespace lepcpplib {
+namespace lep {
 class JsonNumber : public JsonValue {
   public:
     JsonNumber(int number);
@@ -35,6 +35,7 @@ class JsonNumber : public JsonValue {
   private:
     int number_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif // LEPCPPLIB_JSONNUMBER_H_
+#endif // LEP_JSONNUMBER_H_
+

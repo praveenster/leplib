@@ -23,7 +23,7 @@
 
 #include "JsonNumber.h"
 
-namespace lepcpplib {
+namespace lep {
   JsonNumber::JsonNumber(int number)
     : number_(number)
   {
@@ -34,4 +34,5 @@ namespace lepcpplib {
     SmartPointer<String> result(new String(String::fromInt(number_)));
     return result;
   }
-} // namespace lepcpplib
+} // namespace lep
+

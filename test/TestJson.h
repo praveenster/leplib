@@ -21,11 +21,11 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_TESTJSON_H_
-#define LEPCPPLIB_TESTJSON_H_
+#ifndef TEST_TESTJSON_H_
+#define TEST_TESTJSON_H_
 
 #include "../src/TestModule.h"
-using lepcpplib::TestModule;
+using lep::TestModule;
 
 class TestJson : public TestModule
 {
@@ -33,4 +33,5 @@ class TestJson : public TestModule
     TestJson();
 };
 
-#endif // LEPCPPLIB_TESTJSON_H_
+#endif // TEST_TESTJSON_H_
+

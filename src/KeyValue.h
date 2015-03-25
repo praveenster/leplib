@@ -21,17 +21,18 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_KEYVALUE_H_
-#define	LEPCPPLIB_KEYVALUE_H_
+#ifndef LEP_KEYVALUE_H_
+#define	LEP_KEYVALUE_H_
 
 #include "String.h"
 
-namespace lepcpplib {
+namespace lep {
 struct KeyValue
 {
   String key;
   String value;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif	// LEPCPPLIB_KEYVALUE_H_
+#endif	// LEP_KEYVALUE_H_
+

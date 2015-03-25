@@ -21,8 +21,8 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_CSVFILE_H_
-#define LEPCPPLIB_CSVFILE_H_
+#ifndef LEP_CSVFILE_H_
+#define LEP_CSVFILE_H_
 
 #include <vector>
 #include "String.h"
@@ -30,7 +30,7 @@
 // Utility class for processing and storing csv files that contain
 // rows and columns of data
 
-namespace lepcpplib {
+namespace lep {
 class CsvFile {
   public:
     CsvFile(const String& filename);
@@ -64,6 +64,7 @@ class CsvFile {
     String filename_;
     char separator_;
 };
-} // namespace lepcpplib
+} // namespace lep
 
-#endif  // LEPCPPLIB_CSVFILE_H_
+#endif  // LEP_CSVFILE_H_
+

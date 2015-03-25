@@ -28,9 +28,8 @@
 
 using std::string;
 using std::vector;
-using lepcpplib::SmartPointer;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
+using lep::SmartPointer;
+using lep::TestCase;
 
 class TestSmartPointerReferenceCounting1 : public TestCase
 {
@@ -459,3 +458,4 @@ TestSmartPointer::TestSmartPointer()
   add(new TestSmartPointerIsNull1());
   add(new TestSmartPointerIsNull2());
 }
+

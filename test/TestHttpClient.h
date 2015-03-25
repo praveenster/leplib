@@ -21,11 +21,11 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_TESTHTTPCLIENT_H_
-#define LEPCPPLIB_TESTHTTPCLIENT_H_
+#ifndef TEST_TESTHTTPCLIENT_H_
+#define TEST_TESTHTTPCLIENT_H_
 
 #include "../src/TestModule.h"
-using lepcpplib::TestModule;
+using lep::TestModule;
 
 class TestHttpClient : public TestModule
 {
@@ -33,4 +33,5 @@ class TestHttpClient : public TestModule
     TestHttpClient();
 };
 
-#endif // LEPCPPLIB_TESTHTTPCLIENT_H_
+#endif // TEST_TESTHTTPCLIENT_H_
+

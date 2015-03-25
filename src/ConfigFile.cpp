@@ -30,7 +30,7 @@ using std::ifstream;
 using std::map;
 using std::vector;
 
-namespace lepcpplib {
+namespace lep {
 ConfigFile::ConfigFile(const String& filename)
   : filename_(filename)
 {
@@ -81,4 +81,5 @@ bool ConfigFile::ValueOf(const String& key, String& value)
 
   return result;
 }
-} // namespace lepcpplib
+} // namespace lep
+

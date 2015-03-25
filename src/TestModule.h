@@ -21,13 +21,13 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef __TESTMODULE_H__
-#define __TESTMODULE_H__
+#ifndef LEP_TESTMODULE_H_
+#define LEP_TESTMODULE_H_
 
 #include <vector>
 #include "TestCase.h"
 
-namespace lepcpplib {
+namespace lep {
   class TestModule
   {
     public:
@@ -45,4 +45,5 @@ namespace lepcpplib {
   };
 }
 
-#endif // __TESTCASE_H__
+#endif // LEP_TESTMODULE_H_
+

@@ -32,7 +32,7 @@
 #include "TestStringBuilder.h"
 #include "TestThread.h"
 
-using lepcpplib::TestSet;
+using lep::TestSet;
 
 class TestMain : public TestSet
 {
@@ -65,3 +65,4 @@ int main(int argc, char** argv)
   pTest->run(passCount, failCount);
   delete pTest;
 }
+

@@ -32,10 +32,10 @@ using std::ofstream;
 using std::ifstream;
 using std::endl;
 using std::vector;
-using lepcpplib::CsvFile;
-using lepcpplib::String;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
+using lep::CsvFile;
+using lep::String;
+using lep::TestCase;
+using lep::TestModule;
 
 class TestCsvFile1 : public TestCase
 {
@@ -556,3 +556,4 @@ TestCsvFile::TestCsvFile()
   add(new TestCsvFile10());
   add(new TestCsvFile11());
 }
+

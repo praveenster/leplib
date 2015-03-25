@@ -23,7 +23,7 @@
 
 #include "JsonBool.h"
 
-namespace lepcpplib {
+namespace lep {
   JsonBool::JsonBool(bool value)
     : value_(value)
   {
@@ -34,4 +34,5 @@ namespace lepcpplib {
     SmartPointer<String> result(new String((value_) ? "true" : "false"));
     return result;
   }
-} // namespace lepcpplib
+} // namespace lep
+

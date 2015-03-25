@@ -21,10 +21,10 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LEPCPPLIB_SMARTPOINTER_H_
-#define LEPCPPLIB_SMARTPOINTER_H_
+#ifndef LEP_SMARTPOINTER_H_
+#define LEP_SMARTPOINTER_H_
 
-namespace lepcpplib {
+namespace lep {
   template <class T> class SmartPointer {
   private:
     T* p_;
@@ -156,4 +156,5 @@ namespace lepcpplib {
 };
 }
 
-#endif // LEPCPPLIB_SMARTPOINTER_H_
+#endif // LEP_SMARTPOINTER_H_
+

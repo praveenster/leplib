@@ -28,10 +28,10 @@
 
 using std::ofstream;
 using std::endl;
-using lepcpplib::ConfigFile;
-using lepcpplib::String;
-using lepcpplib::TestCase;
-using lepcpplib::TestModule;
+using lep::ConfigFile;
+using lep::String;
+using lep::TestCase;
+using lep::TestModule;
 
 class TestConfigFileKeyRetrieve1 : public TestCase
 {
@@ -79,3 +79,4 @@ TestConfigFile::TestConfigFile()
 {
   add(new TestConfigFileKeyRetrieve1());
 }
+

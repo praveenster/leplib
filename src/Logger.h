@@ -21,8 +21,8 @@
   WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef __LOGGER_H__
-#define __LOGGER_H__
+#ifndef LEP_LOGGER_H_
+#define LEP_LOGGER_H_
 
 #include <cstdio>
 
@@ -67,4 +67,5 @@ do { \
 #define LOG_E(...)
 #endif
 
-#endif // __LOGGER_H__
+#endif // LEP_LOGGER_H_
+
