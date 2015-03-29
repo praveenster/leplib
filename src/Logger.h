@@ -53,7 +53,7 @@ do { \
 #define LOGGER_LOG(logger_string, logger_level, format, ...)  \
 do { \
   if (LOGGER_LEVEL <= logger_level) \
-    printf("[%s:%s:%d] "format, logger_string, __FILE__, __LINE__, ## __VA_ARGS__); \
+    printf("[%s:%s:%d] "format, logger_string, __LEPFILE__, __LINE__, ## __VA_ARGS__); \
 } while (0)
 #define LOG_D(...) LOGGER_LOG("DBG", LOGGER_LEVEL_D, ## __VA_ARGS__)
 #define LOG_I(...) LOGGER_LOG("INF", LOGGER_LEVEL_I, ## __VA_ARGS__)
