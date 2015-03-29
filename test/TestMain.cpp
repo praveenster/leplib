@@ -27,6 +27,7 @@
 #include "TestHttpClient.h"
 #include "TestJson.h"
 #include "TestSmartPointer.h"
+#include "TestSocket.h"
 #include "TestSocketAddress.h"
 #include "TestString.h"
 #include "TestStringBuilder.h"
@@ -44,6 +45,7 @@ class TestMain : public TestSet
       add(new TestHttpClient());
       add(new TestJson());
       add(new TestSmartPointer());
+      add(new TestSocket());
       add(new TestSocketAddress());
       add(new TestString());
       add(new TestStringBuilder());
