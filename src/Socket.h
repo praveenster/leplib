@@ -74,7 +74,7 @@ class Socket {
     const SocketAddress& remote_address() const;
 
     void SendTo();
-    void Shutdown();
+    void Shutdown(Direction direction);
     void Receive();
     void ReceiveFrom();
     //static void Select(vector<SmartPointer<Socket>>& check_read,

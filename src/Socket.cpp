@@ -170,5 +170,39 @@ const SocketAddress& Socket::remote_address() const
 {
   return remote_address_;
 }
+
+void Socket::Shutdown(Direction direction)
+{
+  int how = -1;
+
+  switch (direction) {
+    case kSend:
+#ifdef WIN32
+    how = SD_SEND;
+#else
+    how = SHUT_WR;
+#endif
+    break;
+
+    case kReceive:
+#ifdef WIN32
+    how = SD_RECEIVE;
+#else
+    how = SHUT_RD;
+#endif
+    break;
+
+    case kBoth:
+#ifdef WIN32
+    how = SD_BOTH;
+#else
+    how = SHUT_RDWR;
+#endif
+    break;
+  }
+
+  ::shutdown(socket_, how);
+}
+
 } // namespace lep
 
